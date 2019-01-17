@@ -15,7 +15,7 @@
       {
         "matches": ["http://search.naver.com/*", "https://search.naver.com/*"],
         "run_at": "document_idle",
-        "js": ["common.js", "storage.js", "utils.js", "inject_common.js", "naver.js"]
+        "js": ["common.js", "utils.js", "storage.js", "inject_common.js", "naver.js"]
       }
     ],
 
