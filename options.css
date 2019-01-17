@@ -1,0 +1,74 @@
+@charset "utf-8";
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+.clear{
+    clear:both;
+}
+
+
+.datesList{ /* 설정된 날짜조건들 목록 */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.dateEntry{ /* 설정된 각 날짜조건들 */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width:100%;
+    height:5em;
+    background:#00000011
+}
+.dateEntry:nth-child(even){ /* 설정된 각 날짜조건들 (짝수번째) */
+    background:#00000033
+}
+
+.dateNoInternal{ /* 날짜조건의 고유순번 (숨김) */
+    display:none;
+}
+
+.dateName{ /* 날짜조건의 이름 */
+    font-size:1.5em;
+}
+
+.dateType{ /* 날짜조건의 형식 (human readable) */
+    font-size:1.2em;
+}
+.dateTypeInternal{ /* 날짜조건의 형식 (real data, 숨김) */
+    display:none;
+}
+
+.label_from_year{ /* 날짜조건의 시작 년도 */
+    float:left;
+    margin-right: 3px;
+}
+.label_from_month{ /* 날짜조건의 시작 월 */
+    float:left;
+    margin-right: 3px;
+}
+.label_from_date{ /* 날짜조건의 시작 일 */
+    float:left;
+}
+
+.label_tick{ /* 날짜조건의 구분자 (human readable) */
+    margin-left: 5px;
+    margin-right: 5px;
+    float:left;
+}
+
+.label_to_year{ /* 날짜조건의 도착 년도 */
+    float:left;
+    margin-right: 3px;
+} 
+.label_to_month{ /* 날짜조건의 도착 월 */
+    float:left;
+    margin-right: 3px;
+}
+.label_to_date{ /* 날짜조건의 도착 일 */
+    float:left;
+}
