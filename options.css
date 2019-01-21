@@ -61,8 +61,8 @@
     float:left;
 }
 
-.numberInput{ /* 입력칸의 숫자를 오른쪽 정렬 */
-    /* direction: rtl; /* */
+input[type="number"] { /* 숫자 입력칸의 숫자를 오른쪽 정렬 */
+    text-align: right;
 }
 
 .hidden {
