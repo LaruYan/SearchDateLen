@@ -48,6 +48,10 @@ function populateList(){
                 visibleType = '해당 일수 까지';
 
                 break;
+            case 'rel_range':
+                visibleType = '해당 기간 (상대적)';
+
+                break;
             case 'abs_from':
                 isAbsoluteDate = true;
                 visibleType = '특정 날짜 부터';
@@ -58,9 +62,9 @@ function populateList(){
                 visibleType = '특정 날짜 까지';
 
                 break;
-            case 'range':
+            case 'abs_range':
                 isAbsoluteDate = true;
-                visibleType = '특정 기간';
+                visibleType = '특정 기간 (절대적)';
 
                 break;
         }
