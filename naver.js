@@ -10,8 +10,6 @@ function getDateStringNaver(year,month,date){
 }
 
 function injectDates(){
-    // 
-    var dateToday = new Date();
 
     var wrapper = document.createElement('div');
 
@@ -24,19 +22,17 @@ function injectDates(){
         switch(dateEntry.type){
             case 'rel_from': // 며칠전 부터 
                 {
-                    var fromYear = dateToday.getFullYear() - dateEntry.from_year;
-                    var fromMonth = (dateToday.getMonth() + 1) - dateEntry.from_month;
-                    var fromDate = dateToday.getDate() - dateEntry.from_date;
-                    fromDate = getDateStringNaver(fromYear,fromMonth,fromDate);
+                    // 입력받은 날짜로 현재 날짜를 조정
+                    var dateTarget = setDateFromNow(dateEntry.from_year, dateEntry.from_month, dateEntry.from_date);
+                    fromDate = getDateStringNaver(dateTarget.getFullYear(), (dateTarget.getMonth() + 1), dateTarget.getDate());
                 }
                 break;
 
             case 'rel_to': // 며칠전 까지
                 {
-                    var toYear = dateToday.getFullYear() - dateEntry.to_year;
-                    var toMonth = (dateToday.getMonth() + 1) - dateEntry.to_month;
-                    var toDate = dateToday.getDate() - dateEntry.to_date;
-                    toDate = getDateStringNaver(toYear,toMonth,toDate);
+                    // 입력받은 날짜로 현재 날짜를 조정
+                    var dateTarget = setDateFromNow(dateEntry.to_year, dateEntry.to_month, dateEntry.to_date);
+                    toDate = getDateStringNaver(dateTarget.getFullYear(), (dateTarget.getMonth() + 1), dateTarget.getDate());
                 }
                 break;
 

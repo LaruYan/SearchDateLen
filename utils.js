@@ -57,3 +57,12 @@ function isElement(o){
         o && typeof o === "object" && o !== null && o.nodeType === 1 && typeof o.nodeName==="string"
     );
 }
+
+// 입력받은 날짜로 현재 날짜를 조정
+function setDateFromNow(year, month, date){
+    var dateTarget = new Date();
+    dateTarget.setFullYear(dateTarget.getFullYear() - year);
+    dateTarget.setMonth(dateTarget.getMonth() - month);
+    dateTarget.setDate(dateTarget.getDate() - date);
+    return dateTarget;
+}
