@@ -72,17 +72,17 @@ function populateList(){
         var divDateTypeInternal = getClassedTag('div', 'dateTypeInternal', dateListEntry.type);
 
         // 날짜 wrapper
-        var divLabelFromYear = getClassedTag('div', 'label_from_year', 
+        var divLabelFromYear = getClassedTag('div', 'label_year', 
             getClassedTag('span', 'from_year', dateListEntry.from_year));
-        var divLabelFromMonth = getClassedTag('div', 'label_from_month',
+        var divLabelFromMonth = getClassedTag('div', 'label_month',
             getClassedTag('span', 'from_month', dateListEntry.from_month));
-        var divLabelFromDate = getClassedTag('div', 'label_from_date', 
+        var divLabelFromDate = getClassedTag('div', 'label_date', 
             getClassedTag('span', 'from_date', dateListEntry.from_date));
-        var divLabelToYear = getClassedTag('div', 'label_to_year', 
+        var divLabelToYear = getClassedTag('div', 'label_year', 
             getClassedTag('span', 'to_year', dateListEntry.to_year));
-        var divLabelToMonth = getClassedTag('div', 'label_to_month',
+        var divLabelToMonth = getClassedTag('div', 'label_month',
             getClassedTag('span', 'to_month', dateListEntry.to_month));
-        var divLabelToDate = getClassedTag('div', 'label_to_date', 
+        var divLabelToDate = getClassedTag('div', 'label_date', 
             getClassedTag('span', 'to_date', dateListEntry.to_date));
         
         
