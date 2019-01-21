@@ -66,3 +66,15 @@ function setDateFromNow(year, month, date){
     dateTarget.setDate(dateTarget.getDate() - date);
     return dateTarget;
 }
+
+// checkVal 값과 value가 같으면 selected 를 붙여 나오는 option 태그 생성
+function getSelectedOptionTag(value, checkVal){
+    var optionTag = document.createElement('option');
+    optionTag.setAttribute('value', value);
+    
+    if(checkVal == value){
+        optionTag.setAttribute('selected','selected');
+    }
+
+    return optionTag;
+}
