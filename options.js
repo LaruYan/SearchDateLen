@@ -86,7 +86,7 @@ function populateList(){
             getClassedTag('span', 'to_date', dateListEntry.to_date));
         
         
-        if(isAbsoluteDate){
+        if( ! isAbsoluteDate){
             // 상대적인 기간 (1년 6개월 전 등)
             divLabelFromYear.innerHTML = divLabelFromYear.innerHTML + '년';
             divLabelFromMonth.innerHTML = divLabelFromMonth.innerHTML + '개월';
