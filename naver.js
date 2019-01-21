@@ -22,17 +22,23 @@ function injectDates(){
         switch(dateEntry.type){
             case 'rel_from': // 며칠전 부터 
                 {
-                    // 입력받은 날짜로 현재 날짜를 조정
-                    var dateTarget = setDateFromNow(dateEntry.from_year, dateEntry.from_month, dateEntry.from_date);
-                    fromDate = getDateStringNaver(dateTarget.getFullYear(), (dateTarget.getMonth() + 1), dateTarget.getDate());
+                    var dateFromTarget = setDateFromNow(dateEntry.from_year, dateEntry.from_month, dateEntry.from_date);
+                    fromDate = getDateStringNaver(dateFromTarget.getFullYear(), (dateFromTarget.getMonth() + 1), dateFromTarget.getDate());
                 }
                 break;
 
             case 'rel_to': // 며칠전 까지
                 {
-                    // 입력받은 날짜로 현재 날짜를 조정
-                    var dateTarget = setDateFromNow(dateEntry.to_year, dateEntry.to_month, dateEntry.to_date);
-                    toDate = getDateStringNaver(dateTarget.getFullYear(), (dateTarget.getMonth() + 1), dateTarget.getDate());
+                    var dateToTarget = setDateFromNow(dateEntry.to_year, dateEntry.to_month, dateEntry.to_date);
+                    toDate = getDateStringNaver(dateToTarget.getFullYear(), (dateToTarget.getMonth() + 1), dateToTarget.getDate());
+                }
+                break;
+            case 'abs_range': // 정해진 기간 (상대적)
+                {
+                    var dateRgFrmTarget = setDateFromNow(dateEntry.from_year, dateEntry.from_month, dateEntry.from_date);
+                    fromDate = getDateStringNaver(dateRgFrmTarget.getFullYear(), (dateRgFrmTarget.getMonth() + 1), dateRgFrmTarget.getDate());
+                    var dateRgToTarget = setDateFromNow(dateEntry.to_year, dateEntry.to_month, dateEntry.to_date);
+                    toDate = getDateStringNaver(dateRgToTarget.getFullYear(), (dateRgToTarget.getMonth() + 1), dateRgToTarget.getDate());
                 }
                 break;
 
@@ -44,7 +50,7 @@ function injectDates(){
                 toDate = getDateStringNaver(dateEntry.to_year,dateEntry.to_month,dateEntry.to_date);
                 break;
                 
-            case 'range': // 정해진 기간
+            case 'abs_range': // 정해진 기간 (절대적)
                 fromDate = getDateStringNaver(dateEntry.from_year,dateEntry.from_month,dateEntry.from_date);
                 toDate = getDateStringNaver(dateEntry.to_year,dateEntry.to_month,dateEntry.to_date);
                 break;

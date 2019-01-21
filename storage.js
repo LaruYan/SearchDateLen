@@ -69,7 +69,7 @@ function checkDataAndForceDefault(){
                 '{',
                     '"no": 4,',
                     '"name": "18H1",',
-                    '"type": "range",',
+                    '"type": "abs_range",',
                     '"from_year": 2018,',
                     '"from_month": 1,',
                     '"from_date": 1,',
