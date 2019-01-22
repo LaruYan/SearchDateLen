@@ -73,13 +73,15 @@ function setDateFromNow(year, month, date){
 }
 
 // checkVal 값과 value가 같으면 selected 를 붙여 나오는 option 태그 생성
-function getSelectedOptionTag(value, checkVal){
+function getSelectedOptionTag(label, value, checkVal){
     var optionTag = document.createElement('option');
     optionTag.setAttribute('value', value);
     
     if(checkVal == value){
         optionTag.setAttribute('selected','selected');
     }
+
+    optionTag.innerHTML = label;
 
     return optionTag;
 }
