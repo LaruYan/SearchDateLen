@@ -28,14 +28,19 @@ function unescapeHtml(safe) {
 }
 
 // div/span 태그에 클래스를 정해둔 DOM 객체를 반환
-// inner를 내부에 넣음
-function getClassedTag(tagType, className, inner){
+// inner를 내부에 넣음, appendStr를 뒤에 붙임
+function getClassedTag(tagType, className = '', inner = '', appendStr = null){
     var tag = document.createElement(tagType);
     tag.setAttribute('class', className);
+
     if(isNode(inner) || isElement(inner)){
         tag.appendChild(inner);
     }else{
         tag.innerHTML = inner;
+    }
+
+    if(appendStr){
+        tag.innerHTML = tag.innterHTML + appendStr;
     }
     return tag;
 }
@@ -77,4 +82,30 @@ function getSelectedOptionTag(value, checkVal){
     }
 
     return optionTag;
+}
+
+// number 입력칸 생성
+function getInputNumberTag(nameAndId, maxValue = 9999, value = 0){
+
+    var inputTag = document.createElement('input');
+    optionTag.setAttribute('type', 'number');
+    optionTag.setAttribute('name', nameAndId);
+    optionTag.setAttribute('id', nameAndId);
+    optionTag.setAttribute('min', 0);
+    optionTag.setAttribute('max', maxValue);
+    optionTag.setAttribute('value', value);
+
+    return inputTag;
+}
+
+// 일반 입력칸 생성
+function getInputTextTag(nameAndId, isHidden = false, value = ''){
+
+    var inputTag = document.createElement('input');
+    optionTag.setAttribute('type', isHidden ? 'hidden' : 'text');
+    optionTag.setAttribute('name', nameAndId);
+    optionTag.setAttribute('id', nameAndId);
+    optionTag.setAttribute('value', value);
+
+    return inputTag;
 }
