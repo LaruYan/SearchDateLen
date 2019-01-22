@@ -88,12 +88,12 @@ function getSelectedOptionTag(value, checkVal){
 function getInputNumberTag(nameAndId, maxValue = 9999, value = 0){
 
     var inputTag = document.createElement('input');
-    optionTag.setAttribute('type', 'number');
-    optionTag.setAttribute('name', nameAndId);
-    optionTag.setAttribute('id', nameAndId);
-    optionTag.setAttribute('min', 0);
-    optionTag.setAttribute('max', maxValue);
-    optionTag.setAttribute('value', value);
+    inputTag.setAttribute('type', 'number');
+    inputTag.setAttribute('name', nameAndId);
+    inputTag.setAttribute('id', nameAndId);
+    inputTag.setAttribute('min', 0);
+    inputTag.setAttribute('max', maxValue);
+    inputTag.setAttribute('value', value);
 
     return inputTag;
 }
@@ -102,10 +102,10 @@ function getInputNumberTag(nameAndId, maxValue = 9999, value = 0){
 function getInputTextTag(nameAndId, isHidden = false, value = ''){
 
     var inputTag = document.createElement('input');
-    optionTag.setAttribute('type', isHidden ? 'hidden' : 'text');
-    optionTag.setAttribute('name', nameAndId);
-    optionTag.setAttribute('id', nameAndId);
-    optionTag.setAttribute('value', value);
+    inputTag.setAttribute('type', isHidden ? 'hidden' : 'text');
+    inputTag.setAttribute('name', nameAndId);
+    inputTag.setAttribute('id', nameAndId);
+    inputTag.setAttribute('value', value);
 
     return inputTag;
 }
