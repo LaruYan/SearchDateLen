@@ -20,20 +20,20 @@ function injectDates(){
         var toDate = '';
 
         switch(dateEntry.type){
-            case 'rel_from': // 며칠전 부터 
+            case DATELIST_ENTRY_TYPES[0]: // 'rel_from': // 며칠전 부터 
                 {
                     var dateFromTarget = setDateFromNow(dateEntry.from_year, dateEntry.from_month, dateEntry.from_date);
                     fromDate = getDateStringNaver(dateFromTarget.getFullYear(), (dateFromTarget.getMonth() + 1), dateFromTarget.getDate());
                 }
                 break;
 
-            case 'rel_to': // 며칠전 까지
+            case DATELIST_ENTRY_TYPES[1]: // 'rel_to': // 며칠전 까지
                 {
                     var dateToTarget = setDateFromNow(dateEntry.to_year, dateEntry.to_month, dateEntry.to_date);
                     toDate = getDateStringNaver(dateToTarget.getFullYear(), (dateToTarget.getMonth() + 1), dateToTarget.getDate());
                 }
                 break;
-            case 'abs_range': // 정해진 기간 (상대적)
+            case DATELIST_ENTRY_TYPES[2]: // 'abs_range': // 정해진 기간 (상대적)
                 {
                     var dateRgFrmTarget = setDateFromNow(dateEntry.from_year, dateEntry.from_month, dateEntry.from_date);
                     fromDate = getDateStringNaver(dateRgFrmTarget.getFullYear(), (dateRgFrmTarget.getMonth() + 1), dateRgFrmTarget.getDate());
@@ -42,15 +42,15 @@ function injectDates(){
                 }
                 break;
 
-            case 'abs_from': // 특정일 부터
+            case DATELIST_ENTRY_TYPES[3]: // 'abs_from': // 특정일 부터
                 fromDate = getDateStringNaver(dateEntry.from_year,dateEntry.from_month,dateEntry.from_date);
                 break;
 
-            case 'abs_to': // 특정일 까지
+            case DATELIST_ENTRY_TYPES[4]: // 'abs_to': // 특정일 까지
                 toDate = getDateStringNaver(dateEntry.to_year,dateEntry.to_month,dateEntry.to_date);
                 break;
                 
-            case 'abs_range': // 정해진 기간 (절대적)
+            case DATELIST_ENTRY_TYPES[5]: // 'abs_range': // 정해진 기간 (절대적)
                 fromDate = getDateStringNaver(dateEntry.from_year,dateEntry.from_month,dateEntry.from_date);
                 toDate = getDateStringNaver(dateEntry.to_year,dateEntry.to_month,dateEntry.to_date);
                 break;

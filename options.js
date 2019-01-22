@@ -41,29 +41,29 @@ function populateList(){
         var isAbsoluteDate = false;
         var visibleType = '';
         switch(dateListEntry.type){
-            case 'rel_from':
+            case DATELIST_ENTRY_TYPES[0]: //'rel_from':
                 visibleType = '해당 일수 부터';
 
                 break;
-            case 'rel_to':
+            case DATELIST_ENTRY_TYPES[1]: //'rel_to':
                 visibleType = '해당 일수 까지';
 
                 break;
-            case 'rel_range':
+            case DATELIST_ENTRY_TYPES[2]: //'rel_range':
                 visibleType = '해당 기간 (상대적)';
 
                 break;
-            case 'abs_from':
+            case DATELIST_ENTRY_TYPES[3]: //'abs_from':
                 isAbsoluteDate = true;
                 visibleType = '특정 날짜 부터';
 
                 break;
-            case 'abs_to':
+            case DATELIST_ENTRY_TYPES[4]: //'abs_to':
                 isAbsoluteDate = true;
                 visibleType = '특정 날짜 까지';
 
                 break;
-            case 'abs_range':
+            case DATELIST_ENTRY_TYPES[5]: //'abs_range':
                 isAbsoluteDate = true;
                 visibleType = '특정 기간 (절대적)';
 

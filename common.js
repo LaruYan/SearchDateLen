@@ -18,3 +18,6 @@ function alertAndLog(msg){
     }
     console.log(msg);
 }
+
+// 타입 형식들
+const DATELIST_ENTRY_TYPES = ['rel_from', 'rel_to', 'rel_range', 'abs_from', 'abs_to', 'abs_range'];
