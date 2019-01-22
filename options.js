@@ -42,30 +42,30 @@ function populateList(){
         var visibleType = '';
         switch(dateListEntry.type){
             case DATELIST_ENTRY_TYPES[0]: //'rel_from':
-                visibleType = '해당 일수 부터';
+                visibleType = LABEL_DATELIST_ENTRY_TYPES[0];
 
                 break;
             case DATELIST_ENTRY_TYPES[1]: //'rel_to':
-                visibleType = '해당 일수 까지';
+                visibleType = LABEL_DATELIST_ENTRY_TYPES[1];
 
                 break;
             case DATELIST_ENTRY_TYPES[2]: //'rel_range':
-                visibleType = '해당 기간 (상대적)';
+                visibleType = LABEL_DATELIST_ENTRY_TYPES[2];
 
                 break;
             case DATELIST_ENTRY_TYPES[3]: //'abs_from':
                 isAbsoluteDate = true;
-                visibleType = '특정 날짜 부터';
+                visibleType = LABEL_DATELIST_ENTRY_TYPES[3];
 
                 break;
             case DATELIST_ENTRY_TYPES[4]: //'abs_to':
                 isAbsoluteDate = true;
-                visibleType = '특정 날짜 까지';
+                visibleType = LABEL_DATELIST_ENTRY_TYPES[4];
 
                 break;
             case DATELIST_ENTRY_TYPES[5]: //'abs_range':
                 isAbsoluteDate = true;
-                visibleType = '특정 기간 (절대적)';
+                visibleType = LABEL_DATELIST_ENTRY_TYPES[5];
 
                 break;
         }
@@ -171,7 +171,7 @@ function prepareInput(entryNo = -1){
     selectInputType.setAttribute('id', 'input_type');
     // options
     for(var typeNo = 0; typeNo < DATELIST_ENTRY_TYPES.length; typeNo++){
-        selectInputType.appendChild(getSelectedOptionTag(DATELIST_ENTRY_TYPES[typeNo], dateListEntry.type));
+        selectInputType.appendChild(getSelectedOptionTag(LABEL_DATELIST_ENTRY_TYPES[typeNo], DATELIST_ENTRY_TYPES[typeNo], dateListEntry.type));
     }
 
 
@@ -216,7 +216,7 @@ function prepareInput(entryNo = -1){
     // 종료기간 clear div
     divInputRelTo.appendChild(getClassedTag('div','clear'));    
     // 종료기간을 상대기간 DOM에 추가
-    divInputDateRel.appendChild(divInputRelFrom);
+    divInputDateRel.appendChild(divInputRelTo);
 
     // 절대적 기간 컨테이너 div
     var divInputDateAbs = getClassedTag('div');

@@ -21,3 +21,4 @@ function alertAndLog(msg){
 
 // 타입 형식들
 const DATELIST_ENTRY_TYPES = ['rel_from', 'rel_to', 'rel_range', 'abs_from', 'abs_to', 'abs_range'];
+const LABEL_DATELIST_ENTRY_TYPES = ['해당 일수 부터', '해당 일수 까지', '해당 기간 (상대적)','특정 날짜 부터','특정 날짜 까지','특정 기간 (절대적)'];
