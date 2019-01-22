@@ -40,7 +40,7 @@ function getClassedTag(tagType, className = '', inner = '', appendStr = null){
     }
 
     if(appendStr){
-        tag.innerHTML = tag.innterHTML + appendStr;
+        tag.innerHTML = tag.innerHTML + appendStr;
     }
     return tag;
 }
