@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
     alertAndLog('searchDateLen: [options] DOMContentLoaded');
     
     loadStorage();
-
+    
     var link = document.getElementById('doThing');
     // onClick's logic below:
     link.addEventListener('click', function () {
@@ -21,6 +21,7 @@ function loadStorage(){
         datesJsonStr = data.dates;
         initData();
         populateList();
+        prepareInput();
     });
 }
 
@@ -126,4 +127,113 @@ function populateList(){
     }
 
     alertAndLog('searchDateLen: [options] finished datesList for '+datesData.length+' item(s).');
+}
+
+function prepareInput(entryNo = -1){
+    alertAndLog('searchDateLen: [options] preparing input area.');
+
+    // inputEntry div
+    var inputEntry = document.querySelector('#inputEntry');
+
+    var dateListEntry = null;
+
+    if(datesData && (0 <= entryNo && entryNo < datesData.length)){
+        // datesData 가 있고 해당 원소가 범위 안
+        dateListEntry = datesData[entryNo];
+    }else{
+        // datesData 가 비어있거나 해당 원소가 범위 밖
+        // 임의의 json을 넣어줌
+        dateListEntry = JSON.parse(['{',
+                '"no": '+entryNo+',',
+                '"name": "new entry",',
+                '"type": "'+DATELIST_ENTRY_TYPES[0]+'",',
+                '"from_year": 0,',
+                '"from_month": 0,',
+                '"from_date": 0,',
+                '"to_year": 0,',
+                '"to_month": 0,',
+                '"to_date": 0',
+            '}'].join(''));
+    }
+
+    // input_no input
+    var inputNo = getInputTextTag('input_no', true, entryNo);
+    // 이름 레이블 div
+    var divInputName = getClassedTag('div','label_input','이름');
+    // input_name input
+    var inputName = getInputTextTag('input_name', true, entryNo);
+    // 형식 레이블 div
+    var divInputType = getClassedTag('div','label_input','형식');
+
+    // input_type select
+    var selectInputType = getClassedTag('select');
+    selectInputType.setAttribute('name', 'input_type');
+    selectInputType.setAttribute('id', 'input_type');
+    // options
+    for(var typeNo = 0; typeNo < DATELIST_ENTRY_TYPES.length; typeNo++){
+        selectInputType.appendChild(getSelectedOptionTag(DATELIST_ENTRY_TYPES[typeNo], dateListEntry.type));
+    }
+
+
+
+    // 상대적 기간 컨테이너 div
+    var divInputDateRel = getClassedTag('div');
+    divInputDateRel.setAttribute('id', 'input_date_relative');
+
+    // 시작기간 컨테이너 div
+    var divInputRelFrom = getClassedTag('div','clearfix',);
+    divInputRelFrom.setAttribute('id','input_date_from');
+    // 시작기간 레이블 div
+    divInputRelFrom.appendChild(getClassedTag('div','label_input','시작기간'));
+    // 시작개년 div+input
+    divInputRelFrom.appendChild(getClassedTag('div','label_year',
+        getInputNumberTag('input_rel_from_year',99,dateListEntry.from_year),'년'));
+    // 시작개월 div+input
+    divInputRelFrom.appendChild(getClassedTag('div','label_month',
+        getInputNumberTag('input_rel_from_month',99,dateListEntry.from_month),'개월'));
+    // 시작개일 div+input
+    divInputRelFrom.appendChild(getClassedTag('div','label_date',
+        getInputNumberTag('input_rel_from_date',99,dateListEntry.from_date),'일'));
+    // 시작기간 clear div
+    divInputRelFrom.appendChild(getClassedTag('div','clear'));
+    // 시작기간을 상대기간 DOM에 추가
+    divInputDateRel.appendChild(divInputRelFrom);
+
+    // 종료기간 컨테이너 div
+    var divInputRelTo = getClassedTag('div','clearfix',);
+    divInputRelTo.setAttribute('id','input_date_from');
+    // 종료기간 레이블 div
+    divInputRelTo.appendChild(getClassedTag('div','label_input','종료기간'));
+    // 종료개년 div+input
+    divInputRelTo.appendChild(getClassedTag('div','label_year',
+        getInputNumberTag('input_rel_to_year',99,dateListEntry.to_year),'년'));
+    // 종료개월 div+input
+    divInputRelTo.appendChild(getClassedTag('div','label_month',
+        getInputNumberTag('input_rel_to_month',99,dateListEntry.to_month),'개월'));
+    // 종료개일 div+input
+    divInputRelTo.appendChild(getClassedTag('div','label_date',
+        getInputNumberTag('input_rel_to_date',99,dateListEntry.to_date),'일'));
+    // 종료기간 clear div
+    divInputRelTo.appendChild(getClassedTag('div','clear'));    
+    // 종료기간을 상대기간 DOM에 추가
+    divInputDateRel.appendChild(divInputRelFrom);
+
+    // 절대적 기간 컨테이너 div
+    var divInputDateAbs = getClassedTag('div');
+    divInputDateAbs.setAttribute('id', 'input_date_absolute');
+    var divDummyInputAbs = getClassedTag('div','','시작일자 calendar 종료일자 calendar');
+    divInputDateAbs.appendChild(divDummyInputAbs);
+
+
+    // 페이지에 적용
+    inputEntry.appendChild(inputNo);
+    inputEntry.appendChild(divInputName);
+    inputEntry.appendChild(inputName);
+    inputEntry.appendChild(divInputType);
+    inputEntry.appendChild(selectInputType);
+    inputEntry.appendChild(divInputDateRel);
+    inputEntry.appendChild(divInputDateAbs);
+    
+
+    alertAndLog('searchDateLen: [options] finished preparing input area.');
 }

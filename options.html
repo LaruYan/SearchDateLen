@@ -10,8 +10,62 @@
 </head>
 <body>
 
-  <ul class="datesList">
-  </ul>
+  
+  <div class="wrapper">
+    <ul class="datesList">
+    </ul>
+    <div id="inputEntry">
+      
+    </div>
+    <div id="inputEntryDummy">
+      <input type="hidden" name="input_no" id="input_no"/>
+      <div class="label_input">이름</div>
+      <input type="text" name="input_name" id="input_name" />
+      <div class="label_input">형식</div>
+      <select name="input_type" id="input_type">
+        <option value="rel_from">해당 일수 부터</option>
+        <option value="rel_to">해당 일수 까지</option>
+        <option value="rel_range">해당 기간 (상대적)</option>
+        <option value="abs_from">특정 날짜 부터</option>
+        <option value="abs_to">특정 날짜 까지</option>
+        <option value="abs_range">특정 기간 (절대적)</option>
+      </select>
+      <br />
+      <div id="input_date_relative">
+        <div class="clearfix" id="input_date_from">
+          <div class="label_input">시작기간</div>
+          <div class="label_year">
+            <input type="number" name="input_rel_from_year" id="input_rel_from_year"min="0" max="99" value="0" />년
+          </div>
+          <div class="label_month">
+            <input type="number" name="input_rel_from_month" id="input_rel_from_month" min="0" max="999" value="0" />개월
+          </div>
+          <div class="label_date">
+            <input type="number" name="input_rel_from_date" id="input_rel_from_date" min="0" max="9999" value="0" />일
+          </div>
+          <div class="clear"></div>
+        </div>
+        <div class="clearfix" id="input_date_to">
+          <div class="label_input">종료기간</div>
+          <div class="label_year">
+            <input type="number" name="input_rel_to_year" id="input_rel_to_year" min="0" max="99" value="0" />년
+          </div>
+          <div class="label_month">
+            <input type="number" name="input_rel_to_month" id="input_rel_to_month" min="0" max="999" value="0" />개월
+          </div>
+          <div class="label_date">
+            <input type="number" name="input_rel_to_date" id="input_rel_to_date" min="0" max="9999" value="0" />일
+          </div>
+          <div class="clear"></div>
+        </div>
+      </div>
+      시작일자
+        calendar
+      종료일자
+        calendar
+    </div>
+  </div>
+
 
   <script src="common.js"></script>
   <script src="utils.js"></script>
