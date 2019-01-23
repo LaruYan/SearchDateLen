@@ -140,21 +140,23 @@ function prepareInput(entryNo = -1){
     if(datesData && (0 <= entryNo && entryNo < datesData.length)){
         // datesData 가 있고 해당 원소가 범위 안
         dateListEntry = datesData[entryNo];
+        //버튼 텍스트 설정
         submitBtnTxt = '수정';
     }else{
         // datesData 가 비어있거나 해당 원소가 범위 밖
-        // 임의의 json을 넣어줌
-        dateListEntry = JSON.parse(['{',
-                '"no": '+entryNo+',',
-                '"name": "new entry",',
-                '"type": "'+DATELIST_ENTRY_TYPES[0]+'",',
-                '"from_year": 0,',
-                '"from_month": 0,',
-                '"from_date": 0,',
-                '"to_year": 0,',
-                '"to_month": 0,',
-                '"to_date": 0',
-            '}'].join(''));
+        // 생성하자
+        dateListEntry = {}; // new obj
+        dateListEntry['no'] = entryNo;
+        dateListEntry['name'] = 'new entry';
+        dateListEntry['type'] = DATELIST_ENTRY_TYPES[0];
+        dateListEntry['from_year'] = 0;
+        dateListEntry['from_month'] = 0;
+        dateListEntry['from_date'] = 0;
+        dateListEntry['to_year'] = 0;
+        dateListEntry['to_month'] = 0;
+        dateListEntry['to_date'] = 0;
+
+        // 버튼 텍스트 설정
         submitBtnTxt = '추가';
     }
 
