@@ -5,13 +5,6 @@ document.addEventListener('DOMContentLoaded', function () {
     alertAndLog('searchDateLen: [options] DOMContentLoaded');
     
     loadStorage();
-    
-    var link = document.getElementById('doThing');
-    // onClick's logic below:
-    link.addEventListener('click', function () {
-        alertAndLog('link clicked');
-        
-    });
 });
 
 function loadStorage(){
@@ -135,11 +128,16 @@ function prepareInput(entryNo = -1){
     // inputEntry div
     var inputEntry = document.querySelector('#inputEntry');
 
+    // reset inputEntry;
+    inputEntry.innerHTML = '';
+
     var dateListEntry = null;
+    var submitBtnTxt = '';
 
     if(datesData && (0 <= entryNo && entryNo < datesData.length)){
         // datesData 가 있고 해당 원소가 범위 안
         dateListEntry = datesData[entryNo];
+        submitBtnTxt = '수정';
     }else{
         // datesData 가 비어있거나 해당 원소가 범위 밖
         // 임의의 json을 넣어줌
@@ -154,6 +152,7 @@ function prepareInput(entryNo = -1){
                 '"to_month": 0,',
                 '"to_date": 0',
             '}'].join(''));
+        submitBtnTxt = '추가';
     }
 
     // input_no input
@@ -224,6 +223,16 @@ function prepareInput(entryNo = -1){
     var divDummyInputAbs = getClassedTag('div','','시작일자 calendar 종료일자 calendar');
     divInputDateAbs.appendChild(divDummyInputAbs);
 
+    var btnInputSubmit = document.createElement('button');
+    btnInputSubmit.setAttribute('type','button');
+    btnInputSubmit.innerHTML = submitBtnTxt;
+    // 아래 방법은 content security policy에서 inline javascript를 제한하는 정책을 위배 - 작동 안됨
+    //btnInputSubmit.setAttribute('onclick','submitDateEntry();');
+    // 대신 addEventListener를 사용하세요
+    btnInputSubmit.addEventListener('click', function () {
+        submitDateEntry();
+    });
+    
 
     // 페이지에 적용
     inputEntry.appendChild(inputNo);
@@ -233,7 +242,11 @@ function prepareInput(entryNo = -1){
     inputEntry.appendChild(selectInputType);
     inputEntry.appendChild(divInputDateRel);
     inputEntry.appendChild(divInputDateAbs);
-    
+    inputEntry.appendChild(btnInputSubmit);   
 
     alertAndLog('searchDateLen: [options] finished preparing input area.');
+}
+
+function submitDateEntry(){
+    alertAndLog('searchDateLen: [options] submitting dateEntry into storage.');
 }
