@@ -23,6 +23,9 @@ function populateList(){
     // datesList ul
     var datesList = document.querySelector('.datesList');
 
+    // reset datesList;
+    datesList.innerHTML = '';
+
     for(var entryNo = 0; entryNo < datesData.length; entryNo++){
         // 실제 데이터
         var dateListEntry = datesData[entryNo];
