@@ -19,6 +19,17 @@ function alertAndLog(msg){
     console.log(msg);
 }
 
+const DLE_JSON_COL_NO = 'no';
+const DLE_JSON_COL_NAME = 'name';
+const DLE_JSON_COL_TYPE = 'type';
+const DLE_JSON_COL_FROM_YEAR = 'from_year';
+const DLE_JSON_COL_FROM_MONTH = 'from_month';
+const DLE_JSON_COL_FROM_DATE = 'from_date';
+const DLE_JSON_COL_TO_YEAR = 'to_year';
+const DLE_JSON_COL_TO_MONTH = 'to_month';
+const DLE_JSON_COL_TO_DATE = 'to_date';
+
+
 // 타입 형식들
 const DATELIST_ENTRY_TYPE_REL_FROM = 'rel_from';
 const DATELIST_ENTRY_TYPE_REL_TO = 'rel_to';
