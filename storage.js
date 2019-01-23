@@ -84,6 +84,13 @@ function checkDataAndForceDefault(){
 }
 
 /**
+ * datesJsonStr에서 JSON 을 준비합니다.
+ */
+function prepareStorage(){
+    datesJsonStr = JSON.stringify(datesData);
+}
+
+/**
  * 크롬 스토리지에 JSON값을 저장한다. 
  */
 function saveStorage(){
