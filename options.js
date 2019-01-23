@@ -230,9 +230,8 @@ function prepareInput(entryNo = -1){
     //btnInputSubmit.setAttribute('onclick','submitDateEntry();');
     // 대신 addEventListener를 사용하세요
     btnInputSubmit.addEventListener('click', function () {
-        submitDateEntry();
+        submitDateEntry(entryNo);
     });
-    
 
     // 페이지에 적용
     inputEntry.appendChild(inputNo);
@@ -247,6 +246,80 @@ function prepareInput(entryNo = -1){
     alertAndLog('searchDateLen: [options] finished preparing input area.');
 }
 
-function submitDateEntry(){
+function submitDateEntry(entryNo = -1){
     alertAndLog('searchDateLen: [options] submitting dateEntry into storage.');
+
+    // inputEntry div
+    var inputEntry = document.querySelector('#inputEntry');
+    
+    // input_no input
+    var inputNo = inputEntry.querySelector('#input_no');
+    // input_name input
+    var inputName = inputEntry.querySelector('#input_name');
+    // input_type select
+    var selectInputType = inputEntry.querySelector('#input_type');
+
+
+    // 시작기간
+    // 시작개년 div+input
+    var inputRelFromYear = inputEntry.querySelector('#input_rel_from_year');
+    // 시작개월 div+input
+    var inputRelFromMonth = inputEntry.querySelector('#input_rel_from_month');
+    // 시작개일 div+input
+    var inputRelFromDate = inputEntry.querySelector('#input_rel_from_date');
+
+
+    // 종료기간
+    // 종료개년 div+input
+    var inputRelToYear = inputEntry.querySelector('#input_rel_to_year');
+    // 종료개월 div+input
+    var inputRelToMonth = inputEntry.querySelector('#input_rel_to_month');
+    // 종료개일 div+input
+    var inputRelToDate = inputEntry.querySelector('#input_rel_to_date');
+
+    // 절대적 기간 컨테이너 div
+    // to be continued....
+
+
+    // 객체에 반영
+    dateListEntry = {}; // new obj
+    dateListEntry['no'] = entryNo;
+    dateListEntry['name'] = inputName.value;
+    dateListEntry['type'] = selectInputType.value;
+
+    switch(dateListEntry.type){
+        case DATELIST_ENTRY_TYPES[0]:
+        case DATELIST_ENTRY_TYPES[1]:
+        case DATELIST_ENTRY_TYPES[2]:
+            dateListEntry['from_year'] = inputRelFromYear.value;
+            dateListEntry['from_month'] = inputRelFromMonth.value;
+            dateListEntry['from_date'] = inputRelFromDate.value;
+            dateListEntry['to_year'] = inputRelToYear.value;
+            dateListEntry['to_month'] = inputRelToMonth.value;
+            dateListEntry['to_date'] = inputRelToDate.value;
+            break;
+        case DATELIST_ENTRY_TYPES[3]:
+        case DATELIST_ENTRY_TYPES[4]:
+        case DATELIST_ENTRY_TYPES[5]:
+            dateListEntry['from_year'] = 2018;
+            dateListEntry['from_month'] = 1;
+            dateListEntry['from_date'] = 14;
+            dateListEntry['to_year'] = 2018;
+            dateListEntry['to_month'] = 1;
+            dateListEntry['to_date'] = 20;
+            break;
+    }
+    
+    // 신규 항목은 맨 아래쪽에 넣는다.
+    if(entryNo < 0){
+        entryNo = datesData.length;
+    }
+
+    // 데이터에 반영
+    datesData[entryNo] = dateListEntry;
+    prepareStorage();
+    saveStorage();
+
+    // 새로고침
+    loadStorage();
 }
