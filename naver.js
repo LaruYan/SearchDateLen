@@ -19,40 +19,40 @@ function injectDates(){
         var fromDate = '';
         var toDate = '';
 
-        switch(dateEntry.type){
-            case DATELIST_ENTRY_TYPE_REL_FROM: // 'rel_from': // 며칠전 부터 
+        switch(dateEntry[DLE_JSON_COL_TYPE]){
+            case DLE_TYPE_REL_FROM: // 'rel_from': // 며칠전 부터 
                 {
-                    var dateFromTarget = setDateFromNow(dateEntry.from_year, dateEntry.from_month, dateEntry.from_date);
+                    var dateFromTarget = setDateFromNow(dateEntry[DLE_JSON_COL_FROM_YEAR], dateEntry[DLE_JSON_COL_FROM_MONTH], dateEntry[DLE_JSON_COL_FROM_DATE]);
                     fromDate = getDateStringNaver(dateFromTarget.getFullYear(), (dateFromTarget.getMonth() + 1), dateFromTarget.getDate());
                 }
                 break;
 
-            case DATELIST_ENTRY_TYPE_REL_TO: // 'rel_to': // 며칠전 까지
+            case DLE_TYPE_REL_TO: // 'rel_to': // 며칠전 까지
                 {
-                    var dateToTarget = setDateFromNow(dateEntry.to_year, dateEntry.to_month, dateEntry.to_date);
+                    var dateToTarget = setDateFromNow(dateEntry[DLE_JSON_COL_TO_YEAR], dateEntry[DLE_JSON_COL_TO_MONTH], dateEntry[DLE_JSON_COL_TO_DATE]);
                     toDate = getDateStringNaver(dateToTarget.getFullYear(), (dateToTarget.getMonth() + 1), dateToTarget.getDate());
                 }
                 break;
-            case DATELIST_ENTRY_TYPE_REL_RANGE: // 'rel_range': // 정해진 기간 (상대적)
+            case DLE_TYPE_REL_RANGE: // 'rel_range': // 정해진 기간 (상대적)
                 {
-                    var dateRgFrmTarget = setDateFromNow(dateEntry.from_year, dateEntry.from_month, dateEntry.from_date);
+                    var dateRgFrmTarget = setDateFromNow(dateEntry[DLE_JSON_COL_FROM_YEAR], dateEntry[DLE_JSON_COL_FROM_MONTH], dateEntry[DLE_JSON_COL_FROM_DATE]);
                     fromDate = getDateStringNaver(dateRgFrmTarget.getFullYear(), (dateRgFrmTarget.getMonth() + 1), dateRgFrmTarget.getDate());
-                    var dateRgToTarget = setDateFromNow(dateEntry.to_year, dateEntry.to_month, dateEntry.to_date);
+                    var dateRgToTarget = setDateFromNow(dateEntry[DLE_JSON_COL_TO_YEAR], dateEntry[DLE_JSON_COL_TO_MONTH], dateEntry[DLE_JSON_COL_TO_DATE]);
                     toDate = getDateStringNaver(dateRgToTarget.getFullYear(), (dateRgToTarget.getMonth() + 1), dateRgToTarget.getDate());
                 }
                 break;
 
-            case DATELIST_ENTRY_TYPE_ABS_FROM: // 'abs_from': // 특정일 부터
-                fromDate = getDateStringNaver(dateEntry.from_year,dateEntry.from_month,dateEntry.from_date);
+            case DLE_TYPE_ABS_FROM: // 'abs_from': // 특정일 부터
+                fromDate = getDateStringNaver(dateEntry[DLE_JSON_COL_FROM_YEAR],dateEntry[DLE_JSON_COL_FROM_MONTH],dateEntry[DLE_JSON_COL_FROM_DATE]);
                 break;
 
-            case DATELIST_ENTRY_TYPE_ABS_TO: // 'abs_to': // 특정일 까지
-                toDate = getDateStringNaver(dateEntry.to_year,dateEntry.to_month,dateEntry.to_date);
+            case DLE_TYPE_ABS_TO: // 'abs_to': // 특정일 까지
+                toDate = getDateStringNaver(dateEntry[DLE_JSON_COL_TO_YEAR],dateEntry[DLE_JSON_COL_TO_MONTH],dateEntry[DLE_JSON_COL_TO_DATE]);
                 break;
                 
-            case DATELIST_ENTRY_TYPE_ABS_RANGE: // 'abs_range': // 정해진 기간 (절대적)
-                fromDate = getDateStringNaver(dateEntry.from_year,dateEntry.from_month,dateEntry.from_date);
-                toDate = getDateStringNaver(dateEntry.to_year,dateEntry.to_month,dateEntry.to_date);
+            case DLE_TYPE_ABS_RANGE: // 'abs_range': // 정해진 기간 (절대적)
+                fromDate = getDateStringNaver(dateEntry[DLE_JSON_COL_FROM_YEAR],dateEntry[DLE_JSON_COL_FROM_MONTH],dateEntry[DLE_JSON_COL_FROM_DATE]);
+                toDate = getDateStringNaver(dateEntry[DLE_JSON_COL_TO_YEAR],dateEntry[DLE_JSON_COL_TO_MONTH],dateEntry[DLE_JSON_COL_TO_DATE]);
                 break;
         }
 
@@ -72,7 +72,7 @@ function injectDates(){
         var aTag = document.createElement('a');
         aTag.setAttribute('href', '#');
         aTag.setAttribute('onclick', contentString);
-        aTag.innerHTML = dateEntry.name;
+        aTag.innerHTML = dateEntry[DLE_JSON_COL_NAME];
         var liTag = document.createElement('li');
         liTag.appendChild(aTag);
         wrapper.appendChild(liTag);

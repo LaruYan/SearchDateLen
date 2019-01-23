@@ -28,7 +28,7 @@ function populateList(){
 
     for(var entryNo = 0; entryNo < datesData.length; entryNo++){
         // 실제 데이터
-        var dateListEntry = datesData[entryNo];
+        var dateEntry = datesData[entryNo];
 
         // 항목 컨테이너
         var liTag = getClassedTag('li', 'dateEntry clearfix', '');
@@ -36,55 +36,55 @@ function populateList(){
         // 종류에 따라 표시방식 대음
         var isAbsoluteDate = false;
         var visibleType = '';
-        switch(dateListEntry.type){
-            case DATELIST_ENTRY_TYPE_REL_FROM: //'rel_from':
-                visibleType = LABEL_DATELIST_ENTRY_TYPES_REL_FROM;
+        switch(dateEntry[DLE_JSON_COL_TYPE]){
+            case DLE_TYPE_REL_FROM: //'rel_from':
+                visibleType = LABEL_DLE_TYPES_REL_FROM;
 
                 break;
-            case DATELIST_ENTRY_TYPE_REL_TO: //'rel_to':
-                visibleType = LABEL_DATELIST_ENTRY_TYPES_REL_TO;
+            case DLE_TYPE_REL_TO: //'rel_to':
+                visibleType = LABEL_DLE_TYPES_REL_TO;
 
                 break;
-            case DATELIST_ENTRY_TYPE_REL_RANGE: //'rel_range':
-                visibleType = LABEL_DATELIST_ENTRY_TYPES_REL_RANGE;
+            case DLE_TYPE_REL_RANGE: //'rel_range':
+                visibleType = LABEL_DLE_TYPES_REL_RANGE;
 
                 break;
-            case DATELIST_ENTRY_TYPE_ABS_FROM: //'abs_from':
+            case DLE_TYPE_ABS_FROM: //'abs_from':
                 isAbsoluteDate = true;
-                visibleType = LABEL_DATELIST_ENTRY_TYPES_ABS_FROM;
+                visibleType = LABEL_DLE_TYPES_ABS_FROM;
 
                 break;
-            case DATELIST_ENTRY_TYPE_ABS_TO: //'abs_to':
+            case DLE_TYPE_ABS_TO: //'abs_to':
                 isAbsoluteDate = true;
-                visibleType = LABEL_DATELIST_ENTRY_TYPES_ABS_TO;
+                visibleType = LABEL_DLE_TYPES_ABS_TO;
 
                 break;
-            case DATELIST_ENTRY_TYPE_ABS_RANGE: //'abs_range':
+            case DLE_TYPE_ABS_RANGE: //'abs_range':
                 isAbsoluteDate = true;
-                visibleType = LABEL_DATELIST_ENTRY_TYPES_ABS_RANGE;
+                visibleType = LABEL_DLE_TYPES_ABS_RANGE;
 
                 break;
         }
 
         // 데이터를 그대로 표시
-        var divDateNoInternal = getClassedTag('div', 'dateNoInternal', dateListEntry.no);
-        var divDateName = getClassedTag('div', 'dateName', dateListEntry.name);
+        var divDateNoInternal = getClassedTag('div', 'dateNoInternal', dateEntry.no);
+        var divDateName = getClassedTag('div', 'dateName', dateEntry[DLE_JSON_COL_NAME]);
         var divDateType = getClassedTag('div', 'dateType', visibleType);
-        var divDateTypeInternal = getClassedTag('div', 'dateTypeInternal', dateListEntry.type);
+        var divDateTypeInternal = getClassedTag('div', 'dateTypeInternal', dateEntry[DLE_JSON_COL_TYPE]);
 
         // 날짜 wrapper
         var divLabelFromYear = getClassedTag('div', 'label_year', 
-            getClassedTag('span', 'from_year', dateListEntry.from_year));
+            getClassedTag('span', 'from_year', dateEntry[DLE_JSON_COL_FROM_YEAR]));
         var divLabelFromMonth = getClassedTag('div', 'label_month',
-            getClassedTag('span', 'from_month', dateListEntry.from_month));
+            getClassedTag('span', 'from_month', dateEntry[DLE_JSON_COL_FROM_MONTH]));
         var divLabelFromDate = getClassedTag('div', 'label_date', 
-            getClassedTag('span', 'from_date', dateListEntry.from_date));
+            getClassedTag('span', 'from_date', dateEntry[DLE_JSON_COL_FROM_DATE]));
         var divLabelToYear = getClassedTag('div', 'label_year', 
-            getClassedTag('span', 'to_year', dateListEntry.to_year));
+            getClassedTag('span', 'to_year', dateEntry[DLE_JSON_COL_TO_YEAR]));
         var divLabelToMonth = getClassedTag('div', 'label_month',
-            getClassedTag('span', 'to_month', dateListEntry.to_month));
+            getClassedTag('span', 'to_month', dateEntry[DLE_JSON_COL_TO_MONTH]));
         var divLabelToDate = getClassedTag('div', 'label_date', 
-            getClassedTag('span', 'to_date', dateListEntry.to_date));
+            getClassedTag('span', 'to_date', dateEntry[DLE_JSON_COL_TO_DATE]));
         
         
         if( ! isAbsoluteDate){
@@ -134,27 +134,27 @@ function prepareInput(entryNo = -1){
     // reset inputEntry;
     inputEntry.innerHTML = '';
 
-    var dateListEntry = null;
+    var dateEntry = null;
     var submitBtnTxt = '';
 
     if(datesData && (0 <= entryNo && entryNo < datesData.length)){
         // datesData 가 있고 해당 원소가 범위 안
-        dateListEntry = datesData[entryNo];
+        dateEntry = datesData[entryNo];
         //버튼 텍스트 설정
         submitBtnTxt = '수정';
     }else{
         // datesData 가 비어있거나 해당 원소가 범위 밖
         // 생성하자
-        dateListEntry = {}; // new obj
-        dateListEntry['no'] = entryNo;
-        dateListEntry['name'] = 'new entry';
-        dateListEntry['type'] = DATELIST_ENTRY_TYPE_REL_FROM;
-        dateListEntry['from_year'] = 0;
-        dateListEntry['from_month'] = 0;
-        dateListEntry['from_date'] = 0;
-        dateListEntry['to_year'] = 0;
-        dateListEntry['to_month'] = 0;
-        dateListEntry['to_date'] = 0;
+        dateEntry = {}; // new obj
+        dateEntry['no'] = entryNo;
+        dateEntry['name'] = 'new entry';
+        dateEntry['type'] = DLE_TYPE_REL_FROM;
+        dateEntry['from_year'] = 0;
+        dateEntry['from_month'] = 0;
+        dateEntry['from_date'] = 0;
+        dateEntry['to_year'] = 0;
+        dateEntry['to_month'] = 0;
+        dateEntry['to_date'] = 0;
 
         // 버튼 텍스트 설정
         submitBtnTxt = '추가';
@@ -165,7 +165,7 @@ function prepareInput(entryNo = -1){
     // 이름 레이블 div
     var divInputName = getClassedTag('div','label_input','이름');
     // input_name input
-    var inputName = getInputTextTag('input_name', false, dateListEntry.name);
+    var inputName = getInputTextTag('input_name', false, dateEntry[DLE_JSON_COL_NAME]);
     // 형식 레이블 div
     var divInputType = getClassedTag('div','label_input','형식');
 
@@ -174,8 +174,8 @@ function prepareInput(entryNo = -1){
     selectInputType.setAttribute('name', 'input_type');
     selectInputType.setAttribute('id', 'input_type');
     // options
-    for(var typeNo = 0; typeNo < DATELIST_ENTRY_TYPES.length; typeNo++){
-        selectInputType.appendChild(getSelectedOptionTag(LABEL_DATELIST_ENTRY_TYPES[typeNo], DATELIST_ENTRY_TYPES[typeNo], dateListEntry.type));
+    for(var typeNo = 0; typeNo < DLE_TYPES.length; typeNo++){
+        selectInputType.appendChild(getSelectedOptionTag(LABEL_DLE_TYPES[typeNo], DLE_TYPES[typeNo], dateEntry[DLE_JSON_COL_TYPE]));
     }
 
 
@@ -191,13 +191,13 @@ function prepareInput(entryNo = -1){
     divInputRelFrom.appendChild(getClassedTag('div','label_input','시작기간'));
     // 시작개년 div+input
     divInputRelFrom.appendChild(getClassedTag('div','label_year',
-        getInputNumberTag('input_rel_from_year',99,dateListEntry.from_year),'년'));
+        getInputNumberTag('input_rel_from_year',99,dateEntry[DLE_JSON_COL_FROM_YEAR]),'년'));
     // 시작개월 div+input
     divInputRelFrom.appendChild(getClassedTag('div','label_month',
-        getInputNumberTag('input_rel_from_month',99,dateListEntry.from_month),'개월'));
+        getInputNumberTag('input_rel_from_month',99,dateEntry[DLE_JSON_COL_FROM_MONTH]),'개월'));
     // 시작개일 div+input
     divInputRelFrom.appendChild(getClassedTag('div','label_date',
-        getInputNumberTag('input_rel_from_date',99,dateListEntry.from_date),'일'));
+        getInputNumberTag('input_rel_from_date',99,dateEntry[DLE_JSON_COL_FROM_DATE]),'일'));
     // 시작기간 clear div
     divInputRelFrom.appendChild(getClassedTag('div','clear'));
     // 시작기간을 상대기간 DOM에 추가
@@ -210,13 +210,13 @@ function prepareInput(entryNo = -1){
     divInputRelTo.appendChild(getClassedTag('div','label_input','종료기간'));
     // 종료개년 div+input
     divInputRelTo.appendChild(getClassedTag('div','label_year',
-        getInputNumberTag('input_rel_to_year',99,dateListEntry.to_year),'년'));
+        getInputNumberTag('input_rel_to_year',99,dateEntry[DLE_JSON_COL_TO_YEAR]),'년'));
     // 종료개월 div+input
     divInputRelTo.appendChild(getClassedTag('div','label_month',
-        getInputNumberTag('input_rel_to_month',99,dateListEntry.to_month),'개월'));
+        getInputNumberTag('input_rel_to_month',99,dateEntry[DLE_JSON_COL_TO_MONTH]),'개월'));
     // 종료개일 div+input
     divInputRelTo.appendChild(getClassedTag('div','label_date',
-        getInputNumberTag('input_rel_to_date',99,dateListEntry.to_date),'일'));
+        getInputNumberTag('input_rel_to_date',99,dateEntry[DLE_JSON_COL_TO_DATE]),'일'));
     // 종료기간 clear div
     divInputRelTo.appendChild(getClassedTag('div','clear'));    
     // 종료기간을 상대기간 DOM에 추가
@@ -287,31 +287,31 @@ function submitDateEntry(entryNo = -1){
 
 
     // 객체에 반영
-    dateListEntry = {}; // new obj
-    dateListEntry['no'] = entryNo;
-    dateListEntry['name'] = inputName.value;
-    dateListEntry['type'] = selectInputType.value;
+    dateEntry = {}; // new obj
+    dateEntry['no'] = entryNo;
+    dateEntry['name'] = inputName.value;
+    dateEntry['type'] = selectInputType.value;
 
-    switch(dateListEntry.type){
-        case DATELIST_ENTRY_TYPE_REL_FROM:
-        case DATELIST_ENTRY_TYPE_REL_TO:
-        case DATELIST_ENTRY_TYPE_REL_RANGE:
-            dateListEntry['from_year'] = inputRelFromYear.value;
-            dateListEntry['from_month'] = inputRelFromMonth.value;
-            dateListEntry['from_date'] = inputRelFromDate.value;
-            dateListEntry['to_year'] = inputRelToYear.value;
-            dateListEntry['to_month'] = inputRelToMonth.value;
-            dateListEntry['to_date'] = inputRelToDate.value;
+    switch(dateEntry[DLE_JSON_COL_TYPE]){
+        case DLE_TYPE_REL_FROM:
+        case DLE_TYPE_REL_TO:
+        case DLE_TYPE_REL_RANGE:
+            dateEntry['from_year'] = inputRelFromYear.value;
+            dateEntry['from_month'] = inputRelFromMonth.value;
+            dateEntry['from_date'] = inputRelFromDate.value;
+            dateEntry['to_year'] = inputRelToYear.value;
+            dateEntry['to_month'] = inputRelToMonth.value;
+            dateEntry['to_date'] = inputRelToDate.value;
             break;
-        case DATELIST_ENTRY_TYPE_ABS_FROM:
-        case DATELIST_ENTRY_TYPE_ABS_TO:
-        case DATELIST_ENTRY_TYPE_ABS_RANGE:
-            dateListEntry['from_year'] = 2018;
-            dateListEntry['from_month'] = 1;
-            dateListEntry['from_date'] = 14;
-            dateListEntry['to_year'] = 2018;
-            dateListEntry['to_month'] = 1;
-            dateListEntry['to_date'] = 20;
+        case DLE_TYPE_ABS_FROM:
+        case DLE_TYPE_ABS_TO:
+        case DLE_TYPE_ABS_RANGE:
+            dateEntry['from_year'] = 2018;
+            dateEntry['from_month'] = 1;
+            dateEntry['from_date'] = 14;
+            dateEntry['to_year'] = 2018;
+            dateEntry['to_month'] = 1;
+            dateEntry['to_date'] = 20;
             break;
     }
     
@@ -321,7 +321,7 @@ function submitDateEntry(entryNo = -1){
     }
 
     // 데이터에 반영
-    datesData[entryNo] = dateListEntry;
+    datesData[entryNo] = dateEntry;
     prepareStorage();
     saveStorage();
 
