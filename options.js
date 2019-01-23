@@ -160,7 +160,7 @@ function prepareInput(entryNo = -1){
     // 이름 레이블 div
     var divInputName = getClassedTag('div','label_input','이름');
     // input_name input
-    var inputName = getInputTextTag('input_name', true, entryNo);
+    var inputName = getInputTextTag('input_name', false, dateListEntry.name);
     // 형식 레이블 div
     var divInputType = getClassedTag('div','label_input','형식');
 
