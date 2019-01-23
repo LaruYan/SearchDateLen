@@ -37,31 +37,31 @@ function populateList(){
         var isAbsoluteDate = false;
         var visibleType = '';
         switch(dateListEntry.type){
-            case DATELIST_ENTRY_TYPES[0]: //'rel_from':
-                visibleType = LABEL_DATELIST_ENTRY_TYPES[0];
+            case DATELIST_ENTRY_TYPE_REL_FROM: //'rel_from':
+                visibleType = LABEL_DATELIST_ENTRY_TYPES_REL_FROM;
 
                 break;
-            case DATELIST_ENTRY_TYPES[1]: //'rel_to':
-                visibleType = LABEL_DATELIST_ENTRY_TYPES[1];
+            case DATELIST_ENTRY_TYPE_REL_TO: //'rel_to':
+                visibleType = LABEL_DATELIST_ENTRY_TYPES_REL_TO;
 
                 break;
-            case DATELIST_ENTRY_TYPES[2]: //'rel_range':
-                visibleType = LABEL_DATELIST_ENTRY_TYPES[2];
+            case DATELIST_ENTRY_TYPE_REL_RANGE: //'rel_range':
+                visibleType = LABEL_DATELIST_ENTRY_TYPES_REL_RANGE;
 
                 break;
-            case DATELIST_ENTRY_TYPES[3]: //'abs_from':
+            case DATELIST_ENTRY_TYPE_ABS_FROM: //'abs_from':
                 isAbsoluteDate = true;
-                visibleType = LABEL_DATELIST_ENTRY_TYPES[3];
+                visibleType = LABEL_DATELIST_ENTRY_TYPES_ABS_FROM;
 
                 break;
-            case DATELIST_ENTRY_TYPES[4]: //'abs_to':
+            case DATELIST_ENTRY_TYPE_ABS_TO: //'abs_to':
                 isAbsoluteDate = true;
-                visibleType = LABEL_DATELIST_ENTRY_TYPES[4];
+                visibleType = LABEL_DATELIST_ENTRY_TYPES_ABS_TO;
 
                 break;
-            case DATELIST_ENTRY_TYPES[5]: //'abs_range':
+            case DATELIST_ENTRY_TYPE_ABS_RANGE: //'abs_range':
                 isAbsoluteDate = true;
-                visibleType = LABEL_DATELIST_ENTRY_TYPES[5];
+                visibleType = LABEL_DATELIST_ENTRY_TYPES_ABS_RANGE;
 
                 break;
         }
@@ -148,7 +148,7 @@ function prepareInput(entryNo = -1){
         dateListEntry = {}; // new obj
         dateListEntry['no'] = entryNo;
         dateListEntry['name'] = 'new entry';
-        dateListEntry['type'] = DATELIST_ENTRY_TYPES[0];
+        dateListEntry['type'] = DATELIST_ENTRY_TYPE_REL_FROM;
         dateListEntry['from_year'] = 0;
         dateListEntry['from_month'] = 0;
         dateListEntry['from_date'] = 0;
@@ -293,9 +293,9 @@ function submitDateEntry(entryNo = -1){
     dateListEntry['type'] = selectInputType.value;
 
     switch(dateListEntry.type){
-        case DATELIST_ENTRY_TYPES[0]:
-        case DATELIST_ENTRY_TYPES[1]:
-        case DATELIST_ENTRY_TYPES[2]:
+        case DATELIST_ENTRY_TYPE_REL_FROM:
+        case DATELIST_ENTRY_TYPE_REL_TO:
+        case DATELIST_ENTRY_TYPE_REL_RANGE:
             dateListEntry['from_year'] = inputRelFromYear.value;
             dateListEntry['from_month'] = inputRelFromMonth.value;
             dateListEntry['from_date'] = inputRelFromDate.value;
@@ -303,9 +303,9 @@ function submitDateEntry(entryNo = -1){
             dateListEntry['to_month'] = inputRelToMonth.value;
             dateListEntry['to_date'] = inputRelToDate.value;
             break;
-        case DATELIST_ENTRY_TYPES[3]:
-        case DATELIST_ENTRY_TYPES[4]:
-        case DATELIST_ENTRY_TYPES[5]:
+        case DATELIST_ENTRY_TYPE_ABS_FROM:
+        case DATELIST_ENTRY_TYPE_ABS_TO:
+        case DATELIST_ENTRY_TYPE_ABS_RANGE:
             dateListEntry['from_year'] = 2018;
             dateListEntry['from_month'] = 1;
             dateListEntry['from_date'] = 14;
