@@ -322,6 +322,21 @@ function submitDateEntry(entryNo = -1){
 
     // 데이터에 반영
     datesData[entryNo] = dateEntry;
+    
+    saveAndReload();
+}
+
+function removeItem(index){    
+    // index자리 1칸을 기존 배열에서 따로 뽑아내고 빈 공간은 합쳐 갯수 1 감소.
+    datesData.splice(index, 1);
+}
+
+function insertItem(index, item){
+    // 아무 칸도 뽑아내지 않고 index 자리에 끼워 넣는다. 갯수 1 증가
+    datesData.splice(index, 0, item);
+}
+
+function saveAndReload(){
     prepareStorage();
     saveStorage();
 
