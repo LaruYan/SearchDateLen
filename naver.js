@@ -4,11 +4,21 @@
 //
 //
 
-
+/**
+ * NAVER 날짜 형식에 맞게 yyyy.mm.dd 꼴의 문자열을 반환
+ * @param {*} year 년도
+ * @param {*} month 월
+ * @param {*} date 일
+ */
 function getDateStringNaver(year,month,date){
     return year + '.' + getTwoDigitNumber(month) + '.' + getTwoDigitNumber(date);
 }
 
+/**
+ * 날짜 목록을 기간 설정에 집어넣습니다.
+ * 
+ * *공통 메소드*
+ */
 function injectDates(){
 
     var wrapper = document.createElement('div');

@@ -11,6 +11,9 @@ var datesJsonStr = null;
 // 저장된 데이터 (obj)
 var datesData = null;
 
+/**
+ * 스토리지로부터 불러온 값을 확인하고 없으면 기본 값으로 초기화
+ */
 function checkDataAndForceDefault(){
     if(!datesJsonStr || datesJsonStr == undefined || datesJsonStr == null)
     {

@@ -65,6 +65,6 @@ input[type="number"] { /* 숫자 입력칸의 숫자를 오른쪽 정렬 */
     text-align: right;
 }
 
-.hidden {
+.hidden { /* 숨김 항목 */
     display:none;
 }

@@ -1,3 +1,8 @@
+//
+//
+//  options.html 에서 사용할 설정 관련 스크립트
+//
+//
 
 
 // 확장기능 내에서 inline javascript가 동작하지 않으므로 직접 이벤트 리스너로 추가해야한다
@@ -7,6 +12,10 @@ document.addEventListener('DOMContentLoaded', function () {
     loadStorage();
 });
 
+
+/**
+ * 스토리지에 저장된 값을 읽어와 options.html 초기화
+ */
 function loadStorage(){
     alertAndLog('searchDateLen: [options] loadStorage()');
     //크롬 스토리지에 저장된 JSON값을 가져온다. 
@@ -18,6 +27,10 @@ function loadStorage(){
     });
 }
 
+
+/**
+ * dates 목록을 꾸린다.
+ */
 function populateList(){
     alertAndLog('searchDateLen: [options] preparing datesList for '+datesData.length+' item(s).');
     // datesList ul
@@ -125,6 +138,11 @@ function populateList(){
     alertAndLog('searchDateLen: [options] finished datesList for '+datesData.length+' item(s).');
 }
 
+
+/**
+ * 입력/수정 란을 준비한다.
+ * @param {*} entryNo 항목 번호. 있는 항목이라면 수정 상태로 값을 읽어온다
+ */
 function prepareInput(entryNo = -1){
     alertAndLog('searchDateLen: [options] preparing input area.');
 
@@ -251,6 +269,11 @@ function prepareInput(entryNo = -1){
     alertAndLog('searchDateLen: [options] finished preparing input area.');
 }
 
+
+/**
+ * 입력/수정 값을 란에서 읽고 스토리지에 저장한다
+ * @param {*} entryNo 항목 번호. -1은 신규 아이템으로 삽입
+ */
 function submitDateEntry(entryNo = -1){
     alertAndLog('searchDateLen: [options] submitting dateEntry into storage.');
 
@@ -326,16 +349,31 @@ function submitDateEntry(entryNo = -1){
     saveAndReload();
 }
 
+
+/**
+ * 해당 index의 항목을 datesData에서 삭제
+ * @param {*} index 항목 번호
+ */
 function removeItem(index){    
     // index자리 1칸을 기존 배열에서 따로 뽑아내고 빈 공간은 합쳐 갯수 1 감소.
     datesData.splice(index, 1);
 }
 
+
+/**
+ * 해당 index에 item 항목을 datesData에 삽입
+ * @param {*} index 항목 번호
+ * @param {*} item 각 개별 dateEntry
+ */
 function insertItem(index, item){
     // 아무 칸도 뽑아내지 않고 index 자리에 끼워 넣는다. 갯수 1 증가
     datesData.splice(index, 0, item);
 }
 
+
+/**
+ * 스토리지에 저장하고 페이지를 새로고침합니다.
+ */
 function saveAndReload(){
     prepareStorage();
     saveStorage();
