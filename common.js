@@ -26,10 +26,11 @@ const DLE_JSON_COL_TYPE = 'type';
 const DLE_JSON_COL_FROM_YEAR = 'from_year';
 const DLE_JSON_COL_FROM_MONTH = 'from_month';
 const DLE_JSON_COL_FROM_DATE = 'from_date';
+const DLE_JSON_COL_FROM_DOW = 'from_dow';
 const DLE_JSON_COL_TO_YEAR = 'to_year';
 const DLE_JSON_COL_TO_MONTH = 'to_month';
 const DLE_JSON_COL_TO_DATE = 'to_date';
-
+const DLE_JSON_COL_TO_DOW = 'to_dow';
 
 // 타입 형식들
 const DLE_TYPE_REL_FROM = 'rel_from';
