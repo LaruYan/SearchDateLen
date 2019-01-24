@@ -80,7 +80,6 @@ function populateList(){
         }
 
         // 데이터를 그대로 표시
-        var divDateNoInternal = getClassedTag('div', 'dateNoInternal', dateEntry.no);
         var divDateName = getClassedTag('div', 'dateName', dateEntry[DLE_JSON_COL_NAME]);
         var divDateType = getClassedTag('div', 'dateType', visibleType);
         var divDateTypeInternal = getClassedTag('div', 'dateTypeInternal', dateEntry[DLE_JSON_COL_TYPE]);
@@ -119,7 +118,6 @@ function populateList(){
         }
 
         // 항목에 내용 삽입
-        liTag.appendChild(divDateNoInternal);
         liTag.appendChild(divDateName);
         liTag.appendChild(divDateType);
         liTag.appendChild(divDateTypeInternal);
@@ -164,7 +162,6 @@ function prepareInput(entryNo = -1){
         // datesData 가 비어있거나 해당 원소가 범위 밖
         // 생성하자
         dateEntry = {}; // new obj
-        dateEntry[DLE_JSON_COL_NO] = entryNo;
         dateEntry[DLE_JSON_COL_NAME] = 'new entry';
         dateEntry[DLE_JSON_COL_TYPE] = DLE_TYPE_REL_FROM;
         dateEntry[DLE_JSON_COL_FROM_YEAR] = 0;
@@ -178,8 +175,6 @@ function prepareInput(entryNo = -1){
         submitBtnTxt = '추가';
     }
 
-    // input_no input
-    var inputNo = getInputTextTag('input_no', true, entryNo);
     // 이름 레이블 div
     var divInputName = getClassedTag('div','label_input','이름');
     // input_name input
@@ -257,7 +252,6 @@ function prepareInput(entryNo = -1){
     });
 
     // 페이지에 적용
-    inputEntry.appendChild(inputNo);
     inputEntry.appendChild(divInputName);
     inputEntry.appendChild(inputName);
     inputEntry.appendChild(divInputType);
@@ -280,8 +274,6 @@ function submitDateEntry(entryNo = -1){
     // inputEntry div
     var inputEntry = document.querySelector('#inputEntry');
     
-    // input_no input
-    var inputNo = inputEntry.querySelector('#input_no');
     // input_name input
     var inputName = inputEntry.querySelector('#input_name');
     // input_type select
@@ -311,7 +303,6 @@ function submitDateEntry(entryNo = -1){
 
     // 객체에 반영
     dateEntry = {}; // new obj
-    dateEntry[DLE_JSON_COL_NO] = entryNo;
     dateEntry[DLE_JSON_COL_NAME] = inputName.value;
     dateEntry[DLE_JSON_COL_TYPE] = selectInputType.value;
 
@@ -354,7 +345,7 @@ function submitDateEntry(entryNo = -1){
  * 해당 index의 항목을 datesData에서 삭제
  * @param {*} index 항목 번호
  */
-function removeItem(index){    
+function removeDateEntry(index){    
     // index자리 1칸을 기존 배열에서 따로 뽑아내고 빈 공간은 합쳐 갯수 1 감소.
     datesData.splice(index, 1);
 }
@@ -365,7 +356,7 @@ function removeItem(index){
  * @param {*} index 항목 번호
  * @param {*} item 각 개별 dateEntry
  */
-function insertItem(index, item){
+function insertDateEntry(index, item){
     // 아무 칸도 뽑아내지 않고 index 자리에 끼워 넣는다. 갯수 1 증가
     datesData.splice(index, 0, item);
 }

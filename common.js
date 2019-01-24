@@ -20,7 +20,6 @@ function alertAndLog(msg){
 }
 
 // JSON 컬럼 이름
-const DLE_JSON_COL_NO = 'no';
 const DLE_JSON_COL_NAME = 'name';
 const DLE_JSON_COL_TYPE = 'type';
 const DLE_JSON_COL_FROM_YEAR = 'from_year';
