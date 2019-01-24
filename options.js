@@ -146,15 +146,15 @@ function prepareInput(entryNo = -1){
         // datesData 가 비어있거나 해당 원소가 범위 밖
         // 생성하자
         dateEntry = {}; // new obj
-        dateEntry['no'] = entryNo;
-        dateEntry['name'] = 'new entry';
-        dateEntry['type'] = DLE_TYPE_REL_FROM;
-        dateEntry['from_year'] = 0;
-        dateEntry['from_month'] = 0;
-        dateEntry['from_date'] = 0;
-        dateEntry['to_year'] = 0;
-        dateEntry['to_month'] = 0;
-        dateEntry['to_date'] = 0;
+        dateEntry[DLE_JSON_COL_NO] = entryNo;
+        dateEntry[DLE_JSON_COL_NAME] = 'new entry';
+        dateEntry[DLE_JSON_COL_TYPE] = DLE_TYPE_REL_FROM;
+        dateEntry[DLE_JSON_COL_FROM_YEAR] = 0;
+        dateEntry[DLE_JSON_COL_FROM_MONTH] = 0;
+        dateEntry[DLE_JSON_COL_FROM_DATE] = 0;
+        dateEntry[DLE_JSON_COL_TO_YEAR] = 0;
+        dateEntry[DLE_JSON_COL_TO_MONTH] = 0;
+        dateEntry[DLE_JSON_COL_TO_DATE] = 0;
 
         // 버튼 텍스트 설정
         submitBtnTxt = '추가';
@@ -288,30 +288,30 @@ function submitDateEntry(entryNo = -1){
 
     // 객체에 반영
     dateEntry = {}; // new obj
-    dateEntry['no'] = entryNo;
-    dateEntry['name'] = inputName.value;
-    dateEntry['type'] = selectInputType.value;
+    dateEntry[DLE_JSON_COL_NO] = entryNo;
+    dateEntry[DLE_JSON_COL_NAME] = inputName.value;
+    dateEntry[DLE_JSON_COL_TYPE] = selectInputType.value;
 
     switch(dateEntry[DLE_JSON_COL_TYPE]){
         case DLE_TYPE_REL_FROM:
         case DLE_TYPE_REL_TO:
         case DLE_TYPE_REL_RANGE:
-            dateEntry['from_year'] = inputRelFromYear.value;
-            dateEntry['from_month'] = inputRelFromMonth.value;
-            dateEntry['from_date'] = inputRelFromDate.value;
-            dateEntry['to_year'] = inputRelToYear.value;
-            dateEntry['to_month'] = inputRelToMonth.value;
-            dateEntry['to_date'] = inputRelToDate.value;
+            dateEntry[DLE_JSON_COL_FROM_YEAR] = inputRelFromYear.value;
+            dateEntry[DLE_JSON_COL_FROM_MONTH] = inputRelFromMonth.value;
+            dateEntry[DLE_JSON_COL_FROM_DATE] = inputRelFromDate.value;
+            dateEntry[DLE_JSON_COL_TO_YEAR] = inputRelToYear.value;
+            dateEntry[DLE_JSON_COL_TO_MONTH] = inputRelToMonth.value;
+            dateEntry[DLE_JSON_COL_TO_DATE] = inputRelToDate.value;
             break;
         case DLE_TYPE_ABS_FROM:
         case DLE_TYPE_ABS_TO:
         case DLE_TYPE_ABS_RANGE:
-            dateEntry['from_year'] = 2018;
-            dateEntry['from_month'] = 1;
-            dateEntry['from_date'] = 14;
-            dateEntry['to_year'] = 2018;
-            dateEntry['to_month'] = 1;
-            dateEntry['to_date'] = 20;
+            dateEntry[DLE_JSON_COL_FROM_YEAR] = 2018;
+            dateEntry[DLE_JSON_COL_FROM_MONTH] = 1;
+            dateEntry[DLE_JSON_COL_FROM_DATE] = 14;
+            dateEntry[DLE_JSON_COL_TO_YEAR] = 2018;
+            dateEntry[DLE_JSON_COL_TO_MONTH] = 1;
+            dateEntry[DLE_JSON_COL_TO_DATE] = 20;
             break;
     }
     
