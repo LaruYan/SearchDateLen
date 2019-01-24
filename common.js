@@ -48,3 +48,24 @@ const LABEL_DLE_TYPES_ABS_FROM = '특정 날짜 부터';
 const LABEL_DLE_TYPES_ABS_TO = '특정 날짜 까지';
 const LABEL_DLE_TYPES_ABS_RANGE = '특정 기간 (절대적)';
 const LABEL_DLE_TYPES = [LABEL_DLE_TYPES_REL_FROM, LABEL_DLE_TYPES_REL_TO, LABEL_DLE_TYPES_REL_RANGE, LABEL_DLE_TYPES_ABS_FROM, LABEL_DLE_TYPES_ABS_TO, LABEL_DLE_TYPES_ABS_RANGE];
+
+// 요일 -1 지정 안 함
+// 0일 1월 2화 3수 4목 5금 6토
+const DAY_OF_WEEK_NAN = -1;
+const DAY_OF_WEEK_SUN = 0;
+const DAY_OF_WEEK_MON = 1;
+const DAY_OF_WEEK_TUE = 2;
+const DAY_OF_WEEK_WED = 3;
+const DAY_OF_WEEK_THU = 4;
+const DAY_OF_WEEK_FRI = 5;
+const DAY_OF_WEEK_SAT = 6;
+
+//요일 표시용
+const LABEL_DAY_OF_WEEK_NAN = '지정 안 함';
+const LABEL_DAY_OF_WEEK_SUN = '일요일';
+const LABEL_DAY_OF_WEEK_MON = '월요일';
+const LABEL_DAY_OF_WEEK_TUE = '화요일';
+const LABEL_DAY_OF_WEEK_WED = '수요일';
+const LABEL_DAY_OF_WEEK_THU = '목요일';
+const LABEL_DAY_OF_WEEK_FRI = '금요일';
+const LABEL_DAY_OF_WEEK_SAT = '토요일';
