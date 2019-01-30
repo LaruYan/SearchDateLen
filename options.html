@@ -41,7 +41,7 @@
             <input type="number" name="input_rel_from_month" id="input_rel_from_month" min="0" max="999" value="0" />개월
           </div>
           <div class="label_date">
-            <input type="number" name="input_rel_from_date" id="input_rel_from_date" min="0" max="9999" value="0" />일
+            <input type="number" name="input_rel_from_date" id="input_rel_from_date" min="0" max="9999" value="0" />일 전부터
           </div>
           <div class="clear"></div>
         </div>
@@ -54,15 +54,41 @@
             <input type="number" name="input_rel_to_month" id="input_rel_to_month" min="0" max="999" value="0" />개월
           </div>
           <div class="label_date">
-            <input type="number" name="input_rel_to_date" id="input_rel_to_date" min="0" max="9999" value="0" />일
+            <input type="number" name="input_rel_to_date" id="input_rel_to_date" min="0" max="9999" value="0" />일 전까지
           </div>
           <div class="clear"></div>
         </div>
+        <div class="label_input">입력 범위: 년(99~0), 개월(999~0), 일(9999~0)</div>
       </div>
-      시작일자
-        calendar
-      종료일자
-        calendar
+      <div id="input_date_absolute">
+        <div class="clearfix" id="input_date_from">
+          <div class="label_input">시작일자</div>
+          <div class="label_year">
+            <input type="number" name="input_abs_from_year" id="input_abs_from_year"min="0" max="9999" value="0" />년
+          </div>
+          <div class="label_month">
+            <input type="number" name="input_abs_from_month" id="input_abs_from_month" min="0" max="12" value="0" />월
+          </div>
+          <div class="label_date">
+            <input type="number" name="input_abs_from_date" id="input_abs_from_date" min="0" max="31" value="0" />일
+          </div>
+          <div class="clear"></div>
+        </div>
+        <div class="clearfix" id="input_date_to">
+          <div class="label_input">종료일자</div>
+          <div class="label_year">
+            <input type="number" name="input_abs_to_year" id="input_abs_to_year" min="0" max="9999" value="0" />년
+          </div>
+          <div class="label_month">
+            <input type="number" name="input_abs_to_month" id="input_abs_to_month" min="0" max="12" value="0" />월
+          </div>
+          <div class="label_date">
+            <input type="number" name="input_abs_to_date" id="input_abs_to_date" min="0" max="31" value="0" />일
+          </div>
+          <div class="clear"></div>
+        </div>
+        <div class="label_input">날짜에 0이 입력되어 있으면 오늘을 기준으로 계산합니다.</div>
+      </div>
     </div>
   </div>
 

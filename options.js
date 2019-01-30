@@ -210,7 +210,7 @@ function prepareInput(entryNo = -1){
         getInputNumberTag('input_rel_from_month',99,dateEntry[DLE_JSON_COL_FROM_MONTH]),'개월'));
     // 시작개일 div+input
     divInputRelFrom.appendChild(getClassedTag('div','label_date',
-        getInputNumberTag('input_rel_from_date',99,dateEntry[DLE_JSON_COL_FROM_DATE]),'일'));
+        getInputNumberTag('input_rel_from_date',99,dateEntry[DLE_JSON_COL_FROM_DATE]),'일 전부터'));
     // 시작기간 clear div
     divInputRelFrom.appendChild(getClassedTag('div','clear'));
     // 시작기간을 상대기간 DOM에 추가
@@ -229,7 +229,7 @@ function prepareInput(entryNo = -1){
         getInputNumberTag('input_rel_to_month',99,dateEntry[DLE_JSON_COL_TO_MONTH]),'개월'));
     // 종료개일 div+input
     divInputRelTo.appendChild(getClassedTag('div','label_date',
-        getInputNumberTag('input_rel_to_date',99,dateEntry[DLE_JSON_COL_TO_DATE]),'일'));
+        getInputNumberTag('input_rel_to_date',99,dateEntry[DLE_JSON_COL_TO_DATE]),'일 전까지'));
     // 종료기간 clear div
     divInputRelTo.appendChild(getClassedTag('div','clear'));    
     // 종료기간을 상대기간 DOM에 추가
