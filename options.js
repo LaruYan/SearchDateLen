@@ -421,3 +421,43 @@ function saveAndReload(){
     // 새로고침
     loadStorage();
 }
+
+/**
+ * 입력 수가 범위 내인지 확인하도록 이벤트리스너에 연결합니다.
+ * min과 max 속성을 활용
+ * 
+ * @param {*} inputNumber 숫자 입력을 받는 input 태그의 HtmlNode
+ */
+function bindValidateInputNumber(inputNumber){
+    if(isNode(inputNumber) || isElement(inputNumber)){
+        var minVal = inputNumber.getAttribute('min');
+        var maxVal = inputNumber.getAttribute('max');
+        
+        inputNumber.addEventListener('input', function () {
+            validateInputNumber(inputNumber, minVal, maxVal);
+        });
+    }
+}
+
+/**
+ * 입력 수가 범위 내인지 확인하고 초과하는 값은 minVal 또는 maxVal로 대체합니다.
+ * 
+ * @param {*} inputNumber 숫자 입력을 받는 input 태그의 HtmlNode
+ * @param {*} minVal 최소값
+ * @param {*} maxVal 최대값
+ */
+function validateInputNumber(inputNumber, minVal, maxVal){
+    
+    // 수가 아니면 0으로 설정 후 종료.
+    if(isNaN(inputNumber.value))
+    {
+        inputNumber.value = 0;
+        return ;
+    }
+    // 최소값 미만시 minVal 값으로, 최대값 초과시 maxVal 값으로. 
+    if(inputNumber.value < minVal){
+        inputNumber.value = minVal;
+    }else if(inputNumber.value > maxVal){
+        inputNumber.value = maxVal;
+    }
+}
