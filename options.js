@@ -214,6 +214,10 @@ function prepareInput(entryNo = -1){
         getInputNumberTag('input_rel_from_date',99,dateEntry[DLE_JSON_COL_FROM_DATE]),'일 전부터'));
     // 시작기간 clear div
     divInputRelFrom.appendChild(getClassedTag('div','clear'));
+    // 시작기간에 유효성 검사 이벤트 추가
+    bindValidateInputNumber(divInputRelFrom.querySelector("#input_rel_from_year"));
+    bindValidateInputNumber(divInputRelFrom.querySelector("#input_rel_from_month"));
+    bindValidateInputNumber(divInputRelFrom.querySelector("#input_rel_from_date"));
     // 시작기간을 상대기간 DOM에 추가
     divInputDateRel.appendChild(divInputRelFrom);
 
@@ -233,6 +237,10 @@ function prepareInput(entryNo = -1){
         getInputNumberTag('input_rel_to_date',99,dateEntry[DLE_JSON_COL_TO_DATE]),'일 전까지'));
     // 종료기간 clear div
     divInputRelTo.appendChild(getClassedTag('div','clear'));    
+    // 종료기간에 유효성 검사 이벤트 추가
+    bindValidateInputNumber(divInputRelTo.querySelector("#input_rel_to_year"));
+    bindValidateInputNumber(divInputRelTo.querySelector("#input_rel_to_month"));
+    bindValidateInputNumber(divInputRelTo.querySelector("#input_rel_to_date"));
     // 종료기간을 상대기간 DOM에 추가
     divInputDateRel.appendChild(divInputRelTo);
 
@@ -262,6 +270,10 @@ function prepareInput(entryNo = -1){
         getInputNumberTag('input_abs_from_date',31,dateEntry[DLE_JSON_COL_FROM_DATE]),'일부터'));
     // 시작일자 clear div
     divInputAbsFrom.appendChild(getClassedTag('div','clear'));
+    // 시작일자에 유효성 검사 이벤트 추가
+    bindValidateInputNumber(divInputAbsFrom.querySelector("#input_abs_from_year"));
+    bindValidateInputNumber(divInputAbsFrom.querySelector("#input_abs_from_month"));
+    bindValidateInputNumber(divInputAbsFrom.querySelector("#input_abs_from_date"));
     // 시작일자을 절대기간 DOM에 추가
     divInputDateAbs.appendChild(divInputAbsFrom);
 
@@ -280,9 +292,13 @@ function prepareInput(entryNo = -1){
     // 종료개일 div+input
     divInputAbsTo.appendChild(getClassedTag('div','label_date',
         getInputNumberTag('input_abs_to_date',31,dateEntry[DLE_JSON_COL_TO_DATE]),'일까지'));
-    // 종료기간 clear div
-    divInputAbsTo.appendChild(getClassedTag('div','clear'));    
-    // 종료기간을 상대기간 DOM에 추가
+    // 종료일자 clear div
+    divInputAbsTo.appendChild(getClassedTag('div','clear'));  
+    // 종료일자에 유효성 검사 이벤트 추가
+    bindValidateInputNumber(divInputAbsTo.querySelector("#input_abs_to_year"));
+    bindValidateInputNumber(divInputAbsTo.querySelector("#input_abs_to_month"));
+    bindValidateInputNumber(divInputAbsTo.querySelector("#input_abs_to_date"));  
+    // 종료일자를 상대기간 DOM에 추가
     divInputDateAbs.appendChild(divInputAbsTo);
 
 
@@ -307,7 +323,9 @@ function prepareInput(entryNo = -1){
     inputEntry.appendChild(selectInputType);
     inputEntry.appendChild(divInputDateRel);
     inputEntry.appendChild(divInputDateAbs);
-    inputEntry.appendChild(btnInputSubmit);   
+    inputEntry.appendChild(btnInputSubmit); 
+    
+    
 
     alertAndLog('searchDateLen: [options] finished preparing input area.');
 }
@@ -433,7 +451,7 @@ function bindValidateInputNumber(inputNumber){
         var minVal = inputNumber.getAttribute('min');
         var maxVal = inputNumber.getAttribute('max');
         
-        inputNumber.addEventListener('input', function () {
+        inputNumber.addEventListener('focusout', function () {
             validateInputNumber(inputNumber, minVal, maxVal);
         });
     }
@@ -451,6 +469,7 @@ function validateInputNumber(inputNumber, minVal, maxVal){
     // 수가 아니면 0으로 설정 후 종료.
     if(isNaN(inputNumber.value))
     {
+        // 숫자 입력 input 태그에 value로 값 추출시 + 기호는 무시된다. - 기호는 음수.
         inputNumber.value = 0;
         return ;
     }
