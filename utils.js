@@ -72,6 +72,21 @@ function setDateFromNow(year, month, date){
     return dateTarget;
 }
 
+// 입력받은 날짜 그대로 현재날짜로. 단, 0인건 현재날짜를 기준으로
+function setDateExactTry(year, month, date){
+    var dateTarget = new Date();
+    if(year > 0) {
+        dateTarget.setFullYear(year);
+    }
+    if(month > 0) {
+        dateTarget.setMonth(month);
+    }
+    if(date > 0 ){
+        dateTarget.setDate(date);
+    }
+    return dateTarget;
+}
+
 // checkVal 값과 value가 같으면 selected 를 붙여 나오는 option 태그 생성
 function getSelectedOptionTag(label, value, checkVal){
     var optionTag = document.createElement('option');

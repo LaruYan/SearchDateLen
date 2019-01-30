@@ -53,16 +53,26 @@ function injectDates(){
                 break;
 
             case DLE_TYPE_ABS_FROM: // 'abs_from': // 특정일 부터
-                fromDate = getDateStringNaver(dateEntry[DLE_JSON_COL_FROM_YEAR],dateEntry[DLE_JSON_COL_FROM_MONTH],dateEntry[DLE_JSON_COL_FROM_DATE]);
+                {
+                    var dateAFrmTarget = setDateExactTry(dateEntry[DLE_JSON_COL_FROM_YEAR],dateEntry[DLE_JSON_COL_FROM_MONTH],dateEntry[DLE_JSON_COL_FROM_DATE]);
+                    fromDate = getDateStringNaver(dateAFrmTarget.getFullYear(), (dateAFrmTarget.getMonth() + 1), dateAFrmTarget.getDate());
+                }
                 break;
 
             case DLE_TYPE_ABS_TO: // 'abs_to': // 특정일 까지
-                toDate = getDateStringNaver(dateEntry[DLE_JSON_COL_TO_YEAR],dateEntry[DLE_JSON_COL_TO_MONTH],dateEntry[DLE_JSON_COL_TO_DATE]);
+                {
+                    var dateAToTarget = setDateExactTry(dateEntry[DLE_JSON_COL_TO_YEAR],dateEntry[DLE_JSON_COL_TO_MONTH],dateEntry[DLE_JSON_COL_TO_DATE]);
+                    toDate = getDateStringNaver(dateAToTarget.getFullYear(), (dateAToTarget.getMonth() + 1), dateAToTarget.getDate());
+                }
                 break;
                 
             case DLE_TYPE_ABS_RANGE: // 'abs_range': // 정해진 기간 (절대적)
-                fromDate = getDateStringNaver(dateEntry[DLE_JSON_COL_FROM_YEAR],dateEntry[DLE_JSON_COL_FROM_MONTH],dateEntry[DLE_JSON_COL_FROM_DATE]);
-                toDate = getDateStringNaver(dateEntry[DLE_JSON_COL_TO_YEAR],dateEntry[DLE_JSON_COL_TO_MONTH],dateEntry[DLE_JSON_COL_TO_DATE]);
+                {
+                    var dateAgFrmTarget = setDateExactTry(dateEntry[DLE_JSON_COL_FROM_YEAR],dateEntry[DLE_JSON_COL_FROM_MONTH],dateEntry[DLE_JSON_COL_FROM_DATE]);
+                    fromDate = getDateStringNaver(dateAgFrmTarget.getFullYear(), (dateAgFrmTarget.getMonth() + 1), dateAgFrmTarget.getDate());
+                    var dateAgToTarget = setDateExactTry(dateEntry[DLE_JSON_COL_TO_YEAR],dateEntry[DLE_JSON_COL_TO_MONTH],dateEntry[DLE_JSON_COL_TO_DATE]);
+                    toDate = getDateStringNaver(dateAgToTarget.getFullYear(), (dateAgToTarget.getMonth() + 1), dateAgToTarget.getDate());
+                }
                 break;
         }
 
