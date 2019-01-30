@@ -190,15 +190,16 @@ function prepareInput(entryNo = -1){
     for(var typeNo = 0; typeNo < DLE_TYPES.length; typeNo++){
         selectInputType.appendChild(getSelectedOptionTag(LABEL_DLE_TYPES[typeNo], DLE_TYPES[typeNo], dateEntry[DLE_JSON_COL_TYPE]));
     }
-
-
+    selectInputType.addEventListener('change', function () {
+        //항목 변경시 표시 설정
+    });
 
     // 상대적 기간 컨테이너 div
     var divInputDateRel = getClassedTag('div');
     divInputDateRel.setAttribute('id', 'input_date_relative');
 
     // 시작기간 컨테이너 div
-    var divInputRelFrom = getClassedTag('div','clearfix',);
+    var divInputRelFrom = getClassedTag('div','clearfix');
     divInputRelFrom.setAttribute('id','input_date_from');
     // 시작기간 레이블 div
     divInputRelFrom.appendChild(getClassedTag('div','label_input','시작기간'));
@@ -217,8 +218,8 @@ function prepareInput(entryNo = -1){
     divInputDateRel.appendChild(divInputRelFrom);
 
     // 종료기간 컨테이너 div
-    var divInputRelTo = getClassedTag('div','clearfix',);
-    divInputRelTo.setAttribute('id','input_date_from');
+    var divInputRelTo = getClassedTag('div','clearfix');
+    divInputRelTo.setAttribute('id','input_date_to');
     // 종료기간 레이블 div
     divInputRelTo.appendChild(getClassedTag('div','label_input','종료기간'));
     // 종료개년 div+input
@@ -235,11 +236,59 @@ function prepareInput(entryNo = -1){
     // 종료기간을 상대기간 DOM에 추가
     divInputDateRel.appendChild(divInputRelTo);
 
+    // 상대적 기간 설명
+    var divInputRelLabel = getClassedTag('div', 'label_input','입력 범위: 년(99~0), 개월(999~0), 일(9999~0). 미래 설정 불가');
+    divInputDateRel.appendChild(divInputRelLabel);
+
+
+
     // 절대적 기간 컨테이너 div
     var divInputDateAbs = getClassedTag('div');
     divInputDateAbs.setAttribute('id', 'input_date_absolute');
-    var divDummyInputAbs = getClassedTag('div','','시작일자 calendar 종료일자 calendar');
-    divInputDateAbs.appendChild(divDummyInputAbs);
+
+    // 시작날짜 컨테이너 div
+    var divInputAbsFrom = getClassedTag('div','clearfix');
+    divInputAbsFrom.setAttribute('id','input_date_from');
+    // 시작날짜 레이블 div
+    divInputAbsFrom.appendChild(getClassedTag('div','label_input','시작일자'));
+    // 시작년도 div+input
+    divInputAbsFrom.appendChild(getClassedTag('div','label_year',
+        getInputNumberTag('input_abs_from_year',9999,dateEntry[DLE_JSON_COL_FROM_YEAR]),'년'));
+    // 시작월 div+input
+    divInputAbsFrom.appendChild(getClassedTag('div','label_month',
+        getInputNumberTag('input_abs_from_month',12,dateEntry[DLE_JSON_COL_FROM_MONTH]),'월'));
+    // 시작일 div+input
+    divInputAbsFrom.appendChild(getClassedTag('div','label_date',
+        getInputNumberTag('input_abs_from_date',31,dateEntry[DLE_JSON_COL_FROM_DATE]),'일부터'));
+    // 시작일자 clear div
+    divInputAbsFrom.appendChild(getClassedTag('div','clear'));
+    // 시작일자을 절대기간 DOM에 추가
+    divInputDateAbs.appendChild(divInputAbsFrom);
+
+
+    // 종료일자 컨테이너 div
+    var divInputAbsTo = getClassedTag('div','clearfix');
+    divInputAbsTo.setAttribute('id','input_date_to');
+    // 종료일자 레이블 div
+    divInputAbsTo.appendChild(getClassedTag('div','label_input','종료일자'));
+    // 종료개년 div+input
+    divInputAbsTo.appendChild(getClassedTag('div','label_year',
+        getInputNumberTag('input_abs_to_year',9999,dateEntry[DLE_JSON_COL_TO_YEAR]),'년'));
+    // 종료개월 div+input
+    divInputAbsTo.appendChild(getClassedTag('div','label_month',
+        getInputNumberTag('input_abs_to_month',12,dateEntry[DLE_JSON_COL_TO_MONTH]),'월'));
+    // 종료개일 div+input
+    divInputAbsTo.appendChild(getClassedTag('div','label_date',
+        getInputNumberTag('input_abs_to_date',31,dateEntry[DLE_JSON_COL_TO_DATE]),'일까지'));
+    // 종료기간 clear div
+    divInputAbsTo.appendChild(getClassedTag('div','clear'));    
+    // 종료기간을 상대기간 DOM에 추가
+    divInputDateAbs.appendChild(divInputAbsTo);
+
+
+    // 절대적 기간 설명
+    var divInputAbsLabel = getClassedTag('div', 'label_input','날짜에 0이 입력되어 있으면 계산시 오늘을 기준으로 0 대신 채웁니다.');
+    divInputDateAbs.appendChild(divInputAbsLabel);
 
     var btnInputSubmit = document.createElement('button');
     btnInputSubmit.setAttribute('type','button');
