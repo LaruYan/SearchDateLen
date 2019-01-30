@@ -66,15 +66,20 @@ function isElement(o){
 // 입력받은 날짜로 현재 날짜를 조정
 function setDateFromNow(year, month, date){
     var dateTarget = new Date();
+    alertAndLog("searchDateLen: [utils] setting "+year+"years "+month+"months "+date+"days from "+
+        dateTarget.getFullYear()+"-"+(dateTarget.getMonth() + 1)+"-"+dateTarget.getDate());
     dateTarget.setFullYear(dateTarget.getFullYear() - year);
     dateTarget.setMonth(dateTarget.getMonth() - month);
     dateTarget.setDate(dateTarget.getDate() - date);
+    alertAndLog("searchDateLen: [utils] got "+dateTarget.getFullYear()+"-"+(dateTarget.getMonth() + 1)+"-"+dateTarget.getDate());
     return dateTarget;
 }
 
 // 입력받은 날짜 그대로 현재날짜로. 단, 0인건 현재날짜를 기준으로
 function setDateExactTry(year, month, date){
     var dateTarget = new Date();
+    alertAndLog("searchDateLen: [utils] trying to set "+year+"-"+month+"-"+date+" into "+
+        dateTarget.getFullYear()+"-"+(dateTarget.getMonth() + 1)+"-"+dateTarget.getDate());
     if(year > 0) {
         dateTarget.setFullYear(year);
     }
@@ -84,6 +89,7 @@ function setDateExactTry(year, month, date){
     if(date > 0 ){
         dateTarget.setDate(date);
     }
+    alertAndLog("searchDateLen: [utils] got "+dateTarget.getFullYear()+"-"+(dateTarget.getMonth() + 1)+"-"+dateTarget.getDate());
     return dateTarget;
 }
 
