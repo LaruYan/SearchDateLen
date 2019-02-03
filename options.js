@@ -389,7 +389,6 @@ function submitDateEntry(entryNo = -1){
     // 시작개일 div+input
     var inputRelFromDate = inputEntry.querySelector('#input_rel_from_date');
 
-
     // 종료기간
     // 종료개년 div+input
     var inputRelToYear = inputEntry.querySelector('#input_rel_to_year');
@@ -398,8 +397,22 @@ function submitDateEntry(entryNo = -1){
     // 종료개일 div+input
     var inputRelToDate = inputEntry.querySelector('#input_rel_to_date');
 
+    
     // 절대적 기간 컨테이너 div
-    // to be continued....
+    // 시작년도 div+input
+    var inputAbsFromYear = inputEntry.querySelector('#input_abs_from_year');
+    // 시작월 div+input
+    var inputAbsFromMonth = inputEntry.querySelector('#input_abs_from_month');
+    // 시작일 div+input
+    var inputAbsFromDate = inputEntry.querySelector('#input_abs_from_date');
+
+    // 종료날짜
+    // 종료년도 div+input
+    var inputAbsToYear = inputEntry.querySelector('#input_abs_to_year');
+    // 종료월 div+input
+    var inputAbsToMonth = inputEntry.querySelector('#input_abs_to_month');
+    // 종료일 div+input
+    var inputAbsToDate = inputEntry.querySelector('#input_abs_to_date');
 
 
     // 객체에 반영
@@ -421,12 +434,12 @@ function submitDateEntry(entryNo = -1){
         case DLE_TYPE_ABS_FROM:
         case DLE_TYPE_ABS_TO:
         case DLE_TYPE_ABS_RANGE:
-            dateEntry[DLE_JSON_COL_FROM_YEAR] = 2018;
-            dateEntry[DLE_JSON_COL_FROM_MONTH] = 1;
-            dateEntry[DLE_JSON_COL_FROM_DATE] = 14;
-            dateEntry[DLE_JSON_COL_TO_YEAR] = 2018;
-            dateEntry[DLE_JSON_COL_TO_MONTH] = 1;
-            dateEntry[DLE_JSON_COL_TO_DATE] = 20;
+            dateEntry[DLE_JSON_COL_FROM_YEAR] = inputAbsFromYear.value;
+            dateEntry[DLE_JSON_COL_FROM_MONTH] = inputAbsFromMonth.value;
+            dateEntry[DLE_JSON_COL_FROM_DATE] = inputAbsFromDate.value;
+            dateEntry[DLE_JSON_COL_TO_YEAR] = inputAbsToYear.value;
+            dateEntry[DLE_JSON_COL_TO_MONTH] = inputAbsToMonth.value;
+            dateEntry[DLE_JSON_COL_TO_DATE] = inputAbsToDate.value;
             break;
     }
     
