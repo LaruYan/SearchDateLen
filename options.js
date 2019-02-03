@@ -85,6 +85,24 @@ function populateList(){
         var divDateType = getClassedTag('div', 'dateType', visibleType);
         var divDateTypeInternal = getClassedTag('div', 'dateTypeInternal', dateEntry[DLE_JSON_COL_TYPE]);
 
+        var btnActModify = document.createElement('button');
+        btnActModify.setAttribute('type','button');
+        btnActModify.setAttribute('entryNo', entryNo);
+        btnActModify.innerHTML = '수정';
+        btnActModify.addEventListener('click', function () {
+            prepareInput(this.getAttribute('entryNo'));
+        });
+        var btnActDelete = document.createElement('button');
+        btnActDelete.setAttribute('type','button');
+        btnActDelete.setAttribute('entryNo', entryNo);
+        btnActDelete.innerHTML = '삭제';
+        btnActDelete.addEventListener('click', function () {
+            prepareInput(this.getAttribute('entryNo'));
+        });
+        var divDateAction = getClassedTag('div', 'dateAction', '');
+        divDateAction.appendChild(btnActModify);
+        divDateAction.appendChild(btnActDelete);
+
         // 날짜 wrapper
         var divLabelFromYear = getClassedTag('div', 'label_year', 
             getClassedTag('span', 'from_year', dateEntry[DLE_JSON_COL_FROM_YEAR]));
@@ -123,6 +141,7 @@ function populateList(){
         liTag.appendChild(divDateName);
         liTag.appendChild(divDateType);
         liTag.appendChild(divDateTypeInternal);
+        liTag.appendChild(divDateAction);
         liTag.appendChild(divLabelFromYear);
         liTag.appendChild(divLabelFromMonth);
         liTag.appendChild(divLabelFromDate);
@@ -134,9 +153,9 @@ function populateList(){
         // li 태그에 클릭하면 수정되도록 준비
         // this를 써서 이 객체에 해당되는 것만 사용하도록 해야한다.
         // for 문 사용시 변수 이름 그대로 사용했다간 마지막 번호로 가게 될테니.
-        liTag.addEventListener('click', function () {
-            prepareInput(this.querySelector('.dateNoInternal').innerHTML);
-        });
+        //liTag.addEventListener('click', function () {
+        //    prepareInput(this.querySelector('.dateNoInternal').innerHTML);
+        //});
         
         // 목록에 항목 삽입
         datesList.appendChild(liTag);
