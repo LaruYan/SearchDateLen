@@ -17,6 +17,7 @@
 }
 
 .dateEntry{ /* 설정된 각 날짜조건들 */
+    position: relative;
     list-style: none;
     padding: 0;
     margin: 0;
@@ -30,6 +31,12 @@
 
 .dateNoInternal{ /* 날짜조건의 고유순번 (숨김) */
     display:none;
+}
+
+.dateAction{ /* 날짜 조건의 행동 부분(수정/삭제) */
+    position: absolute;
+    top: 1em;
+    right: 1em;
 }
 
 .dateName{ /* 날짜조건의 이름 */
