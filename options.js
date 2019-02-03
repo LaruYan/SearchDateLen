@@ -46,7 +46,7 @@ function populateList(){
         // 항목 컨테이너
         var liTag = getClassedTag('li', 'dateEntry clearfix', '');
 
-        // 종류에 따라 표시방식 대음
+        // 종류에 따라 표시방식 대응
         var isAbsoluteDate = false;
         var isFromDate = false;
         var isToDate = false;
@@ -95,6 +95,7 @@ function populateList(){
         var divDateType = getClassedTag('div', 'dateType', visibleType);
         var divDateTypeInternal = getClassedTag('div', 'dateTypeInternal', dateEntry[DLE_JSON_COL_TYPE]);
 
+        // 수정 버튼
         var btnActModify = document.createElement('button');
         btnActModify.setAttribute('type','button');
         btnActModify.setAttribute('entryNo', entryNo);
@@ -102,6 +103,7 @@ function populateList(){
         btnActModify.addEventListener('click', function () {
             prepareInput(this.getAttribute('entryNo'));
         });
+        // 삭제 버튼
         var btnActDelete = document.createElement('button');
         btnActDelete.setAttribute('type','button');
         btnActDelete.setAttribute('entryNo', entryNo);
@@ -109,6 +111,7 @@ function populateList(){
         btnActDelete.addEventListener('click', function () {
             prepareInput(this.getAttribute('entryNo'));
         });
+        // 수정+삭제 버튼이 놓일 곳
         var divDateAction = getClassedTag('div', 'dateAction', '');
         divDateAction.appendChild(btnActModify);
         divDateAction.appendChild(btnActDelete);
@@ -381,22 +384,74 @@ function prepareInput(entryNo = -1){
 }
 
 
+/**
+ * 선택된 날짜 형식에 따라 상대적/절대적 날짜 항목 입력칸을 표시
+ * @param {*} selectedOption 선택된 날짜 형식
+ * @param {*} relDiv 상대적 날짜 입력칸 
+ * @param {*} absDiv 절대적 날짜 입력칸
+ */
 function showProperInputDate(selectedOption, relDiv, absDiv){
+    var isAbsoluteDate = false;
+    var isFromDate = false;
+    var isToDate = false;
+
     switch(selectedOption){
     case DLE_TYPE_REL_FROM: //'rel_from':
+        isFromDate = true;
+
+        break;
     case DLE_TYPE_REL_TO: //'rel_to':
+        isToDate = true;
+
+        break;
     case DLE_TYPE_REL_RANGE: //'rel_range':
-        relDiv.classList.remove("hidden");
-        absDiv.classList.add("hidden");
+        isFromDate = true;
+        isToDate = true;
 
         break;
     case DLE_TYPE_ABS_FROM: //'abs_from':
-    case DLE_TYPE_ABS_TO: //'abs_to':
-    case DLE_TYPE_ABS_RANGE: //'abs_range':
-        relDiv.classList.add("hidden");
-        absDiv.classList.remove("hidden");
+        isAbsoluteDate = true;
+        isFromDate = true;
 
         break;
+    case DLE_TYPE_ABS_TO: //'abs_to':
+        isAbsoluteDate = true;
+        isToDate = true;
+
+        break;
+    case DLE_TYPE_ABS_RANGE: //'abs_range':
+        isAbsoluteDate = true;
+        isFromDate = true;
+        isToDate = true;
+        
+
+        break;
+    }
+
+    // 상대적/절대적 입력칸을 선택
+    var selectedDiv = null;
+    if(isAbsoluteDate){     
+        selectedDiv = absDiv;   
+        relDiv.classList.add("hidden");
+        absDiv.classList.remove("hidden");
+    }else{
+        selectedDiv = relDiv;
+        relDiv.classList.remove("hidden");
+        absDiv.classList.add("hidden");
+    }
+
+    // 상대적/절대적 전환시 입력칸 초기화나 표시 정리가 이루어지지 않지만
+    // 표시할 때 제대로 표시된다.
+    // 단, 입력하던 내용을 옮겨주진 않으므로 주의
+    if(isFromDate){
+        selectedDiv.querySelector('#input_date_from').classList.remove("hidden");
+    }else{
+        selectedDiv.querySelector('#input_date_from').classList.add("hidden");
+    }
+    if(isToDate){
+        selectedDiv.querySelector('#input_date_to').classList.remove("hidden");
+    }else{
+        selectedDiv.querySelector('#input_date_to').classList.add("hidden");
     }
 }
 
