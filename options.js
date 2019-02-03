@@ -80,6 +80,7 @@ function populateList(){
         }
 
         // 데이터를 그대로 표시
+        var divDateNo = getClassedTag('div', 'dateNoInternal', entryNo);
         var divDateName = getClassedTag('div', 'dateName', dateEntry[DLE_JSON_COL_NAME]);
         var divDateType = getClassedTag('div', 'dateType', visibleType);
         var divDateTypeInternal = getClassedTag('div', 'dateTypeInternal', dateEntry[DLE_JSON_COL_TYPE]);
@@ -118,6 +119,7 @@ function populateList(){
         }
 
         // 항목에 내용 삽입
+        liTag.appendChild(divDateNo);
         liTag.appendChild(divDateName);
         liTag.appendChild(divDateType);
         liTag.appendChild(divDateTypeInternal);
@@ -129,6 +131,11 @@ function populateList(){
         liTag.appendChild(divLabelToMonth);
         liTag.appendChild(divLabelToDate);
 
+        // li 태그에 클릭하면 수정되도록 준비
+        liTag.addEventListener('click', function () {
+            prepareInput(this.querySelector('.dateNoInternal').innerHTML);
+        });
+        
         // 목록에 항목 삽입
         datesList.appendChild(liTag);
     }
@@ -142,7 +149,7 @@ function populateList(){
  * @param {*} entryNo 항목 번호. 있는 항목이라면 수정 상태로 값을 읽어온다
  */
 function prepareInput(entryNo = -1){
-    alertAndLog('searchDateLen: [options] preparing input area.');
+    alertAndLog('searchDateLen: [options] preparing input area. as entryNo: '+entryNo);
 
     // inputEntry div
     var inputEntry = document.querySelector('#inputEntry');
@@ -154,11 +161,13 @@ function prepareInput(entryNo = -1){
     var submitBtnTxt = '';
 
     if(datesData && (0 <= entryNo && entryNo < datesData.length)){
+        alertAndLog('searchDateLen: [options] processing entry with entryNo '+entryNo);
         // datesData 가 있고 해당 원소가 범위 안
         dateEntry = datesData[entryNo];
         //버튼 텍스트 설정
         submitBtnTxt = '수정';
     }else{
+        alertAndLog('searchDateLen: [options] There\'s no entry with entryNo '+entryNo);
         // datesData 가 비어있거나 해당 원소가 범위 밖
         // 생성하자
         dateEntry = {}; // new obj
