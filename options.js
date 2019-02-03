@@ -50,33 +50,33 @@ function populateList(){
         var isAbsoluteDate = false;
         var visibleType = '';
         switch(dateEntry[DLE_JSON_COL_TYPE]){
-            case DLE_TYPE_REL_FROM: //'rel_from':
-                visibleType = LABEL_DLE_TYPES_REL_FROM;
+        case DLE_TYPE_REL_FROM: //'rel_from':
+            visibleType = LABEL_DLE_TYPES_REL_FROM;
 
-                break;
-            case DLE_TYPE_REL_TO: //'rel_to':
-                visibleType = LABEL_DLE_TYPES_REL_TO;
+            break;
+        case DLE_TYPE_REL_TO: //'rel_to':
+            visibleType = LABEL_DLE_TYPES_REL_TO;
 
-                break;
-            case DLE_TYPE_REL_RANGE: //'rel_range':
-                visibleType = LABEL_DLE_TYPES_REL_RANGE;
+            break;
+        case DLE_TYPE_REL_RANGE: //'rel_range':
+            visibleType = LABEL_DLE_TYPES_REL_RANGE;
 
-                break;
-            case DLE_TYPE_ABS_FROM: //'abs_from':
-                isAbsoluteDate = true;
-                visibleType = LABEL_DLE_TYPES_ABS_FROM;
+            break;
+        case DLE_TYPE_ABS_FROM: //'abs_from':
+            isAbsoluteDate = true;
+            visibleType = LABEL_DLE_TYPES_ABS_FROM;
 
-                break;
-            case DLE_TYPE_ABS_TO: //'abs_to':
-                isAbsoluteDate = true;
-                visibleType = LABEL_DLE_TYPES_ABS_TO;
+            break;
+        case DLE_TYPE_ABS_TO: //'abs_to':
+            isAbsoluteDate = true;
+            visibleType = LABEL_DLE_TYPES_ABS_TO;
 
-                break;
-            case DLE_TYPE_ABS_RANGE: //'abs_range':
-                isAbsoluteDate = true;
-                visibleType = LABEL_DLE_TYPES_ABS_RANGE;
+            break;
+        case DLE_TYPE_ABS_RANGE: //'abs_range':
+            isAbsoluteDate = true;
+            visibleType = LABEL_DLE_TYPES_ABS_RANGE;
 
-                break;
+            break;
         }
 
         // 데이터를 그대로 표시
@@ -132,6 +132,8 @@ function populateList(){
         liTag.appendChild(divLabelToDate);
 
         // li 태그에 클릭하면 수정되도록 준비
+        // this를 써서 이 객체에 해당되는 것만 사용하도록 해야한다.
+        // for 문 사용시 변수 이름 그대로 사용했다간 마지막 번호로 가게 될테니.
         liTag.addEventListener('click', function () {
             prepareInput(this.querySelector('.dateNoInternal').innerHTML);
         });
@@ -199,9 +201,6 @@ function prepareInput(entryNo = -1){
     for(var typeNo = 0; typeNo < DLE_TYPES.length; typeNo++){
         selectInputType.appendChild(getSelectedOptionTag(LABEL_DLE_TYPES[typeNo], DLE_TYPES[typeNo], dateEntry[DLE_JSON_COL_TYPE]));
     }
-    selectInputType.addEventListener('change', function () {
-        //항목 변경시 표시 설정
-    });
 
     // 상대적 기간 컨테이너 div
     var divInputDateRel = getClassedTag('div');
@@ -325,6 +324,12 @@ function prepareInput(entryNo = -1){
         submitDateEntry(entryNo);
     });
 
+    //항목 변경시 표시 설정
+    selectInputType.addEventListener('change', function () {
+        showProperInputDate(this.value, divInputDateRel, divInputDateAbs);
+    });
+    showProperInputDate(selectInputType.value, divInputDateRel, divInputDateAbs);
+
     // 페이지에 적용
     inputEntry.appendChild(divInputName);
     inputEntry.appendChild(inputName);
@@ -337,6 +342,26 @@ function prepareInput(entryNo = -1){
     
 
     alertAndLog('searchDateLen: [options] finished preparing input area.');
+}
+
+
+function showProperInputDate(selectedOption, relDiv, absDiv){
+    switch(selectedOption){
+    case DLE_TYPE_REL_FROM: //'rel_from':
+    case DLE_TYPE_REL_TO: //'rel_to':
+    case DLE_TYPE_REL_RANGE: //'rel_range':
+        relDiv.classList.remove("hidden");
+        absDiv.classList.add("hidden");
+
+        break;
+    case DLE_TYPE_ABS_FROM: //'abs_from':
+    case DLE_TYPE_ABS_TO: //'abs_to':
+    case DLE_TYPE_ABS_RANGE: //'abs_range':
+        relDiv.classList.add("hidden");
+        absDiv.classList.remove("hidden");
+
+        break;
+    }
 }
 
 
