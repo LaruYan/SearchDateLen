@@ -173,7 +173,7 @@ function prepareInput(entryNo = -1){
         // datesData 가 비어있거나 해당 원소가 범위 밖
         // 생성하자
         dateEntry = {}; // new obj
-        dateEntry[DLE_JSON_COL_NAME] = 'new entry';
+        dateEntry[DLE_JSON_COL_NAME] = '';
         dateEntry[DLE_JSON_COL_TYPE] = DLE_TYPE_REL_FROM;
         dateEntry[DLE_JSON_COL_FROM_YEAR] = 0;
         dateEntry[DLE_JSON_COL_FROM_MONTH] = 0;
@@ -185,7 +185,9 @@ function prepareInput(entryNo = -1){
         // 버튼 텍스트 설정
         submitBtnTxt = '추가';
     }
-
+    
+    // input_no_internal input
+    var inputNoInternal = getInputTextTag('input_no_internal', true, entryNo);
     // 이름 레이블 div
     var divInputName = getClassedTag('div','label_input','이름');
     // input_name input
@@ -321,7 +323,7 @@ function prepareInput(entryNo = -1){
     //btnInputSubmit.setAttribute('onclick','submitDateEntry();');
     // 대신 addEventListener를 사용하세요
     btnInputSubmit.addEventListener('click', function () {
-        submitDateEntry(entryNo);
+        submitDateEntry(document.querySelector('#inputEntry #input_no_internal').value);
     });
 
     //항목 변경시 표시 설정
@@ -331,6 +333,7 @@ function prepareInput(entryNo = -1){
     showProperInputDate(selectInputType.value, divInputDateRel, divInputDateAbs);
 
     // 페이지에 적용
+    inputEntry.appendChild(inputNoInternal);
     inputEntry.appendChild(divInputName);
     inputEntry.appendChild(inputName);
     inputEntry.appendChild(divInputType);
@@ -397,7 +400,7 @@ function submitDateEntry(entryNo = -1){
     // 종료개일 div+input
     var inputRelToDate = inputEntry.querySelector('#input_rel_to_date');
 
-    
+
     // 절대적 기간 컨테이너 div
     // 시작년도 div+input
     var inputAbsFromYear = inputEntry.querySelector('#input_abs_from_year');
