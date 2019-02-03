@@ -447,13 +447,28 @@ function saveAndReload(){
  * @param {*} inputNumber 숫자 입력을 받는 input 태그의 HtmlNode
  */
 function bindValidateInputNumber(inputNumber){
+    var success = false;
     if(isNode(inputNumber) || isElement(inputNumber)){
         var minVal = inputNumber.getAttribute('min');
         var maxVal = inputNumber.getAttribute('max');
-        
+
+        // 수를 비교해야하므로 미리 수로 변환해둔다.
+        if(!isNaN(minVal)){
+            minVal = parseInt(minVal,10);
+        }
+        if(!isNaN(maxVal)){
+            maxVal = parseInt(maxVal,10);
+        }
+
         inputNumber.addEventListener('focusout', function () {
             validateInputNumber(inputNumber, minVal, maxVal);
         });
+        success = true;
+    }
+    if(success){
+        alertAndLog('searchDateLen: [options] bindValidateInputNumber(#'+inputNumber.getAttribute('id')+')');
+    }else{
+        alertAndLog('searchDateLen: [options] bindValidateInputNumber failed as this is not Node or Element');
     }
 }
 
@@ -466,17 +481,32 @@ function bindValidateInputNumber(inputNumber){
  */
 function validateInputNumber(inputNumber, minVal, maxVal){
     
+    var elementId = inputNumber.getAttribute('id');
+    var value = inputNumber.value;
+    alertAndLog('searchDateLen: [options] validating input number area (#'+elementId+') as : ' + minVal + ' <= ' + value + ' <= ' + maxVal);
+
     // 수가 아니면 0으로 설정 후 종료.
-    if(isNaN(inputNumber.value))
+    if(isNaN(value))
     {
+        alertAndLog('searchDateLen: [options] input number area (#'+elementId+') value is NaN');
+
         // 숫자 입력 input 태그에 value로 값 추출시 + 기호는 무시된다. - 기호는 음수.
-        inputNumber.value = 0;
-        return ;
+        value = 0;
+    }else{
+        //문자열을 수로 변환하지 않으면 99 > 11111 이 성립하게 된다.
+        value = parseInt(value,10);
     }
+
     // 최소값 미만시 minVal 값으로, 최대값 초과시 maxVal 값으로. 
-    if(inputNumber.value < minVal){
-        inputNumber.value = minVal;
-    }else if(inputNumber.value > maxVal){
-        inputNumber.value = maxVal;
+    if(value < minVal){
+        alertAndLog('searchDateLen: [options] input number area (#'+elementId+') value is under ' + minVal);
+        value = minVal;
+    }else if(value > maxVal){
+        alertAndLog('searchDateLen: [options] input number area (#'+elementId+') value is over ' + maxVal);
+        value = maxVal;
+    }else{
+        alertAndLog('searchDateLen: [options] input number area (#'+elementId+') value is satisfying condition');
     }
+
+    inputNumber.value = value;
 }
