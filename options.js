@@ -48,32 +48,42 @@ function populateList(){
 
         // 종류에 따라 표시방식 대음
         var isAbsoluteDate = false;
+        var isFromDate = false;
+        var isToDate = false;
         var visibleType = '';
         switch(dateEntry[DLE_JSON_COL_TYPE]){
         case DLE_TYPE_REL_FROM: //'rel_from':
+            isFromDate = true;
             visibleType = LABEL_DLE_TYPES_REL_FROM;
-
+            
             break;
         case DLE_TYPE_REL_TO: //'rel_to':
+            isToDate = true;
             visibleType = LABEL_DLE_TYPES_REL_TO;
-
+            
             break;
         case DLE_TYPE_REL_RANGE: //'rel_range':
+            isFromDate = true;
+            isToDate = true;
             visibleType = LABEL_DLE_TYPES_REL_RANGE;
 
             break;
         case DLE_TYPE_ABS_FROM: //'abs_from':
             isAbsoluteDate = true;
+            isFromDate = true;
             visibleType = LABEL_DLE_TYPES_ABS_FROM;
-
+            
             break;
         case DLE_TYPE_ABS_TO: //'abs_to':
             isAbsoluteDate = true;
+            isToDate = true;
             visibleType = LABEL_DLE_TYPES_ABS_TO;
 
             break;
         case DLE_TYPE_ABS_RANGE: //'abs_range':
             isAbsoluteDate = true;
+            isFromDate = true;
+            isToDate = true;
             visibleType = LABEL_DLE_TYPES_ABS_RANGE;
 
             break;
@@ -142,13 +152,17 @@ function populateList(){
         liTag.appendChild(divDateType);
         liTag.appendChild(divDateTypeInternal);
         liTag.appendChild(divDateAction);
-        liTag.appendChild(divLabelFromYear);
-        liTag.appendChild(divLabelFromMonth);
-        liTag.appendChild(divLabelFromDate);
+        if(isFromDate){
+            liTag.appendChild(divLabelFromYear);
+            liTag.appendChild(divLabelFromMonth);
+            liTag.appendChild(divLabelFromDate);
+        }
         liTag.appendChild(getClassedTag('div','label_tick','~'));
-        liTag.appendChild(divLabelToYear);
-        liTag.appendChild(divLabelToMonth);
-        liTag.appendChild(divLabelToDate);
+        if(isToDate){
+            liTag.appendChild(divLabelToYear);
+            liTag.appendChild(divLabelToMonth);
+            liTag.appendChild(divLabelToDate);
+        }
 
         // li 태그에 클릭하면 수정되도록 준비
         // this를 써서 이 객체에 해당되는 것만 사용하도록 해야한다.
