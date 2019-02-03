@@ -95,6 +95,28 @@ function populateList(){
         var divDateType = getClassedTag('div', 'dateType', visibleType);
         var divDateTypeInternal = getClassedTag('div', 'dateTypeInternal', dateEntry[DLE_JSON_COL_TYPE]);
 
+
+
+        // 버튼들이 놓일 곳
+        var divDateAction = getClassedTag('div', 'dateAction', '');
+        // 한 칸 위로 버튼
+        var btnActMoveUp = document.createElement('button');
+        btnActMoveUp.setAttribute('type','button');
+        btnActMoveUp.setAttribute('entryNo', entryNo);
+        btnActMoveUp.innerHTML = '▲';
+        btnActMoveUp.addEventListener('click', function () {
+            actionMoveUpDateEntry(this.getAttribute('entryNo'));
+        });
+        divDateAction.appendChild(btnActMoveUp);
+        //한 칸 아래로 버튼
+        var btnActMoveDown = document.createElement('button');
+        btnActMoveDown.setAttribute('type','button');
+        btnActMoveDown.setAttribute('entryNo', entryNo);
+        btnActMoveDown.innerHTML = '▼';
+        btnActMoveDown.addEventListener('click', function () {
+            actionMoveDownDateEntry(this.getAttribute('entryNo'));
+        });
+        divDateAction.appendChild(btnActMoveDown);
         // 수정 버튼
         var btnActModify = document.createElement('button');
         btnActModify.setAttribute('type','button');
@@ -103,18 +125,18 @@ function populateList(){
         btnActModify.addEventListener('click', function () {
             prepareInput(this.getAttribute('entryNo'));
         });
+        divDateAction.appendChild(btnActModify);
         // 삭제 버튼
         var btnActDelete = document.createElement('button');
         btnActDelete.setAttribute('type','button');
         btnActDelete.setAttribute('entryNo', entryNo);
         btnActDelete.innerHTML = '삭제';
         btnActDelete.addEventListener('click', function () {
-            prepareInput(this.getAttribute('entryNo'));
+            actionRemoveDateEntry(this.getAttribute('entryNo'));
         });
-        // 수정+삭제 버튼이 놓일 곳
-        var divDateAction = getClassedTag('div', 'dateAction', '');
-        divDateAction.appendChild(btnActModify);
         divDateAction.appendChild(btnActDelete);
+
+
 
         // 날짜 wrapper
         var divLabelFromYear = getClassedTag('div', 'label_year', 
@@ -553,6 +575,46 @@ function submitDateEntry(entryNo = -1){
     saveAndReload();
 }
 
+/**
+ * dateEntry 한 칸 위로 (배열상 앞으로) 이동
+ * @param {*} entryNo 옮길 dateEntry
+ */
+function actionMoveUpDateEntry(entryNo){
+    if(entryNo <= 0){
+        // 0번 원소는 더 이상 앞으로 갈 수 없음
+        return;
+    }
+    var dateEntry = datesData[entryNo];
+    removeDateEntry(entryNo);
+    insertDateEntry(--entryNo, dateEntry);
+    saveAndReload();
+}
+
+/**
+ * dateEntry 한 칸 아래로 (배열상 뒤로) 이동
+ * @param {*} entryNo 
+ */
+function actionMoveDownDateEntry(entryNo){
+    if(entryNo >= datesData.length-1){
+        // length-1 번 원소는 더 이상 뒤로 갈 수 없음
+        // 에> 5개인 경우 4번 원소는 더 뒤로 갈 수 없음
+        return;
+    }
+    var dateEntry = datesData[entryNo];
+    removeDateEntry(entryNo);
+    insertDateEntry(++entryNo, dateEntry);
+    saveAndReload();
+}
+
+/**
+ * 해당 entryNo의 항목을 삭제하고 반영합니다
+ * @param {*} entryNo 삭제할 dateEntry 번호
+ */
+function actionRemoveDateEntry(entryNo){
+    removeDateEntry(entryNo);
+    saveAndReload();
+}
+
 
 /**
  * 해당 index의 항목을 datesData에서 삭제
@@ -560,7 +622,7 @@ function submitDateEntry(entryNo = -1){
  */
 function removeDateEntry(index){    
     // index자리 1칸을 기존 배열에서 따로 뽑아내고 빈 공간은 합쳐 갯수 1 감소.
-    datesData.splice(index, 1);
+    return datesData.splice(index, 1);
 }
 
 
