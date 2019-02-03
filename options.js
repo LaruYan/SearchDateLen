@@ -380,6 +380,14 @@ function submitDateEntry(entryNo = -1){
     
     // input_name input
     var inputName = inputEntry.querySelector('#input_name');
+
+    // 이름이 입력되지 않으면 저장을 못하게 하자
+    inputName.value = inputName.value.trim();
+    if(inputName.value == '' || inputName.value.length == 0){
+        alert('항목을 저장하려면 이름을 입력해 주세요');
+        return false;
+    }
+
     // input_type select
     var selectInputType = inputEntry.querySelector('#input_type');
 
