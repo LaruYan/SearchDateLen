@@ -276,10 +276,10 @@ function prepareInput(entryNo = -1){
         getInputNumberTag('input_rel_from_year',99,dateEntry[DLE_JSON_COL_FROM_YEAR]),'년'));
     // 시작개월 div+input
     divInputRelFrom.appendChild(getClassedTag('div','label_month',
-        getInputNumberTag('input_rel_from_month',99,dateEntry[DLE_JSON_COL_FROM_MONTH]),'개월'));
+        getInputNumberTag('input_rel_from_month',999,dateEntry[DLE_JSON_COL_FROM_MONTH]),'개월'));
     // 시작개일 div+input
     divInputRelFrom.appendChild(getClassedTag('div','label_date',
-        getInputNumberTag('input_rel_from_date',99,dateEntry[DLE_JSON_COL_FROM_DATE]),'일 전부터'));
+        getInputNumberTag('input_rel_from_date',9999,dateEntry[DLE_JSON_COL_FROM_DATE]),'일 전부터'));
     // 시작기간 clear div
     divInputRelFrom.appendChild(getClassedTag('div','clear'));
     // 시작기간에 유효성 검사 이벤트 추가
@@ -299,10 +299,10 @@ function prepareInput(entryNo = -1){
         getInputNumberTag('input_rel_to_year',99,dateEntry[DLE_JSON_COL_TO_YEAR]),'년'));
     // 종료개월 div+input
     divInputRelTo.appendChild(getClassedTag('div','label_month',
-        getInputNumberTag('input_rel_to_month',99,dateEntry[DLE_JSON_COL_TO_MONTH]),'개월'));
+        getInputNumberTag('input_rel_to_month',999,dateEntry[DLE_JSON_COL_TO_MONTH]),'개월'));
     // 종료개일 div+input
     divInputRelTo.appendChild(getClassedTag('div','label_date',
-        getInputNumberTag('input_rel_to_date',99,dateEntry[DLE_JSON_COL_TO_DATE]),'일 전까지'));
+        getInputNumberTag('input_rel_to_date',9999,dateEntry[DLE_JSON_COL_TO_DATE]),'일 전까지'));
     // 종료기간 clear div
     divInputRelTo.appendChild(getClassedTag('div','clear'));    
     // 종료기간에 유효성 검사 이벤트 추가
