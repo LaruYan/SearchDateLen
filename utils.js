@@ -108,6 +108,7 @@ function setDateHybrid(year, month, date){
     }else if(year > -100){
         alertAndLog('searchDateLen: [utils] got year -100 < '+ year + '. using this as relative year in hybrid mode.');
         dateTarget.setFullYear(dateTarget.getFullYear() + year);
+        year = dateTarget.getFullYear();
     }
 
     if(month > 0) {
@@ -143,10 +144,25 @@ function isDateSupported(dateObj, year, month, date){
 }
 
 // 유효한 Date 객체로 변환
-function makeDateSupported(date, year, month, date){
-    if( ! isDateSupported(date, year, month, date) ){
-        // 여러가지 시도해보자.
+function makeDateSupported(dateObj, year, month, date){
+    var isOverrideOccured = false;
+    if( ! isDateSupported(dateObj, year, month, date) ){
+        isOverrideOccured = true;
+        
+        if(year < 100){
+            // -99 ~ +99는 상대값 매핑을 위해 사용되므로 100부터 있어야 한다.
+            dateObj.setFullYear(100);
+        }else if( year > 9999){
+            // iso8601 표현에는 년도를 상호간 동의 없이 0~9999를 초과할 수 없다.
+            dateObj.setFullYear(9999);
+        }
     }
+
+    if(isOverrideOccured){
+        alertAndLog("searchDateLen: [utils] date override occured: "+dateObj.getFullYear()+"-"+getTwoDigitNumber(dateObj.getMonth() + 1)+"-"+getTwoDigitNumber(dateObj.getDate())+" was "+year+"-"+getTwoDigitNumber(month)+"-"+getTwoDigitNumber(date));
+    }
+
+    return dateObj;
 }
 
 
