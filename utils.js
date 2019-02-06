@@ -191,6 +191,14 @@ function getInputNumberTag(nameAndId, minValue = 0, maxValue = 9999, value = 0){
     inputTag.setAttribute('type', 'number');
     inputTag.setAttribute('name', nameAndId);
     inputTag.setAttribute('id', nameAndId);
+
+    // 최소와 최대 값이 반대면 뒤집는다
+    if(minValue > maxValue){
+        var temp = minValue;
+        minValue = maxValue;
+        maxValue = temp;
+    }
+
     inputTag.setAttribute('min', minValue);
     inputTag.setAttribute('max', maxValue);
 
