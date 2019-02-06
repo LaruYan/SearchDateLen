@@ -193,6 +193,8 @@ function getInputNumberTag(nameAndId, minValue = 0, maxValue = 9999, value = 0){
     inputTag.setAttribute('id', nameAndId);
     inputTag.setAttribute('min', minValue);
     inputTag.setAttribute('max', maxValue);
+
+    // 여기는 문자열을 처리하지 않으므로 parseInt 없이도 괜찮을 것
     if(value < minValue){
         value = minValue;
     }else if( value > maxValue){
