@@ -46,8 +46,10 @@ function injectDates(){
             case DLE_TYPE_REL_RANGE: // 'rel_range': // 정해진 기간 (상대적)
                 {
                     var dateRgFrmTarget = setDateFromNow(dateEntry[DLE_JSON_COL_FROM_YEAR], dateEntry[DLE_JSON_COL_FROM_MONTH], dateEntry[DLE_JSON_COL_FROM_DATE]);
-                    fromDate = getDateStringNaver(dateRgFrmTarget.getFullYear(), (dateRgFrmTarget.getMonth() + 1), dateRgFrmTarget.getDate());
                     var dateRgToTarget = setDateFromNow(dateEntry[DLE_JSON_COL_TO_YEAR], dateEntry[DLE_JSON_COL_TO_MONTH], dateEntry[DLE_JSON_COL_TO_DATE]);
+                    
+                    
+                    fromDate = getDateStringNaver(dateRgFrmTarget.getFullYear(), (dateRgFrmTarget.getMonth() + 1), dateRgFrmTarget.getDate());
                     toDate = getDateStringNaver(dateRgToTarget.getFullYear(), (dateRgToTarget.getMonth() + 1), dateRgToTarget.getDate());
                 }
                 break;
@@ -55,6 +57,10 @@ function injectDates(){
             case DLE_TYPE_ABS_FROM: // 'abs_from': // 특정일 부터
                 {
                     var dateAFrmTarget = setDateExactTry(dateEntry[DLE_JSON_COL_FROM_YEAR],dateEntry[DLE_JSON_COL_FROM_MONTH],dateEntry[DLE_JSON_COL_FROM_DATE]);
+                    
+                    // 현재날짜 보다 미래부터로 되어있다면?
+                    dateAFrmTarget = pullDateMonthOrYear(dateAFrmTarget,dateEntry[DLE_JSON_COL_FROM_YEAR],dateEntry[DLE_JSON_COL_FROM_MONTH],dateEntry[DLE_JSON_COL_FROM_DATE]);
+
                     fromDate = getDateStringNaver(dateAFrmTarget.getFullYear(), (dateAFrmTarget.getMonth() + 1), dateAFrmTarget.getDate());
                 }
                 break;
@@ -62,6 +68,8 @@ function injectDates(){
             case DLE_TYPE_ABS_TO: // 'abs_to': // 특정일 까지
                 {
                     var dateAToTarget = setDateExactTry(dateEntry[DLE_JSON_COL_TO_YEAR],dateEntry[DLE_JSON_COL_TO_MONTH],dateEntry[DLE_JSON_COL_TO_DATE]);
+                    
+                    
                     toDate = getDateStringNaver(dateAToTarget.getFullYear(), (dateAToTarget.getMonth() + 1), dateAToTarget.getDate());
                 }
                 break;
@@ -69,8 +77,17 @@ function injectDates(){
             case DLE_TYPE_ABS_RANGE: // 'abs_range': // 정해진 기간 (절대적)
                 {
                     var dateAgFrmTarget = setDateExactTry(dateEntry[DLE_JSON_COL_FROM_YEAR],dateEntry[DLE_JSON_COL_FROM_MONTH],dateEntry[DLE_JSON_COL_FROM_DATE]);
-                    fromDate = getDateStringNaver(dateAgFrmTarget.getFullYear(), (dateAgFrmTarget.getMonth() + 1), dateAgFrmTarget.getDate());
                     var dateAgToTarget = setDateExactTry(dateEntry[DLE_JSON_COL_TO_YEAR],dateEntry[DLE_JSON_COL_TO_MONTH],dateEntry[DLE_JSON_COL_TO_DATE]);
+                    
+
+                    // 기간이 후자가 더 큰지 공고히
+                    if(dateAgFrmTarget > dateAgToTarget){
+                        var temp = dateAgFrmTarget;
+                        dateAgFrmTarget = dateAgToTarget;
+                        dateAgToTarget = temp;
+                    }
+
+                    fromDate = getDateStringNaver(dateAgFrmTarget.getFullYear(), (dateAgFrmTarget.getMonth() + 1), dateAgFrmTarget.getDate());
                     toDate = getDateStringNaver(dateAgToTarget.getFullYear(), (dateAgToTarget.getMonth() + 1), dateAgToTarget.getDate());
                 }
                 break;

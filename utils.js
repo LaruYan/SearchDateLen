@@ -78,25 +78,26 @@ function setDateFromNow(year, month, date){
 
 // 입력받은 날짜 그대로 현재날짜로. 단, 0인건 현재날짜를 기준으로
 function setDateExactTry(year, month, date){
-    var dateTarget = new Date();
-    alertAndLog("searchDateLen: [utils] trying to set "+year+"-"+getTwoDigitNumber(month)+"-"+getTwoDigitNumber(date)+" into "+
-        dateTarget.getFullYear()+"-"+getTwoDigitNumber(dateTarget.getMonth() + 1)+"-"+getTwoDigitNumber(dateTarget.getDate()));
-    if(year > 0) {
-        dateTarget.setFullYear(year);
-    }
-    if(month > 0) {
-        dateTarget.setMonth(month-1);
-    }
-    if(date > 0 ){
-        dateTarget.setDate(date);
-    }
+    return setDateHybrid(year, month, date);
+    // var dateTarget = new Date();
+    // alertAndLog("searchDateLen: [utils] trying to set "+year+"-"+getTwoDigitNumber(month)+"-"+getTwoDigitNumber(date)+" into "+
+    //     dateTarget.getFullYear()+"-"+getTwoDigitNumber(dateTarget.getMonth() + 1)+"-"+getTwoDigitNumber(dateTarget.getDate()));
+    // if(year > 0) {
+    //     dateTarget.setFullYear(year);
+    // }
+    // if(month > 0) {
+    //     dateTarget.setMonth(month-1);
+    // }
+    // if(date > 0 ){
+    //     dateTarget.setDate(date);
+    // }
     
-    dateTarget = makeDateSupported(dateTarget, year, month, date);
-    return dateTarget;
+    // dateTarget = makeDateSupported(dateTarget, year, month, date);
+    // return dateTarget;
 }
 
 // 입력받은 날짜 그대로 현재날짜로.
-// 단, -99~99년으로 조절할 수 있게 하자
+// 단, 오늘로부터 -99 ~ +99년으로 조절할 수 있게 하자
 function setDateHybrid(year, month, date){
     var dateTarget = new Date();
     alertAndLog("searchDateLen: [utils] trying to set "+year+"-"+getTwoDigitNumber(month)+"-"+getTwoDigitNumber(date)+" into "+
@@ -120,7 +121,14 @@ function setDateHybrid(year, month, date){
     }
 
     dateTarget = makeDateSupported(dateTarget, year, month, date);
+
     return dateTarget;
+}
+
+// 년월일이 미래인 경우 조건에 맞게 당긴다.
+function pullDateMonthOrYear(dateObj, year, month, date){
+
+    return dateObj;
 }
 
 // Date 객체가 유효한지 검사
