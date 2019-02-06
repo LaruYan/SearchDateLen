@@ -71,7 +71,8 @@ function setDateFromNow(year, month, date){
     dateTarget.setFullYear(dateTarget.getFullYear() - year);
     dateTarget.setMonth(dateTarget.getMonth() - month);
     dateTarget.setDate(dateTarget.getDate() - date);
-    alertAndLog("searchDateLen: [utils] got "+dateTarget.getFullYear()+"-"+getTwoDigitNumber(dateTarget.getMonth() + 1)+"-"+getTwoDigitNumber(dateTarget.getDate()));
+    
+    dateTarget = makeDateSupported(dateTarget, year, month, date);
     return dateTarget;
 }
 
@@ -89,48 +90,62 @@ function setDateExactTry(year, month, date){
     if(date > 0 ){
         dateTarget.setDate(date);
     }
-    alertAndLog("searchDateLen: [utils] got "+dateTarget.getFullYear()+"-"+getTwoDigitNumber(dateTarget.getMonth() + 1)+"-"+getTwoDigitNumber(dateTarget.getDate()));
+    
+    dateTarget = makeDateSupported(dateTarget, year, month, date);
     return dateTarget;
 }
 
 // 입력받은 날짜 그대로 현재날짜로.
-// 단,
+// 단, -99~99년으로 조절할 수 있게 하자
 function setDateHybrid(year, month, date){
     var dateTarget = new Date();
     alertAndLog("searchDateLen: [utils] trying to set "+year+"-"+getTwoDigitNumber(month)+"-"+getTwoDigitNumber(date)+" into "+
         dateTarget.getFullYear()+"-"+(dateTarget.getMonth() + 1)+"-"+dateTarget.getDate());
     
-    //
     if(year >= 100) {
+        alertAndLog('searchDateLen: [utils] got year 100 <= '+ year +'. trying as-is.');
         dateTarget.setFullYear(year);
+    }else if(year > -100){
+        alertAndLog('searchDateLen: [utils] got year -100 < '+ year + '. using this as relative year in hybrid mode.');
+        dateTarget.setFullYear(dateTarget.getFullYear() + year);
     }
+
     if(month > 0) {
         dateTarget.setMonth(month-1);
     }
-    if(date > 0){
+
+    if(date > 0) {
         dateTarget.setDate(date);
     }
-    alertAndLog("searchDateLen: [utils] got "+dateTarget.getFullYear()+"-"+getTwoDigitNumber(dateTarget.getMonth() + 1)+"-"+getTwoDigitNumber(dateTarget.getDate()));
+
+    dateTarget = makeDateSupported(dateTarget, year, month, date);
     return dateTarget;
 }
 
-// 유효성 검사
-function isDateValid(dateObj, year, month, date){
+// Date 객체가 유효한지 검사
+function isDateSupported(dateObj, year, month, date){
     
     if(Boolean(+dateObj)){
         // dateObj.getDate() == date만 해도 된다고
         // https://medium.com/@esganzerla/simple-date-validation-with-javascript-caea0f71883c
         // 에 적혀있지만, 로깅 기능이 있으니 빡빡하게 해볼까.
         //if(dateObj.getDate() == date){
-        if(dateObj.getFullYear() == year && dateObj.getMonth() == month && dateObj.getDate() == date){
-            alertAndLog("searchDateLen: [utils] Valid and desired date: "+dateObj.getFullYear()+"-"+getTwoDigitNumber(dateObj.getMonth() + 1)+"-"+getTwoDigitNumber(dateObj.getDate()));
+        if(dateObj.getFullYear() == year && (dateObj.getMonth() + 1) == month && dateObj.getDate() == date){
+            alertAndLog("searchDateLen: [utils] Supported and desired date: "+year+"-"+getTwoDigitNumber(month)+"-"+getTwoDigitNumber(date));
         } else {
-            alertAndLog("searchDateLen: [utils] Valid but calibrated date: "+dateObj.getFullYear()+"-"+getTwoDigitNumber(dateObj.getMonth() + 1)+"-"+getTwoDigitNumber(dateObj.getDate()));
+            alertAndLog("searchDateLen: [utils] Supported but calibrated date: "+dateObj.getFullYear()+"-"+getTwoDigitNumber(dateObj.getMonth() + 1)+"-"+getTwoDigitNumber(dateObj.getDate()));
         }
         return true;
     } else {
-        alertAndLog("searchDateLen: [utils] This is invalid date.");
+        alertAndLog("searchDateLen: [utils] This is not supported date: "+year+"-"+getTwoDigitNumber(month)+"-"+getTwoDigitNumber(date));
         return false;
+    }
+}
+
+// 유효한 Date 객체로 변환
+function makeDateSupported(date, year, month, date){
+    if( ! isDateSupported(date, year, month, date) ){
+        // 여러가지 시도해보자.
     }
 }
 
