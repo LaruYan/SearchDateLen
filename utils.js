@@ -182,13 +182,22 @@ function getSelectedOptionTag(label, value, checkVal){
 
 // number 입력칸 생성
 function getInputNumberTag(nameAndId, maxValue = 9999, value = 0){
+    return getInputNumberTag(nameAndId, 0, maxValue, value);
+}
+
+function getInputNumberTag(nameAndId, minValue = 0, maxValue = 9999, value = 0){
 
     var inputTag = document.createElement('input');
     inputTag.setAttribute('type', 'number');
     inputTag.setAttribute('name', nameAndId);
     inputTag.setAttribute('id', nameAndId);
-    inputTag.setAttribute('min', 0);
+    inputTag.setAttribute('min', minValue);
     inputTag.setAttribute('max', maxValue);
+    if(value < minValue){
+        value = minValue;
+    }else if( value > maxValue){
+        value= maxValue;
+    }
     inputTag.setAttribute('value', value);
 
     return inputTag;
