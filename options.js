@@ -273,13 +273,13 @@ function prepareInput(entryNo = -1){
     divInputRelFrom.appendChild(getClassedTag('div','label_input','시작기간'));
     // 시작개년 div+input
     divInputRelFrom.appendChild(getClassedTag('div','label_year',
-        getInputNumberTag('input_rel_from_year',99,dateEntry[DLE_JSON_COL_FROM_YEAR]),'년'));
+        getInputNumberTag('input_rel_from_year',LIMIT_YEARS_REL_MINIMUM,LIMIT_YEARS_REL_MAXIMUM,dateEntry[DLE_JSON_COL_FROM_YEAR]),'년'));
     // 시작개월 div+input
     divInputRelFrom.appendChild(getClassedTag('div','label_month',
-        getInputNumberTag('input_rel_from_month',999,dateEntry[DLE_JSON_COL_FROM_MONTH]),'개월'));
+        getInputNumberTag('input_rel_from_month',LIMIT_MONTHS_REL_MINIMUM,LIMIT_MONTHS_REL_MAXIMUM,dateEntry[DLE_JSON_COL_FROM_MONTH]),'개월'));
     // 시작개일 div+input
     divInputRelFrom.appendChild(getClassedTag('div','label_date',
-        getInputNumberTag('input_rel_from_date',9999,dateEntry[DLE_JSON_COL_FROM_DATE]),'일 전부터'));
+        getInputNumberTag('input_rel_from_date',LIMIT_DAYS_REL_MINIMUM,LIMIT_DAYS_REL_MAXIMUM,dateEntry[DLE_JSON_COL_FROM_DATE]),'일 전부터'));
     // 시작기간 clear div
     divInputRelFrom.appendChild(getClassedTag('div','clear'));
     // 시작기간에 유효성 검사 이벤트 추가
@@ -296,13 +296,13 @@ function prepareInput(entryNo = -1){
     divInputRelTo.appendChild(getClassedTag('div','label_input','종료기간'));
     // 종료개년 div+input
     divInputRelTo.appendChild(getClassedTag('div','label_year',
-        getInputNumberTag('input_rel_to_year',99,dateEntry[DLE_JSON_COL_TO_YEAR]),'년'));
+        getInputNumberTag('input_rel_to_year',LIMIT_YEARS_REL_MINIMUM,LIMIT_YEARS_REL_MAXIMUM,dateEntry[DLE_JSON_COL_TO_YEAR]),'년'));
     // 종료개월 div+input
     divInputRelTo.appendChild(getClassedTag('div','label_month',
-        getInputNumberTag('input_rel_to_month',999,dateEntry[DLE_JSON_COL_TO_MONTH]),'개월'));
+        getInputNumberTag('input_rel_to_month',LIMIT_MONTHS_REL_MINIMUM,LIMIT_MONTHS_REL_MAXIMUM,dateEntry[DLE_JSON_COL_TO_MONTH]),'개월'));
     // 종료개일 div+input
     divInputRelTo.appendChild(getClassedTag('div','label_date',
-        getInputNumberTag('input_rel_to_date',9999,dateEntry[DLE_JSON_COL_TO_DATE]),'일 전까지'));
+        getInputNumberTag('input_rel_to_date',LIMIT_DAYS_REL_MINIMUM,LIMIT_DAYS_REL_MAXIMUM,dateEntry[DLE_JSON_COL_TO_DATE]),'일 전까지'));
     // 종료기간 clear div
     divInputRelTo.appendChild(getClassedTag('div','clear'));    
     // 종료기간에 유효성 검사 이벤트 추가
@@ -313,7 +313,7 @@ function prepareInput(entryNo = -1){
     divInputDateRel.appendChild(divInputRelTo);
 
     // 상대적 기간 설명
-    var divInputRelLabel = getClassedTag('div', 'label_input','입력 범위: 년(99~0), 개월(999~0), 일(9999~0). 미래 설정 불가');
+    var divInputRelLabel = getClassedTag('div', 'label_input','입력 범위: 년('+LIMIT_YEARS_REL_MAXIMUM+'~'+LIMIT_YEARS_REL_MINIMUM+'), 개월('+LIMIT_MONTHS_REL_MAXIMUM+'~'+LIMIT_MONTHS_REL_MINIMUM+'), 일('+LIMIT_DAYS_REL_MAXIMUM+'~'+LIMIT_DAYS_REL_MINIMUM+'). 미래 설정 불가');
     divInputDateRel.appendChild(divInputRelLabel);
 
 
@@ -329,13 +329,13 @@ function prepareInput(entryNo = -1){
     divInputAbsFrom.appendChild(getClassedTag('div','label_input','시작일자'));
     // 시작년도 div+input
     divInputAbsFrom.appendChild(getClassedTag('div','label_year',
-        getInputNumberTag('input_abs_from_year',9999,dateEntry[DLE_JSON_COL_FROM_YEAR]),'년'));
+        getInputNumberTag('input_abs_from_year',LIMIT_YEARS_HBD_MINIMUM,LIMIT_YEARS_ABS_MAXIMUM,dateEntry[DLE_JSON_COL_FROM_YEAR]),'년'));
     // 시작월 div+input
     divInputAbsFrom.appendChild(getClassedTag('div','label_month',
-        getInputNumberTag('input_abs_from_month',12,dateEntry[DLE_JSON_COL_FROM_MONTH]),'월'));
+        getInputNumberTag('input_abs_from_month',LIMIT_MONTHS_ABS_MINIMUM,LIMIT_MONTHS_ABS_MAXIMUM,dateEntry[DLE_JSON_COL_FROM_MONTH]),'월'));
     // 시작일 div+input
     divInputAbsFrom.appendChild(getClassedTag('div','label_date',
-        getInputNumberTag('input_abs_from_date',31,dateEntry[DLE_JSON_COL_FROM_DATE]),'일부터'));
+        getInputNumberTag('input_abs_from_date',LIMIT_DAYS_ABS_MAXIMUM,LIMIT_DAYS_ABS_MAXIMUM,dateEntry[DLE_JSON_COL_FROM_DATE]),'일부터'));
     // 시작일자 clear div
     divInputAbsFrom.appendChild(getClassedTag('div','clear'));
     // 시작일자에 유효성 검사 이벤트 추가
@@ -353,13 +353,13 @@ function prepareInput(entryNo = -1){
     divInputAbsTo.appendChild(getClassedTag('div','label_input','종료일자'));
     // 종료개년 div+input
     divInputAbsTo.appendChild(getClassedTag('div','label_year',
-        getInputNumberTag('input_abs_to_year',9999,dateEntry[DLE_JSON_COL_TO_YEAR]),'년'));
+        getInputNumberTag('input_abs_to_year',LIMIT_YEARS_HBD_MINIMUM,LIMIT_YEARS_ABS_MAXIMUM,dateEntry[DLE_JSON_COL_TO_YEAR]),'년'));
     // 종료개월 div+input
     divInputAbsTo.appendChild(getClassedTag('div','label_month',
-        getInputNumberTag('input_abs_to_month',12,dateEntry[DLE_JSON_COL_TO_MONTH]),'월'));
+        getInputNumberTag('input_abs_to_month',LIMIT_MONTHS_ABS_MINIMUM,LIMIT_MONTHS_ABS_MAXIMUM,dateEntry[DLE_JSON_COL_TO_MONTH]),'월'));
     // 종료개일 div+input
     divInputAbsTo.appendChild(getClassedTag('div','label_date',
-        getInputNumberTag('input_abs_to_date',31,dateEntry[DLE_JSON_COL_TO_DATE]),'일까지'));
+        getInputNumberTag('input_abs_to_date',LIMIT_DAYS_ABS_MINIMUM,LIMIT_DAYS_ABS_MAXIMUM,dateEntry[DLE_JSON_COL_TO_DATE]),'일까지'));
     // 종료일자 clear div
     divInputAbsTo.appendChild(getClassedTag('div','clear'));  
     // 종료일자에 유효성 검사 이벤트 추가

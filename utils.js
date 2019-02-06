@@ -102,11 +102,11 @@ function setDateHybrid(year, month, date){
     alertAndLog("searchDateLen: [utils] trying to set "+year+"-"+getTwoDigitNumber(month)+"-"+getTwoDigitNumber(date)+" into "+
         dateTarget.getFullYear()+"-"+(dateTarget.getMonth() + 1)+"-"+dateTarget.getDate());
     
-    if(year >= 100) {
-        alertAndLog('searchDateLen: [utils] got year 100 <= '+ year +'. trying as-is.');
+    if(year >= LIMIT_YEARS_HBD_PLUS) {
+        alertAndLog('searchDateLen: [utils] got year '+LIMIT_YEARS_HBD_PLUS+' <= '+ year +'. trying as-is.');
         dateTarget.setFullYear(year);
-    }else if(year > -100){
-        alertAndLog('searchDateLen: [utils] got year -100 < '+ year + '. using this as relative year in hybrid mode.');
+    }else if(year > LIMIT_YEARS_HBD_MINUS){
+        alertAndLog('searchDateLen: [utils] got year '+LIMIT_YEARS_HBD_MINUS+' < '+ year + '. using this as relative year in hybrid mode.');
         dateTarget.setFullYear(dateTarget.getFullYear() + year);
         year = dateTarget.getFullYear();
     }
@@ -149,12 +149,12 @@ function makeDateSupported(dateObj, year, month, date){
     if( ! isDateSupported(dateObj, year, month, date) ){
         isOverrideOccured = true;
         
-        if(year < 100){
+        if(year < LIMIT_YEARS_ABS_MINIMUM){
             // -99 ~ +99는 상대값 매핑을 위해 사용되므로 100부터 있어야 한다.
-            dateObj.setFullYear(100);
-        }else if( year > 9999){
+            dateObj.setFullYear(LIMIT_YEARS_ABS_MINIMUM);
+        }else if( year > LIMIT_YEARS_ABS_MAXIMUM){
             // iso8601 표현에는 년도를 상호간 동의 없이 0~9999를 초과할 수 없다.
-            dateObj.setFullYear(9999);
+            dateObj.setFullYear(LIMIT_YEARS_ABS_MAXIMUM);
         }
     }
 
