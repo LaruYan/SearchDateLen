@@ -114,6 +114,27 @@ function setDateHybrid(year, month, date){
     return dateTarget;
 }
 
+// 유효성 검사
+function isDateValid(dateObj, year, month, date){
+    
+    if(Boolean(+dateObj)){
+        // dateObj.getDate() == date만 해도 된다고
+        // https://medium.com/@esganzerla/simple-date-validation-with-javascript-caea0f71883c
+        // 에 적혀있지만, 로깅 기능이 있으니 빡빡하게 해볼까.
+        //if(dateObj.getDate() == date){
+        if(dateObj.getFullYear() == year && dateObj.getMonth() == month && dateObj.getDate() == date){
+            alertAndLog("searchDateLen: [utils] Valid and desired date: "+dateObj.getFullYear()+"-"+getTwoDigitNumber(dateObj.getMonth() + 1)+"-"+getTwoDigitNumber(dateObj.getDate()));
+        } else {
+            alertAndLog("searchDateLen: [utils] Valid but calibrated date: "+dateObj.getFullYear()+"-"+getTwoDigitNumber(dateObj.getMonth() + 1)+"-"+getTwoDigitNumber(dateObj.getDate()));
+        }
+        return true;
+    } else {
+        alertAndLog("searchDateLen: [utils] This is invalid date.");
+        return false;
+    }
+}
+
+
 // checkVal 값과 value가 같으면 selected 를 붙여 나오는 option 태그 생성
 function getSelectedOptionTag(label, value, checkVal){
     var optionTag = document.createElement('option');
