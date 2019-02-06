@@ -371,7 +371,7 @@ function prepareInput(entryNo = -1){
 
 
     // 절대적 기간 설명
-    var divInputAbsLabel = getClassedTag('div', 'label_input','날짜에 0이 입력되어 있으면 계산시 오늘을 기준으로 0 대신 채웁니다.');
+    var divInputAbsLabel = getClassedTag('div', 'label_input','날짜에 0이 입력되어 있으면 계산시 오늘을 기준으로 0 대신 채웁니다.<br />단, 년도에 한해 ('+LIMIT_YEARS_HBD_MINIMUM+'~'+LIMIT_YEARS_HBD_MAXIMUM+') 범위로 상대적 기간 처럼 사용할 수 있음. 음수는 과거');
     divInputDateAbs.appendChild(divInputAbsLabel);
 
     var btnInputSubmit = document.createElement('button');
