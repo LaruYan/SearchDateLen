@@ -67,29 +67,50 @@ function isElement(o){
 function setDateFromNow(year, month, date){
     var dateTarget = new Date();
     alertAndLog("searchDateLen: [utils] setting "+year+"years "+month+"months "+date+"days from "+
-        dateTarget.getFullYear()+"-"+(dateTarget.getMonth() + 1)+"-"+dateTarget.getDate());
+        dateTarget.getFullYear()+"-"+getTwoDigitNumber(dateTarget.getMonth() + 1)+"-"+getTwoDigitNumber(dateTarget.getDate()));
     dateTarget.setFullYear(dateTarget.getFullYear() - year);
     dateTarget.setMonth(dateTarget.getMonth() - month);
     dateTarget.setDate(dateTarget.getDate() - date);
-    alertAndLog("searchDateLen: [utils] got "+dateTarget.getFullYear()+"-"+(dateTarget.getMonth() + 1)+"-"+dateTarget.getDate());
+    alertAndLog("searchDateLen: [utils] got "+dateTarget.getFullYear()+"-"+getTwoDigitNumber(dateTarget.getMonth() + 1)+"-"+getTwoDigitNumber(dateTarget.getDate()));
     return dateTarget;
 }
 
 // 입력받은 날짜 그대로 현재날짜로. 단, 0인건 현재날짜를 기준으로
 function setDateExactTry(year, month, date){
     var dateTarget = new Date();
-    alertAndLog("searchDateLen: [utils] trying to set "+year+"-"+month+"-"+date+" into "+
-        dateTarget.getFullYear()+"-"+(dateTarget.getMonth() + 1)+"-"+dateTarget.getDate());
+    alertAndLog("searchDateLen: [utils] trying to set "+year+"-"+getTwoDigitNumber(month)+"-"+getTwoDigitNumber(date)+" into "+
+        dateTarget.getFullYear()+"-"+getTwoDigitNumber(dateTarget.getMonth() + 1)+"-"+getTwoDigitNumber(dateTarget.getDate()));
     if(year > 0) {
         dateTarget.setFullYear(year);
     }
     if(month > 0) {
-        dateTarget.setMonth(month);
+        dateTarget.setMonth(month-1);
     }
     if(date > 0 ){
         dateTarget.setDate(date);
     }
-    alertAndLog("searchDateLen: [utils] got "+dateTarget.getFullYear()+"-"+(dateTarget.getMonth() + 1)+"-"+dateTarget.getDate());
+    alertAndLog("searchDateLen: [utils] got "+dateTarget.getFullYear()+"-"+getTwoDigitNumber(dateTarget.getMonth() + 1)+"-"+getTwoDigitNumber(dateTarget.getDate()));
+    return dateTarget;
+}
+
+// 입력받은 날짜 그대로 현재날짜로.
+// 단,
+function setDateHybrid(year, month, date){
+    var dateTarget = new Date();
+    alertAndLog("searchDateLen: [utils] trying to set "+year+"-"+getTwoDigitNumber(month)+"-"+getTwoDigitNumber(date)+" into "+
+        dateTarget.getFullYear()+"-"+(dateTarget.getMonth() + 1)+"-"+dateTarget.getDate());
+    
+    //
+    if(year >= 100) {
+        dateTarget.setFullYear(year);
+    }
+    if(month > 0) {
+        dateTarget.setMonth(month-1);
+    }
+    if(date > 0){
+        dateTarget.setDate(date);
+    }
+    alertAndLog("searchDateLen: [utils] got "+dateTarget.getFullYear()+"-"+getTwoDigitNumber(dateTarget.getMonth() + 1)+"-"+getTwoDigitNumber(dateTarget.getDate()));
     return dateTarget;
 }
 
