@@ -125,8 +125,69 @@ function setDateHybrid(year, month, date){
     return dateTarget;
 }
 
+
 // 년월일이 미래인 경우 조건에 맞게 당긴다.
-function pullDateMonthOrYear(dateObj, year, month, date){
+// <예1>
+// 오늘 2019-02-11
+// from    0-07-01 -> 2018-07-01
+// to      0-12-31 -> 2018-12-31
+// <예2>
+// 오늘 2019-08-11
+// from    0-07-01 -> 2019-07-01
+// to      0-12-31 -> 2019-12-31
+function pullDateMonthOrYear(dateObj, year, month, date, forceShot = false){
+    var today = new Date();
+
+    if(dateObj <= today || (year != 0 && month != 0 && date != 0)){
+        // 이미 과거나 오늘이거나 모든게 고정된 날짜. 고칠 필요 없음
+        return dateObj;
+    }
+
+    // // 일이 지정되어 있음, 월을 고쳐본다
+    // if(date != 0){
+    //     while(dateObj > today){
+    //         // 월이 지정되어 있음, 지나친다.
+    //         if(month != 0){
+    //             break;
+    //         }
+    //         dateObj.setMonth(dateObj.getMonth() - 1);
+    //     }
+    // }
+
+    // // 월이 지정되어 있음, 년을 고쳐본다
+    // if(month != 0){
+    //     while(dateObj > today){
+    //         // 년이 지정되어 있음, 지나친다
+    //         if(year != 0){
+    //             break;
+    //         }
+    //         dateObj.setFullYear(dateObj.getFullYear() - 1);
+    //     }
+    // }
+
+    // // 년이 지정되어 있음.
+    // if(year != 0){
+    //     if(month != 0){
+
+    //     }
+    // }
+
+    while(dateObj > today){
+        if(year == 0){
+            dateObj.setFullYear(dateObj.getFullYear() - 1);
+            continue;
+        }
+
+        if(month == 0){
+            dateObj.setMonth(dateObj.getMonth() - 1);
+            continue;
+        }
+
+        if(date == 0){
+            dateObj.setDate(dateObj.getDate() - 1);
+            continue;
+        }
+    }
 
     return dateObj;
 }
