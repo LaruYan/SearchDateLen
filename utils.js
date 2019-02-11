@@ -65,7 +65,7 @@ function isElement(o){
 
 // 입력받은 날짜로 현재 날짜를 조정
 function setDateFromNow(year, month, date){
-    var dateTarget = new Date();
+    var dateTarget = fixDateTimeResidue(new Date());
     alertAndLog("searchDateLen: [utils] setting "+year+"years "+month+"months "+date+"days from "+
         dateTarget.getFullYear()+"-"+getTwoDigitNumber(dateTarget.getMonth() + 1)+"-"+getTwoDigitNumber(dateTarget.getDate()));
     dateTarget.setFullYear(dateTarget.getFullYear() - year);
@@ -79,7 +79,7 @@ function setDateFromNow(year, month, date){
 // 입력받은 날짜 그대로 현재날짜로. 단, 0인건 현재날짜를 기준으로
 function setDateExactTry(year, month, date){
     return setDateHybrid(year, month, date);
-    // var dateTarget = new Date();
+    // var dateTarget = fixDateTimeResidue(new Date());
     // alertAndLog("searchDateLen: [utils] trying to set "+year+"-"+getTwoDigitNumber(month)+"-"+getTwoDigitNumber(date)+" into "+
     //     dateTarget.getFullYear()+"-"+getTwoDigitNumber(dateTarget.getMonth() + 1)+"-"+getTwoDigitNumber(dateTarget.getDate()));
     // if(year > 0) {
@@ -99,7 +99,7 @@ function setDateExactTry(year, month, date){
 // 입력받은 날짜 그대로 현재날짜로.
 // 단, 오늘로부터 -99 ~ +99년으로 조절할 수 있게 하자
 function setDateHybrid(year, month, date){
-    var dateTarget = new Date();
+    var dateTarget = fixDateTimeResidue(new Date());
     alertAndLog("searchDateLen: [utils] trying to set "+year+"-"+getTwoDigitNumber(month)+"-"+getTwoDigitNumber(date)+" into "+
         dateTarget.getFullYear()+"-"+(dateTarget.getMonth() + 1)+"-"+dateTarget.getDate());
     
@@ -136,7 +136,7 @@ function setDateHybrid(year, month, date){
 // from    0-07-01 -> 2019-07-01
 // to      0-12-31 -> 2019-12-31
 function pullDateMonthOrYear(dateObj, year, month, date, forceShot = false){
-    var today = new Date();
+    var today = fixDateTimeResidue(new Date());
 
     if(dateObj <= today || (year != 0 && month != 0 && date != 0)){
         // 이미 과거나 오늘이거나 모든게 고정된 날짜. 고칠 필요 없음
@@ -230,6 +230,18 @@ function makeDateSupported(dateObj, year, month, date){
     if(isOverrideOccured){
         alertAndLog("searchDateLen: [utils] date override occured: "+dateObj.getFullYear()+"-"+getTwoDigitNumber(dateObj.getMonth() + 1)+"-"+getTwoDigitNumber(dateObj.getDate())+" was "+year+"-"+getTwoDigitNumber(month)+"-"+getTwoDigitNumber(date));
     }
+
+    return dateObj;
+}
+
+
+// 날짜에서 시간을 12:00:00.000으로 고정
+function fixDateTimeResidue(dateObj){
+
+    dateObj.setMilliseconds(0);
+    dateObj.setSeconds(0);
+    dateObj.setMinutes(0);
+    dateObj.setHours(12);
 
     return dateObj;
 }
