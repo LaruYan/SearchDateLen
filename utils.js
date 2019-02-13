@@ -63,6 +63,28 @@ function isElement(o){
     );
 }
 
+
+//https://stackoverflow.com/a/26426761
+// is leap year
+function dateHasLeapYear(year) {
+    // 111(2)와 AND 연산을 진행해 000(2)인지 확인하면 4로 나누어떨어지는지 알 수 있다
+    if((year & 3) != 0) return false;
+    return ((year % 100) != 0 || (year % 400) == 0);
+};
+// Get Day of Year
+Date.prototype.getDOY = function() {
+    // 각 월별 누적 일수
+    var dayCount = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334];
+    var mn = this.getMonth();
+    var dn = this.getDate();
+    // 지난달까지의 누적일수 + 현재 월에서의 일수
+    var dayOfYear = dayCount[mn] + dn;
+    // 윤년이고 2월 이후라면 일 수를 1 증가
+    if(mn > 1 && dateHasLeapYear(this.getFullYear())) dayOfYear++;
+
+    return dayOfYear;
+};
+
 // 입력받은 날짜로 현재 날짜를 조정
 function setDateFromNow(year, month, date){
     var dateTarget = fixDateTimeResidue(new Date());
@@ -172,17 +194,50 @@ function pullDateMonthOrYear(dateObj, year, month, date, forceShot = false){
     //     }
     // }
 
+    var dateCalc = new Date();
     while(dateObj > today){
+
         if(year == 0){
+            dateCalc.setTime(dateObj.getTime());
+
+            var isLeapYear = false;
+            if(dateHasLeapYear(dateCalc.getFullYear())){
+                //해당 년도가 윤년이다
+                if(dateCalc.getMonth() > 1 || (dateCalc.getMonth() == 1 && dateCalc.getDate() >= 29)){
+                    // 2월 초과(3월 이상)이거나 2월 29일이후면 365일이 아니라 366일을 빼야한다    
+                    isLeapYear = true;
+                }else if (dateHasLeapYear(dateCalc.getFullYear() - 1)){
+                    // 2월 29일 전이면 이전 년도가 윤년인지 검사
+                    isLeapYear = true;
+                }
+            }else if(dateHasLeapYear(dateCalc.getFullYear() - 1)){
+                // 이전 년도가 윤년이다.
+                if(dateCalc.getMonth() > 1 ){
+                    // 2월 초과(3월 이상)이면 365일이 아니라 366일을 빼야한다    
+                    isLeapYear = true;
+                }
+            }
+
+            if(isLeapYear){
+                dateCalc.setDate(dateCalc.getDate()-366);
+            }else{
+                dateCalc.setDate(dateCalc.getDate()-365);
+            }
+
+            
+
+            if(dateCalc)
             dateObj.setFullYear(dateObj.getFullYear() - 1);
             continue;
         }
 
+        dateCalc.setTime(dateObj.getTime());
         if(month == 0){
             dateObj.setMonth(dateObj.getMonth() - 1);
             continue;
         }
 
+        dateCalc.setTime(dateObj.getTime());
         if(date == 0){
             dateObj.setDate(dateObj.getDate() - 1);
             continue;
