@@ -357,7 +357,7 @@ function prepareInput(entryNo = -1){
         getInputNumberTag('input_abs_from_month',LIMIT_MONTHS_ABS_MINIMUM,LIMIT_MONTHS_ABS_MAXIMUM,dateEntry[DLE_JSON_COL_FROM_MONTH]),'월'));
     // 시작일 div+input
     divInputAbsFrom.appendChild(getClassedTag('div','label_date',
-        getInputNumberTag('input_abs_from_date',LIMIT_DAYS_ABS_MAXIMUM,LIMIT_DAYS_ABS_MAXIMUM,dateEntry[DLE_JSON_COL_FROM_DATE]),'일부터'));
+        getInputNumberTag('input_abs_from_date',LIMIT_DAYS_ABS_MINIMUM,LIMIT_DAYS_ABS_MAXIMUM,dateEntry[DLE_JSON_COL_FROM_DATE]),'일부터'));
     // 시작일자 clear div
     divInputAbsFrom.appendChild(getClassedTag('div','clear'));
     // 시작일자에 유효성 검사 이벤트 추가
