@@ -89,3 +89,90 @@ const LIMIT_MONTHS_ABS_MINIMUM = 0;
 const LIMIT_MONTHS_ABS_MAXIMUM = +12;
 const LIMIT_DAYS_ABS_MINIMUM = 0;
 const LIMIT_DAYS_ABS_MAXIMUM = +31;
+
+
+
+// 입력받은 날짜로 현재 날짜를 조정
+function setDateFromNow(year, month, date){
+    var dateTarget = fixDateTimeResidue(new Date());
+    alertAndLog("searchDateLen: [utils] setting "+year+"years "+month+"months "+date+"days from "+
+        dateTarget.getFullYear()+"-"+getTwoDigitNumber(dateTarget.getMonth() + 1)+"-"+getTwoDigitNumber(dateTarget.getDate()));
+    dateTarget.setFullYear(dateTarget.getFullYear() - year);
+    dateTarget.setMonth(dateTarget.getMonth() - month);
+    dateTarget.setDate(dateTarget.getDate() - date);
+    
+    dateTarget = makeDateSupported(dateTarget, year, month, date);
+    return dateTarget;
+}
+
+// 입력받은 날짜 그대로 현재날짜로. 단, 0인건 현재날짜를 기준으로
+function setDateExactTry(year, month, date){
+    return setDateHybrid(year, month, date);
+    // var dateTarget = fixDateTimeResidue(new Date());
+    // alertAndLog("searchDateLen: [utils] trying to set "+year+"-"+getTwoDigitNumber(month)+"-"+getTwoDigitNumber(date)+" into "+
+    //     dateTarget.getFullYear()+"-"+getTwoDigitNumber(dateTarget.getMonth() + 1)+"-"+getTwoDigitNumber(dateTarget.getDate()));
+    // if(year > 0) {
+    //     dateTarget.setFullYear(year);
+    // }
+    // if(month > 0) {
+    //     dateTarget.setMonth(month-1);
+    // }
+    // if(date > 0 ){
+    //     dateTarget.setDate(date);
+    // }
+    
+    // dateTarget = makeDateSupported(dateTarget, year, month, date);
+    // return dateTarget;
+}
+
+// 입력받은 날짜 그대로 현재날짜로.
+// 단, 오늘로부터 -99 ~ +99년으로 조절할 수 있게 하자
+function setDateHybrid(year, month, date){
+    var dateTarget = fixDateTimeResidue(new Date());
+    alertAndLog("searchDateLen: [utils] trying to set "+year+"-"+getTwoDigitNumber(month)+"-"+getTwoDigitNumber(date)+" into "+
+        dateTarget.getFullYear()+"-"+(dateTarget.getMonth() + 1)+"-"+dateTarget.getDate());
+    
+    if(year >= LIMIT_YEARS_HBD_PLUS) {
+        alertAndLog('searchDateLen: [utils] got year '+LIMIT_YEARS_HBD_PLUS+' <= '+ year +'. trying as-is.');
+        dateTarget.setFullYear(year);
+    }else if(year > LIMIT_YEARS_HBD_MINUS){
+        alertAndLog('searchDateLen: [utils] got year '+LIMIT_YEARS_HBD_MINUS+' < '+ year + '. using this as relative year in hybrid mode.');
+        dateTarget.setFullYear(dateTarget.getFullYear() + year);
+        year = dateTarget.getFullYear();
+    }
+
+    if(month > 0) {
+        dateTarget.setMonth(month-1);
+    }
+
+    if(date > 0) {
+        dateTarget.setDate(date);
+    }
+
+    dateTarget = makeDateSupported(dateTarget, year, month, date);
+
+    return dateTarget;
+}
+
+
+// 유효한 Date 객체로 변환
+function makeDateSupported(dateObj, year, month, date){
+    var isOverrideOccured = false;
+    if( ! isDateSupported(dateObj, year, month, date) ){
+        isOverrideOccured = true;
+        
+        if(year < LIMIT_YEARS_ABS_MINIMUM){
+            // -99 ~ +99는 상대값 매핑을 위해 사용되므로 100부터 있어야 한다.
+            dateObj.setFullYear(LIMIT_YEARS_ABS_MINIMUM);
+        }else if( year > LIMIT_YEARS_ABS_MAXIMUM){
+            // iso8601 표현에는 년도를 상호간 동의 없이 0~9999를 초과할 수 없다.
+            dateObj.setFullYear(LIMIT_YEARS_ABS_MAXIMUM);
+        }
+    }
+
+    if(isOverrideOccured){
+        alertAndLog("searchDateLen: [utils] date override occured: "+dateObj.getFullYear()+"-"+getTwoDigitNumber(dateObj.getMonth() + 1)+"-"+getTwoDigitNumber(dateObj.getDate())+" was "+year+"-"+getTwoDigitNumber(month)+"-"+getTwoDigitNumber(date));
+    }
+
+    return dateObj;
+}
