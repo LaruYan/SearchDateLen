@@ -99,7 +99,7 @@ function pullDatesToFitPast(dateOrig, year, month, date){
 
     if(dateOrig > today){
         // 날짜가 미래다.
-        alertAndLog('searchDateLen: [utils] '+dateOrig.getFullYear()+"-"+getTwoDigitNumber(dateOrig.getMonth())+"-"+getTwoDigitNumber(dateOrig.getDate())+' is future than '+today.getFullYear()+"-"+getTwoDigitNumber(today.getMonth())+"-"+getTwoDigitNumber(today.getDate())+'.');
+        alertAndLog('searchDateLen: [utils] '+dateOrig.getFullYear()+"-"+getTwoDigitNumber(dateOrig.getMonth() + 1)+"-"+getTwoDigitNumber(dateOrig.getDate())+' is future than '+today.getFullYear()+"-"+getTwoDigitNumber(today.getMonth() + 1)+"-"+getTwoDigitNumber(today.getDate())+'.');
         if(year != 0 && month != 0 && date != 0){
             // 모든게 고정된 날짜. 고칠 수 없음
             alertAndLog('searchDateLen: [utils] input was '+year+"-"+getTwoDigitNumber(month)+"-"+getTwoDigitNumber(date)+' so all immutable.');
@@ -189,7 +189,7 @@ function pullDatesToFitPast(dateOrig, year, month, date){
         alertAndLog("searchDateLen: [utils] gave up pulling dates");
     }
 
-    alertAndLog("searchDateLen: [utils] changed dates to "+dateObj.getFullYear()+"-"+getTwoDigitNumber(dateObj.getMonth())+"-"+getTwoDigitNumber(dateObj.getDate())+" to fit. "+yearChanged+" year(s) "+monthChanged+" month(s) "+dayChanged+" day(s) changed.");
+    alertAndLog("searchDateLen: [utils] changed dates to "+dateObj.getFullYear()+"-"+getTwoDigitNumber(dateObj.getMonth() + 1)+"-"+getTwoDigitNumber(dateObj.getDate())+" to fit. "+yearChanged+" year(s) "+monthChanged+" month(s) "+dayChanged+" day(s) changed.");
 
     return dateObj;
 }
