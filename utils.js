@@ -174,46 +174,6 @@ function pullDatesToFitPast(dateObj, year, month, date){
         return dateObj;
     }
 
-    // // 일이 지정되어 있음, 월을 고쳐본다
-    // if(date != 0){
-    //     while(dateObj > today){
-    //         // 월이 지정되어 있음, 지나친다.
-    //         if(month != 0){
-    //             break;
-    //         }
-    //         dateObj.setMonth(dateObj.getMonth() - 1);
-    //     }
-    // }
-
-    // // 월이 지정되어 있음, 년을 고쳐본다
-    // if(month != 0){
-    //     while(dateObj > today){
-    //         // 년이 지정되어 있음, 지나친다
-    //         if(year != 0){
-    //             break;
-    //         }
-    //         dateObj.setFullYear(dateObj.getFullYear() - 1);
-    //     }
-    // }
-
-    // // 년이 지정되어 있음.
-    // if(year != 0){
-    //     if(month != 0){
-
-    //     }
-    // }
-
-    // <예1>
-    // 오늘 2019-02-11
-    // from    0-07-01 -> 2018-07-01
-    // to      0-12-31 -> 2018-12-31
-    // <예2>
-    // 오늘 2019-08-11
-    // from    0-07-01 -> 2019-07-01
-    // to      0-12-31 -> 2019-12-31
-
-    //var dateCalc = new Date();
-
     var yearChanged = 0;
     var monthChanged = 0;
     var dayChanged = 0;
@@ -221,6 +181,7 @@ function pullDatesToFitPast(dateObj, year, month, date){
     while(dateObj > today && !dateChangeGaveUp){
 
         if ( year == 0 && yearChanged == 0 ){
+            // <예>
             // 0000-07-01
             // 2018-07-01
             // 0은 올해를 뜻하고 나머지 날짜로 인해 미래가 되더라도
@@ -228,38 +189,6 @@ function pullDatesToFitPast(dateObj, year, month, date){
             dateObj.setFullYear(dateObj.getFullYear() - 1);
             yearChanged ++;
             continue;
-
-            // dateCalc.setTime(today.getTime());
-
-            // var isLeapYear = false;
-            // if(dateHasLeapYear(dateCalc.getFullYear())){
-            //     //해당 년도가 윤년이다
-            //     if(dateCalc.getMonth() > 1 || (dateCalc.getMonth() == 1 && dateCalc.getDate() >= 29)){
-            //         // 2월 초과(3월 이상)이거나 2월 29일이후면 365일이 아니라 366일을 빼야한다    
-            //         isLeapYear = true;
-            //     }else if (dateHasLeapYear(dateCalc.getFullYear() - 1)){
-            //         // 2월 29일 전이면 이전 년도가 윤년인지 검사
-            //         isLeapYear = true;
-            //     }
-            // }else if(dateHasLeapYear(dateCalc.getFullYear() - 1)){
-            //     // 이전 년도가 윤년이다.
-            //     if(dateCalc.getMonth() > 1 ){
-            //         // 2월 초과(3월 이상)이면 365일이 아니라 366일을 빼야한다    
-            //         isLeapYear = true;
-            //     }
-            // }
-
-            // if(isLeapYear){
-            //     dateCalc.setDate(dateCalc.getDate()-366);
-            // }else{
-            //     dateCalc.setDate(dateCalc.getDate()-365);
-            // }
-
-            // // 작년 오늘이 
-            // if(dateCalc < dateObj){
-            //     dateObj.setFullYear(dateObj.getFullYear() - 1);
-            //     continue;
-            // }
         }
 
         // dateCalc.setTime(dateObj.getTime());
