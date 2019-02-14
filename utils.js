@@ -157,22 +157,25 @@ function setDateHybrid(year, month, date){
 // 오늘 2019-08-11
 // from    0-07-01 -> 2019-07-01
 // to      0-12-31 -> 2019-12-31
-function pullDatesToFitPast(dateObj, year, month, date){
+function pullDatesToFitPast(dateOrig, year, month, date){
     var today = fixDateTimeResidue(new Date());
 
-    if(dateObj > today){
+    if(dateOrig > today){
         // 날짜가 미래다.
-        alertAndLog('searchDateLen: [utils] '+dateObj.getFullYear()+"-"+getTwoDigitNumber(dateObj.getMonth())+"-"+getTwoDigitNumber(dateObj.getDate())+' is future than '+today.getFullYear()+"-"+getTwoDigitNumber(today.getMonth())+"-"+getTwoDigitNumber(today.getDate())+'.');
+        alertAndLog('searchDateLen: [utils] '+dateOrig.getFullYear()+"-"+getTwoDigitNumber(dateOrig.getMonth())+"-"+getTwoDigitNumber(dateOrig.getDate())+' is future than '+today.getFullYear()+"-"+getTwoDigitNumber(today.getMonth())+"-"+getTwoDigitNumber(today.getDate())+'.');
         if(year != 0 && month != 0 && date != 0){
             // 모든게 고정된 날짜. 고칠 수 없음
             alertAndLog('searchDateLen: [utils] input was '+year+"-"+getTwoDigitNumber(month)+"-"+getTwoDigitNumber(date)+' so all immutable.');
-            return dateObj;
+            return dateOrig;
         }
     } else {
         // 이미 과거나 오늘. 고칠 필요 없음
         alertAndLog('searchDateLen: [utils] date is today or before today.');
-        return dateObj;
+        return dateOrig;
     }
+    
+    // 기존 객체 오염을 막기 위해 새 객체를 만들어 진행
+    var dateObj = new Date(dateOrig.getTime());
 
     var yearChanged = 0;
     var monthChanged = 0;
