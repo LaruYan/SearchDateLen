@@ -132,7 +132,7 @@ function setDateExactTry(year, month, date){
 function setDateHybrid(year, month, date){
     var dateTarget = fixDateTimeResidue(new Date());
     alertAndLog("searchDateLen: [commons] trying to set "+year+"-"+getTwoDigitNumber(month)+"-"+getTwoDigitNumber(date)+" into "+
-        dateTarget.getFullYear()+"-"+(dateTarget.getMonth() + 1)+"-"+dateTarget.getDate());
+        dateTarget.getFullYear()+"-"+getTwoDigitNumber(dateTarget.getMonth() + 1)+"-"+getTwoDigitNumber(dateTarget.getDate()));
     
     if(year >= LIMIT_YEARS_HBD_PLUS) {
         alertAndLog('searchDateLen: [commons] got year '+LIMIT_YEARS_HBD_PLUS+' <= '+ year +'. trying as-is.');
