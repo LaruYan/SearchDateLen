@@ -29,81 +29,15 @@ function injectDates(){
         var fromDate = '';
         var toDate = '';
 
-        switch(dateEntry[DLE_JSON_COL_TYPE]){
-            case DLE_TYPE_REL_FROM: // 'rel_from': // 며칠전 부터 
-                {
-                    var dateFromTarget = setDateFromNow(dateEntry[DLE_JSON_COL_FROM_YEAR], dateEntry[DLE_JSON_COL_FROM_MONTH], dateEntry[DLE_JSON_COL_FROM_DATE]);
-                    fromDate = getDateStringNaver(dateFromTarget.getFullYear(), (dateFromTarget.getMonth() + 1), dateFromTarget.getDate());
-                }
-                break;
-
-            case DLE_TYPE_REL_TO: // 'rel_to': // 며칠전 까지
-                {
-                    var dateToTarget = setDateFromNow(dateEntry[DLE_JSON_COL_TO_YEAR], dateEntry[DLE_JSON_COL_TO_MONTH], dateEntry[DLE_JSON_COL_TO_DATE]);
-                    toDate = getDateStringNaver(dateToTarget.getFullYear(), (dateToTarget.getMonth() + 1), dateToTarget.getDate());
-                }
-                break;
-            case DLE_TYPE_REL_RANGE: // 'rel_range': // 정해진 기간 (상대적)
-                {
-                    var dateRgFrmTarget = setDateFromNow(dateEntry[DLE_JSON_COL_FROM_YEAR], dateEntry[DLE_JSON_COL_FROM_MONTH], dateEntry[DLE_JSON_COL_FROM_DATE]);
-                    var dateRgToTarget = setDateFromNow(dateEntry[DLE_JSON_COL_TO_YEAR], dateEntry[DLE_JSON_COL_TO_MONTH], dateEntry[DLE_JSON_COL_TO_DATE]);
-                    
-                    
-                    fromDate = getDateStringNaver(dateRgFrmTarget.getFullYear(), (dateRgFrmTarget.getMonth() + 1), dateRgFrmTarget.getDate());
-                    toDate = getDateStringNaver(dateRgToTarget.getFullYear(), (dateRgToTarget.getMonth() + 1), dateRgToTarget.getDate());
-                }
-                break;
-
-            case DLE_TYPE_ABS_FROM: // 'abs_from': // 특정일 부터
-                {
-                    var dateAFrmTarget = setDateExactTry(dateEntry[DLE_JSON_COL_FROM_YEAR],dateEntry[DLE_JSON_COL_FROM_MONTH],dateEntry[DLE_JSON_COL_FROM_DATE]);
-                    
-                    // 현재날짜 보다 미래'부터'로 되어있다면 과거가 되도록 년월일을 내려본다.
-                    var dateAFrmFixed = pullDatesToFitPast(dateAFrmTarget,dateEntry[DLE_JSON_COL_FROM_YEAR],dateEntry[DLE_JSON_COL_FROM_MONTH],dateEntry[DLE_JSON_COL_FROM_DATE]);
-
-                    fromDate = getDateStringNaver(dateAFrmFixed.getFullYear(), (dateAFrmFixed.getMonth() + 1), dateAFrmFixed.getDate());
-                }
-                break;
-
-            case DLE_TYPE_ABS_TO: // 'abs_to': // 특정일 까지
-                {
-                    var dateAToTarget = setDateExactTry(dateEntry[DLE_JSON_COL_TO_YEAR],dateEntry[DLE_JSON_COL_TO_MONTH],dateEntry[DLE_JSON_COL_TO_DATE]);
-                    
-                    // 특정일 까지이긴 한데 미래여도 된다.
-                    
-                    toDate = getDateStringNaver(dateAToTarget.getFullYear(), (dateAToTarget.getMonth() + 1), dateAToTarget.getDate());
-                }
-                break;
-                
-            case DLE_TYPE_ABS_RANGE: // 'abs_range': // 정해진 기간 (절대적)
-                {
-                    var dateAgFrmTarget = setDateExactTry(dateEntry[DLE_JSON_COL_FROM_YEAR],dateEntry[DLE_JSON_COL_FROM_MONTH],dateEntry[DLE_JSON_COL_FROM_DATE]);
-                    var dateAgToTarget = setDateExactTry(dateEntry[DLE_JSON_COL_TO_YEAR],dateEntry[DLE_JSON_COL_TO_MONTH],dateEntry[DLE_JSON_COL_TO_DATE]);
-                    
-
-                    // 기간이 후자가 더 큰지 공고히
-                    if(dateAgFrmTarget > dateAgToTarget){
-                        var temp = dateAgFrmTarget;
-                        dateAgFrmTarget = dateAgToTarget;
-                        dateAgToTarget = temp;
-                    }
-                    
-                    // 현재날짜 보다 미래'부터'로 되어있다면 과거가 되도록 년월일을 내려본다.
-                    var dateAgFrmFixed = pullDatesToFitPast(dateAgFrmTarget,dateEntry[DLE_JSON_COL_FROM_YEAR],dateEntry[DLE_JSON_COL_FROM_MONTH],dateEntry[DLE_JSON_COL_FROM_DATE]);
-                    var dateAgToFixed = null;
-
-                    if(dateAgFrmFixed != dateAgFrmTarget){
-                        //
-                        dateAgToFixed = pullDatesToFitPast(dateAgToTarget,dateEntry[DLE_JSON_COL_TO_YEAR],dateEntry[DLE_JSON_COL_TO_MONTH],dateEntry[DLE_JSON_COL_TO_DATE]);
-                    }else{
-                        dateAgToFixed = dateAgToTarget;
-                    }
-
-
-                    fromDate = getDateStringNaver(dateAgFrmFixed.getFullYear(), (dateAgFrmFixed.getMonth() + 1), dateAgFrmFixed.getDate());
-                    toDate = getDateStringNaver(dateAgToFixed.getFullYear(), (dateAgToFixed.getMonth() + 1), dateAgToFixed.getDate());
-                }
-                break;
+        var desiredDates = getDesiredDates(dateEntry);
+        
+        if(desiredDates[DLE_JSON_COL_FROM_DATEOBJ]){
+            var dateFromTarget = desiredDates[DLE_JSON_COL_FROM_DATEOBJ];
+            fromDate = getDateStringNaver(dateFromTarget.getFullYear(), (dateFromTarget.getMonth() + 1), dateFromTarget.getDate());
+        }
+        if(desiredDates[DLE_JSON_COL_TO_DATEOBJ]){
+            var dateToTarget = desiredDates[DLE_JSON_COL_TO_DATEOBJ]
+            toDate = getDateStringNaver(dateToTarget.getFullYear(), (dateToTarget.getMonth() + 1), dateToTarget.getDate());
         }
 
         // 큰따옴표를 안에다 넣어두면 DOM 삽입시 &quot;으로 자체 이스케이프된다.

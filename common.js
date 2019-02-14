@@ -22,10 +22,12 @@ function alertAndLog(msg){
 // JSON 컬럼 이름
 const DLE_JSON_COL_NAME = 'name';
 const DLE_JSON_COL_TYPE = 'type';
+const DLE_JSON_COL_FROM_DATEOBJ = 'from_dateobj';
 const DLE_JSON_COL_FROM_YEAR = 'from_year';
 const DLE_JSON_COL_FROM_MONTH = 'from_month';
 const DLE_JSON_COL_FROM_DATE = 'from_date';
 const DLE_JSON_COL_FROM_DOW = 'from_dow';
+const DLE_JSON_COL_TO_DATEOBJ = 'to_dateobj';
 const DLE_JSON_COL_TO_YEAR = 'to_year';
 const DLE_JSON_COL_TO_MONTH = 'to_month';
 const DLE_JSON_COL_TO_DATE = 'to_date';
@@ -175,4 +177,85 @@ function makeDateSupported(dateObj, year, month, date){
     }
 
     return dateObj;
+}
+
+
+//
+function getDesiredDates(dateEntry){
+    var desiredDates = {};
+    
+    switch(dateEntry[DLE_JSON_COL_TYPE]){
+        case DLE_TYPE_REL_FROM: // 'rel_from': // 며칠전 부터 
+            {
+                var dateFromTarget = setDateFromNow(dateEntry[DLE_JSON_COL_FROM_YEAR], dateEntry[DLE_JSON_COL_FROM_MONTH], dateEntry[DLE_JSON_COL_FROM_DATE]);
+                desiredDates[DLE_JSON_COL_FROM_DATEOBJ] = dateFromTarget;
+            }
+            break;
+
+        case DLE_TYPE_REL_TO: // 'rel_to': // 며칠전 까지
+            {
+                var dateToTarget = setDateFromNow(dateEntry[DLE_JSON_COL_TO_YEAR], dateEntry[DLE_JSON_COL_TO_MONTH], dateEntry[DLE_JSON_COL_TO_DATE]);
+                desiredDates[DLE_JSON_COL_TO_DATEOBJ] = dateToTarget;
+            }
+            break;
+        case DLE_TYPE_REL_RANGE: // 'rel_range': // 정해진 기간 (상대적)
+            {
+                var dateRgFrmTarget = setDateFromNow(dateEntry[DLE_JSON_COL_FROM_YEAR], dateEntry[DLE_JSON_COL_FROM_MONTH], dateEntry[DLE_JSON_COL_FROM_DATE]);
+                var dateRgToTarget = setDateFromNow(dateEntry[DLE_JSON_COL_TO_YEAR], dateEntry[DLE_JSON_COL_TO_MONTH], dateEntry[DLE_JSON_COL_TO_DATE]);
+                
+                desiredDates[DLE_JSON_COL_FROM_DATEOBJ] = dateRgFrmTarget;
+                desiredDates[DLE_JSON_COL_TO_DATEOBJ] = dateRgToTarget;
+            }
+            break;
+
+        case DLE_TYPE_ABS_FROM: // 'abs_from': // 특정일 부터
+            {
+                var dateAFrmTarget = setDateExactTry(dateEntry[DLE_JSON_COL_FROM_YEAR],dateEntry[DLE_JSON_COL_FROM_MONTH],dateEntry[DLE_JSON_COL_FROM_DATE]);
+                
+                // 현재날짜 보다 미래'부터'로 되어있다면 과거가 되도록 년월일을 내려본다.
+                var dateAFrmFixed = pullDatesToFitPast(dateAFrmTarget,dateEntry[DLE_JSON_COL_FROM_YEAR],dateEntry[DLE_JSON_COL_FROM_MONTH],dateEntry[DLE_JSON_COL_FROM_DATE]);
+
+                desiredDates[DLE_JSON_COL_FROM_DATEOBJ] = dateAFrmFixed;
+            }
+            break;
+
+        case DLE_TYPE_ABS_TO: // 'abs_to': // 특정일 까지
+            {
+                var dateAToTarget = setDateExactTry(dateEntry[DLE_JSON_COL_TO_YEAR],dateEntry[DLE_JSON_COL_TO_MONTH],dateEntry[DLE_JSON_COL_TO_DATE]);
+                
+                // 특정일 까지이긴 한데 미래여도 된다.
+                desiredDates[DLE_JSON_COL_TO_DATEOBJ] = dateAToTarget;
+            }
+            break;
+            
+        case DLE_TYPE_ABS_RANGE: // 'abs_range': // 정해진 기간 (절대적)
+            {
+                var dateAgFrmTarget = setDateExactTry(dateEntry[DLE_JSON_COL_FROM_YEAR],dateEntry[DLE_JSON_COL_FROM_MONTH],dateEntry[DLE_JSON_COL_FROM_DATE]);
+                var dateAgToTarget = setDateExactTry(dateEntry[DLE_JSON_COL_TO_YEAR],dateEntry[DLE_JSON_COL_TO_MONTH],dateEntry[DLE_JSON_COL_TO_DATE]);
+                
+
+                // 기간이 후자가 더 큰지 공고히
+                if(dateAgFrmTarget > dateAgToTarget){
+                    var temp = dateAgFrmTarget;
+                    dateAgFrmTarget = dateAgToTarget;
+                    dateAgToTarget = temp;
+                }
+                
+                // 현재날짜 보다 미래'부터'로 되어있다면 과거가 되도록 년월일을 내려본다.
+                var dateAgFrmFixed = pullDatesToFitPast(dateAgFrmTarget,dateEntry[DLE_JSON_COL_FROM_YEAR],dateEntry[DLE_JSON_COL_FROM_MONTH],dateEntry[DLE_JSON_COL_FROM_DATE]);
+                var dateAgToFixed = null;
+
+                if(dateAgFrmFixed != dateAgFrmTarget){
+                    //
+                    dateAgToFixed = pullDatesToFitPast(dateAgToTarget,dateEntry[DLE_JSON_COL_TO_YEAR],dateEntry[DLE_JSON_COL_TO_MONTH],dateEntry[DLE_JSON_COL_TO_DATE]);
+                }else{
+                    dateAgToFixed = dateAgToTarget;
+                }
+
+                desiredDates[DLE_JSON_COL_FROM_DATEOBJ] = dateAgFrmFixed;
+                desiredDates[DLE_JSON_COL_TO_DATEOBJ] = dateAgToFixed;
+            }
+            break;
+    }
+    return desiredDates;
 }

@@ -46,7 +46,6 @@ function getClassedTag(tagType, className = '', inner = '', appendStr = null){
 }
 
 
-
 //https://stackoverflow.com/a/384380
 // DOM Node는 true
 function isNode(o){
