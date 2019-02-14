@@ -59,7 +59,7 @@ function injectDates(){
                     var dateAFrmTarget = setDateExactTry(dateEntry[DLE_JSON_COL_FROM_YEAR],dateEntry[DLE_JSON_COL_FROM_MONTH],dateEntry[DLE_JSON_COL_FROM_DATE]);
                     
                     // 현재날짜 보다 미래부터로 되어있다면?
-                    dateAFrmTarget = pullDateMonthOrYear(dateAFrmTarget,dateEntry[DLE_JSON_COL_FROM_YEAR],dateEntry[DLE_JSON_COL_FROM_MONTH],dateEntry[DLE_JSON_COL_FROM_DATE]);
+                    dateAFrmTarget = pullDatesToFitPast(dateAFrmTarget,dateEntry[DLE_JSON_COL_FROM_YEAR],dateEntry[DLE_JSON_COL_FROM_MONTH],dateEntry[DLE_JSON_COL_FROM_DATE]);
 
                     fromDate = getDateStringNaver(dateAFrmTarget.getFullYear(), (dateAFrmTarget.getMonth() + 1), dateAFrmTarget.getDate());
                 }

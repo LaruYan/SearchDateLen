@@ -157,11 +157,20 @@ function setDateHybrid(year, month, date){
 // 오늘 2019-08-11
 // from    0-07-01 -> 2019-07-01
 // to      0-12-31 -> 2019-12-31
-function pullDateMonthOrYear(dateObj, year, month, date, forceShot = false){
+function pullDatesToFitPast(dateObj, year, month, date){
     var today = fixDateTimeResidue(new Date());
 
-    if(dateObj <= today || (year != 0 && month != 0 && date != 0)){
-        // 이미 과거나 오늘이거나 모든게 고정된 날짜. 고칠 필요 없음
+    if(dateObj > today){
+        // 날짜가 미래다.
+        alertAndLog('searchDateLen: [utils] '+dateObj.getFullYear()+"-"+getTwoDigitNumber(dateObj.getMonth())+"-"+getTwoDigitNumber(dateObj.getDate())+' is future than '+today.getFullYear()+"-"+getTwoDigitNumber(today.getMonth())+"-"+getTwoDigitNumber(today.getDate())+'.');
+        if(year != 0 && month != 0 && date != 0){
+            // 모든게 고정된 날짜. 고칠 수 없음
+            alertAndLog('searchDateLen: [utils] input was '+year+"-"+getTwoDigitNumber(month)+"-"+getTwoDigitNumber(date)+' so all immutable.');
+            return dateObj;
+        }
+    } else {
+        // 이미 과거나 오늘. 고칠 필요 없음
+        alertAndLog('searchDateLen: [utils] date is today or before today.');
         return dateObj;
     }
 
@@ -194,55 +203,124 @@ function pullDateMonthOrYear(dateObj, year, month, date, forceShot = false){
     //     }
     // }
 
-    var dateCalc = new Date();
-    while(dateObj > today){
+    // <예1>
+    // 오늘 2019-02-11
+    // from    0-07-01 -> 2018-07-01
+    // to      0-12-31 -> 2018-12-31
+    // <예2>
+    // 오늘 2019-08-11
+    // from    0-07-01 -> 2019-07-01
+    // to      0-12-31 -> 2019-12-31
 
-        if(year == 0){
-            dateCalc.setTime(dateObj.getTime());
+    //var dateCalc = new Date();
 
-            var isLeapYear = false;
-            if(dateHasLeapYear(dateCalc.getFullYear())){
-                //해당 년도가 윤년이다
-                if(dateCalc.getMonth() > 1 || (dateCalc.getMonth() == 1 && dateCalc.getDate() >= 29)){
-                    // 2월 초과(3월 이상)이거나 2월 29일이후면 365일이 아니라 366일을 빼야한다    
-                    isLeapYear = true;
-                }else if (dateHasLeapYear(dateCalc.getFullYear() - 1)){
-                    // 2월 29일 전이면 이전 년도가 윤년인지 검사
-                    isLeapYear = true;
-                }
-            }else if(dateHasLeapYear(dateCalc.getFullYear() - 1)){
-                // 이전 년도가 윤년이다.
-                if(dateCalc.getMonth() > 1 ){
-                    // 2월 초과(3월 이상)이면 365일이 아니라 366일을 빼야한다    
-                    isLeapYear = true;
-                }
-            }
+    var yearChanged = 0;
+    var monthChanged = 0;
+    var dayChanged = 0;
+    var dateChangeGaveUp = false;
+    while(dateObj > today && !dateChangeGaveUp){
 
-            if(isLeapYear){
-                dateCalc.setDate(dateCalc.getDate()-366);
-            }else{
-                dateCalc.setDate(dateCalc.getDate()-365);
-            }
-
-            
-
-            if(dateCalc)
+        if ( year == 0 && yearChanged == 0 ){
+            // 0000-07-01
+            // 2018-07-01
+            // 0은 올해를 뜻하고 나머지 날짜로 인해 미래가 되더라도
+            // 한 해만 내려가야 합니다.
             dateObj.setFullYear(dateObj.getFullYear() - 1);
+            yearChanged ++;
             continue;
+
+            // dateCalc.setTime(today.getTime());
+
+            // var isLeapYear = false;
+            // if(dateHasLeapYear(dateCalc.getFullYear())){
+            //     //해당 년도가 윤년이다
+            //     if(dateCalc.getMonth() > 1 || (dateCalc.getMonth() == 1 && dateCalc.getDate() >= 29)){
+            //         // 2월 초과(3월 이상)이거나 2월 29일이후면 365일이 아니라 366일을 빼야한다    
+            //         isLeapYear = true;
+            //     }else if (dateHasLeapYear(dateCalc.getFullYear() - 1)){
+            //         // 2월 29일 전이면 이전 년도가 윤년인지 검사
+            //         isLeapYear = true;
+            //     }
+            // }else if(dateHasLeapYear(dateCalc.getFullYear() - 1)){
+            //     // 이전 년도가 윤년이다.
+            //     if(dateCalc.getMonth() > 1 ){
+            //         // 2월 초과(3월 이상)이면 365일이 아니라 366일을 빼야한다    
+            //         isLeapYear = true;
+            //     }
+            // }
+
+            // if(isLeapYear){
+            //     dateCalc.setDate(dateCalc.getDate()-366);
+            // }else{
+            //     dateCalc.setDate(dateCalc.getDate()-365);
+            // }
+
+            // // 작년 오늘이 
+            // if(dateCalc < dateObj){
+            //     dateObj.setFullYear(dateObj.getFullYear() - 1);
+            //     continue;
+            // }
         }
 
-        dateCalc.setTime(dateObj.getTime());
-        if(month == 0){
-            dateObj.setMonth(dateObj.getMonth() - 1);
-            continue;
+        // dateCalc.setTime(dateObj.getTime());
+        if( month == 0 ){
+            // <예>
+            // 2019-00-21
+            // 2019-01-21
+            // 0은 이번달을 뜻하고 나머지 날짜로 인해 미래가 될 수 있다
+            // 여러달 내려서 지난달 XX일까지 내려갈 수 있다.
+            // 년도 설정이 무시되지 않게 올해로 설정된 경우만 내릴 수 있게하고
+            // 1월까지 내려오면 더 내려가지 않게 함
+            if(year == 0 || dateObj.getMonth() > 0){
+                dateObj.setMonth(dateObj.getMonth() - 1);
+                monthChanged++;
+                continue;
+            }
         }
 
-        dateCalc.setTime(dateObj.getTime());
-        if(date == 0){
-            dateObj.setDate(dateObj.getDate() - 1);
-            continue;
+        // dateCalc.setTime(dateObj.getTime());
+        if( date == 0 ){
+            // <예>
+            // 2019-07-00
+            // 2019-02-14
+            // 0은 오늘을 뜻하고 나머지 날짜로 인해 미래가 되더라도
+            // 일은 여러일 내려서 오늘까지 내려올 수 있다.
+            // 년도/월 설정이 무시되지 않게
+            // 1월 1일(년지정)이거나 X월 1일(월지정)이면 내리지 못하게 함
+            var dayMutable = true;
+            if(year != 0){
+                if(dateObj.getMonth() <= 0 && dateObj.getDate <= 1){
+                    dayMutable = false;
+                }
+            }
+            if(month != 0){
+                if(dateObj.getDate() <= 1){
+                    dayMutable = false;
+                }
+            }
+
+            if(dayMutable){
+                dayChanged++;
+                dateObj.setDate(dateObj.getDate() - 1);
+                continue;
+            }else{
+                // 더 이상 일을 내릴 수 없다.: 포기, 반복을 빠져나간다.
+                dateChangeGaveUp = true;
+                break;
+            }
+        }else{
+            // 일을 내려야할 만큼 년도 빼고 월도 빼서 내려왔지만
+            // 일이 고정되어 있다: 포기, 반복을 빠져나간다
+            dateChangeGaveUp = true;
+            break;
         }
     }
+
+    if(dateChangeGaveUp){
+        alertAndLog("searchDateLen: [utils] gave up pulling dates");
+    }
+
+    alertAndLog("searchDateLen: [utils] changed dates to "+dateObj.getFullYear()+"-"+getTwoDigitNumber(dateObj.getMonth())+"-"+getTwoDigitNumber(dateObj.getDate())+" to fit. "+yearChanged+" year(s) "+monthChanged+" month(s) "+dayChanged+" day(s) changed.");
 
     return dateObj;
 }
