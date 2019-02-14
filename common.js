@@ -95,7 +95,7 @@ const LIMIT_DAYS_ABS_MAXIMUM = +31;
 // 입력받은 날짜로 현재 날짜를 조정
 function setDateFromNow(year, month, date){
     var dateTarget = fixDateTimeResidue(new Date());
-    alertAndLog("searchDateLen: [utils] setting "+year+"years "+month+"months "+date+"days from "+
+    alertAndLog("searchDateLen: [commons] setting "+year+"years "+month+"months "+date+"days from "+
         dateTarget.getFullYear()+"-"+getTwoDigitNumber(dateTarget.getMonth() + 1)+"-"+getTwoDigitNumber(dateTarget.getDate()));
     dateTarget.setFullYear(dateTarget.getFullYear() - year);
     dateTarget.setMonth(dateTarget.getMonth() - month);
@@ -129,14 +129,14 @@ function setDateExactTry(year, month, date){
 // 단, 오늘로부터 -99 ~ +99년으로 조절할 수 있게 하자
 function setDateHybrid(year, month, date){
     var dateTarget = fixDateTimeResidue(new Date());
-    alertAndLog("searchDateLen: [utils] trying to set "+year+"-"+getTwoDigitNumber(month)+"-"+getTwoDigitNumber(date)+" into "+
+    alertAndLog("searchDateLen: [commons] trying to set "+year+"-"+getTwoDigitNumber(month)+"-"+getTwoDigitNumber(date)+" into "+
         dateTarget.getFullYear()+"-"+(dateTarget.getMonth() + 1)+"-"+dateTarget.getDate());
     
     if(year >= LIMIT_YEARS_HBD_PLUS) {
-        alertAndLog('searchDateLen: [utils] got year '+LIMIT_YEARS_HBD_PLUS+' <= '+ year +'. trying as-is.');
+        alertAndLog('searchDateLen: [commons] got year '+LIMIT_YEARS_HBD_PLUS+' <= '+ year +'. trying as-is.');
         dateTarget.setFullYear(year);
     }else if(year > LIMIT_YEARS_HBD_MINUS){
-        alertAndLog('searchDateLen: [utils] got year '+LIMIT_YEARS_HBD_MINUS+' < '+ year + '. using this as relative year in hybrid mode.');
+        alertAndLog('searchDateLen: [commons] got year '+LIMIT_YEARS_HBD_MINUS+' < '+ year + '. using this as relative year in hybrid mode.');
         dateTarget.setFullYear(dateTarget.getFullYear() + year);
         year = dateTarget.getFullYear();
     }
@@ -171,7 +171,7 @@ function makeDateSupported(dateObj, year, month, date){
     }
 
     if(isOverrideOccured){
-        alertAndLog("searchDateLen: [utils] date override occured: "+dateObj.getFullYear()+"-"+getTwoDigitNumber(dateObj.getMonth() + 1)+"-"+getTwoDigitNumber(dateObj.getDate())+" was "+year+"-"+getTwoDigitNumber(month)+"-"+getTwoDigitNumber(date));
+        alertAndLog("searchDateLen: [commons] date override occured: "+dateObj.getFullYear()+"-"+getTwoDigitNumber(dateObj.getMonth() + 1)+"-"+getTwoDigitNumber(dateObj.getDate())+" was "+year+"-"+getTwoDigitNumber(month)+"-"+getTwoDigitNumber(date));
     }
 
     return dateObj;
