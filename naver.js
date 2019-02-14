@@ -58,10 +58,10 @@ function injectDates(){
                 {
                     var dateAFrmTarget = setDateExactTry(dateEntry[DLE_JSON_COL_FROM_YEAR],dateEntry[DLE_JSON_COL_FROM_MONTH],dateEntry[DLE_JSON_COL_FROM_DATE]);
                     
-                    // 현재날짜 보다 미래부터로 되어있다면?
-                    dateAFrmTarget = pullDatesToFitPast(dateAFrmTarget,dateEntry[DLE_JSON_COL_FROM_YEAR],dateEntry[DLE_JSON_COL_FROM_MONTH],dateEntry[DLE_JSON_COL_FROM_DATE]);
+                    // 현재날짜 보다 미래'부터'로 되어있다면 과거가 되도록 년월일을 내려본다.
+                    var dateAFrmFixed = pullDatesToFitPast(dateAFrmTarget,dateEntry[DLE_JSON_COL_FROM_YEAR],dateEntry[DLE_JSON_COL_FROM_MONTH],dateEntry[DLE_JSON_COL_FROM_DATE]);
 
-                    fromDate = getDateStringNaver(dateAFrmTarget.getFullYear(), (dateAFrmTarget.getMonth() + 1), dateAFrmTarget.getDate());
+                    fromDate = getDateStringNaver(dateAFrmFixed.getFullYear(), (dateAFrmFixed.getMonth() + 1), dateAFrmFixed.getDate());
                 }
                 break;
 
@@ -69,6 +69,7 @@ function injectDates(){
                 {
                     var dateAToTarget = setDateExactTry(dateEntry[DLE_JSON_COL_TO_YEAR],dateEntry[DLE_JSON_COL_TO_MONTH],dateEntry[DLE_JSON_COL_TO_DATE]);
                     
+                    // 특정일 까지이긴 한데 미래여도 된다.
                     
                     toDate = getDateStringNaver(dateAToTarget.getFullYear(), (dateAToTarget.getMonth() + 1), dateAToTarget.getDate());
                 }
@@ -86,9 +87,21 @@ function injectDates(){
                         dateAgFrmTarget = dateAgToTarget;
                         dateAgToTarget = temp;
                     }
+                    
+                    // 현재날짜 보다 미래'부터'로 되어있다면 과거가 되도록 년월일을 내려본다.
+                    var dateAgFrmFixed = pullDatesToFitPast(dateAgFrmTarget,dateEntry[DLE_JSON_COL_FROM_YEAR],dateEntry[DLE_JSON_COL_FROM_MONTH],dateEntry[DLE_JSON_COL_FROM_DATE]);
+                    var dateAgToFixed = null;
 
-                    fromDate = getDateStringNaver(dateAgFrmTarget.getFullYear(), (dateAgFrmTarget.getMonth() + 1), dateAgFrmTarget.getDate());
-                    toDate = getDateStringNaver(dateAgToTarget.getFullYear(), (dateAgToTarget.getMonth() + 1), dateAgToTarget.getDate());
+                    if(dateAgFrmFixed != dateAgFrmTarget){
+                        //
+                        dateAgToFixed = pullDatesToFitPast(dateAgToTarget,dateEntry[DLE_JSON_COL_TO_YEAR],dateEntry[DLE_JSON_COL_TO_MONTH],dateEntry[DLE_JSON_COL_TO_DATE]);
+                    }else{
+                        dateAgToFixed = dateAgToTarget;
+                    }
+
+
+                    fromDate = getDateStringNaver(dateAgFrmFixed.getFullYear(), (dateAgFrmFixed.getMonth() + 1), dateAgFrmFixed.getDate());
+                    toDate = getDateStringNaver(dateAgToFixed.getFullYear(), (dateAgToFixed.getMonth() + 1), dateAgToFixed.getDate());
                 }
                 break;
         }
