@@ -89,6 +89,8 @@ function populateList(){
             break;
         }
 
+        //var divClear = getClassedTag('div', 'clear', '');
+
         // 데이터를 그대로 표시
         var divDateNo = getClassedTag('div', 'dateNoInternal', entryNo);
         var divDateName = getClassedTag('div', 'dateName', dateEntry[DLE_JSON_COL_NAME]);
@@ -171,6 +173,22 @@ function populateList(){
             divLabelToDate.innerHTML = divLabelToDate.innerHTML + '일';
         }
 
+        // 날짜(계산됨) div
+        var desiredDates = getDesiredDates(dateEntry);
+        var fromDateStr = '';
+        var toDateStr = '';
+        if(desiredDates[DLE_JSON_COL_FROM_DATEOBJ]){
+            var dateFromTarget = desiredDates[DLE_JSON_COL_FROM_DATEOBJ];
+            fromDateStr = dateFromTarget.getFullYear()+'-'+(dateFromTarget.getMonth() + 1)+'-'+dateFromTarget.getDate();
+        }
+        if(desiredDates[DLE_JSON_COL_TO_DATEOBJ]){
+            var dateToTarget = desiredDates[DLE_JSON_COL_TO_DATEOBJ]
+            toDateStr = dateToTarget.getFullYear()+'-'+(dateToTarget.getMonth() + 1)+'-'+dateToTarget.getDate();
+        }
+        
+        var divLabelFromDateCalc = getClassedTag('div', 'label_date_calc', '('+fromDateStr+' ~ '+toDateStr+')');
+
+
         // 항목에 내용 삽입
         liTag.appendChild(divDateNo);
         liTag.appendChild(divDateName);
@@ -188,6 +206,10 @@ function populateList(){
             liTag.appendChild(divLabelToMonth);
             liTag.appendChild(divLabelToDate);
         }
+
+        // for dev purpose
+        //liTag.appendChild(divClear);
+        liTag.appendChild(divLabelFromDateCalc);
 
         // li 태그에 클릭하면 수정되도록 준비
         // this를 써서 이 객체에 해당되는 것만 사용하도록 해야한다.

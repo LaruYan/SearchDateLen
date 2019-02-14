@@ -61,6 +61,12 @@
 .label_date{ /* 날짜조건의 일 */
     float:left;
 }
+.label_date_calc{ /* 날짜조건 (계산됨) */
+    float:left;
+    margin-left:0.6em;
+    font-size:1.3em;
+    font-family: monospace;
+}
 
 .label_tick{ /* 날짜조건의 구분자 (human readable) */
     margin-left: 0.3em;
