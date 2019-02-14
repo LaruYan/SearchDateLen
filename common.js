@@ -139,7 +139,7 @@ function setDateHybrid(year, month, date){
         dateTarget.setFullYear(year);
     }else if(year > LIMIT_YEARS_HBD_MINUS){
         alertAndLog('searchDateLen: [commons] got year '+LIMIT_YEARS_HBD_MINUS+' < '+ year + '. using this as relative year in hybrid mode.');
-        dateTarget.setFullYear(dateTarget.getFullYear() + year);
+        dateTarget.setFullYear(dateTarget.getFullYear() + parseInt(year));
         year = dateTarget.getFullYear();
     }
 
