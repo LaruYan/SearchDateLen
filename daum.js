@@ -5,7 +5,7 @@
 //
 
 /**
- * NAVER 날짜 형식에 맞게 yyyy.mm.dd 꼴의 문자열을 반환
+ * Daum 날짜 형식에 맞게 yyyy.mm.dd 꼴의 문자열을 반환
  * @param {*} year 년도
  * @param {*} month 월
  * @param {*} date 일
