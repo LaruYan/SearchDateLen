@@ -186,7 +186,7 @@ function populateList(){
             toDateStr = dateToTarget.getFullYear()+'-'+(dateToTarget.getMonth() + 1)+'-'+dateToTarget.getDate();
         }
         
-        var divLabelFromDateCalc = getClassedTag('div', 'label_date_calc', '('+fromDateStr+' ~ '+toDateStr+')');
+        var divLabelFromDateCalc = getClassedTag('div', 'label_date_calc', '(오늘 기준 '+fromDateStr+' ~ '+toDateStr+')');
 
 
         // 항목에 내용 삽입
@@ -393,7 +393,7 @@ function prepareInput(entryNo = -1){
 
 
     // 절대적 기간 설명
-    var divInputAbsLabel = getClassedTag('div', 'label_input','날짜에 0이 입력되어 있으면 계산시 오늘을 기준으로 0 대신 채웁니다.<br />단, 년도에 한해 ('+LIMIT_YEARS_HBD_MINIMUM+'~'+LIMIT_YEARS_HBD_MAXIMUM+') 범위로 상대적 기간 처럼 사용할 수 있음. 음수는 과거');
+    var divInputAbsLabel = getClassedTag('div', 'label_input','날짜에 0이 입력되어 있으면 계산시 오늘을 기준으로 0 대신 채웁니다.<br />단, 년도에 한해 ('+LIMIT_YEARS_HBD_MINIMUM+'~'+LIMIT_YEARS_HBD_MAXIMUM+') 범위로 상대적 기간 처럼 사용할 수 있음. 음수는 과거를 뜻하며, 시작일자가 미래인 경우 시작일자와 종료일자가 오늘로부터 1년 전까지 당겨질 수 있습니다.');
     divInputDateAbs.appendChild(divInputAbsLabel);
 
     var btnInputSubmit = document.createElement('button');
