@@ -16,6 +16,11 @@
         "matches": ["http://search.naver.com/*", "https://search.naver.com/*"],
         "run_at": "document_idle",
         "js": ["common.js", "utils.js", "storage.js", "inject_common.js", "naver.js"]
+      },
+      {
+        "matches": ["http://search.daum.net/*", "https://search.daum.net/*"],
+        "run_at": "document_idle",
+        "js": ["common.js", "utils.js", "storage.js", "inject_common.js", "daum.js"]
       }
     ],
 
