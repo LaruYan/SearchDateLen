@@ -1,0 +1,30 @@
+body{ /* 팝업 전체 */
+    width:15em;
+    padding:0.5em;
+    margin:0;
+}
+.title{ /* 제목 */
+    margin: 0 0.5em;
+    font-size: 1.7em;
+    font-weight: bold;
+}
+ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.popupDivider{ /* 팝업 제목과 링크를 나눠주는 분리자*/
+    margin:0 0.5em;
+}
+.listEntry{ 
+    padding-left: 0.8em;
+    padding-right: 0.8em;
+    padding-top: 0.4em;
+    padding-bottom: 0.4em;
+}
+.link{ /* 링크 항목 */
+    font-size: 1.1em;
+}
+.author{
+    font-size: 0.9em;
+}

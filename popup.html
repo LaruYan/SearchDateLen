@@ -2,29 +2,18 @@
 <meta charset="utf-8">
 <html>
   <head>
-    <style>
-      body{
-        width:15em;
-        padding:0.5em;
-        margin:0;
-      }
-      .title{
-        font-size: 1.7em;
-        font-weight: bold;
-        margin-bottom: 0.5em;
-      }
-      .link{
-        font-size: 1.1em;
-        padding-bottom: 0.5em;
-        padding-left: 0.5em;
-        padding-right: 0.5em;
-      }
-    </style>
+    <title>검색 기간 확장 팝업</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="popup.css" />
   </head>
   <body>
     <div class="title">검색 기간 확장</div>
-    <div class="link"><a id="openGitHub" href="#">GitHub (도움말)</a></div>
-    <div class="link"><a id="openOptionsPage" href="#">설정</a></div>
+    <div class="versionNo" id="versionNo">versionNo</div>
+    <hr class="popupDivider" />
+    <ul>
+      <li class="listEntry link"><a id="openOptionsPage" href="#">설정</a></li>
+      <li class="listEntry link"><a id="openGitHub" href="#">GitHub (도움말)</a></li>
+      <li class="listEntry author">by MSM8994 and contributors.</li>
+    </ul>
     <script src="popup.js"></script>
   </body>
 </html>
