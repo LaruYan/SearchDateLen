@@ -35,6 +35,7 @@ function populateList(){
     alertAndLog('searchDateLen: [options] preparing datesList for '+datesData.length+' item(s).');
     // datesList ul
     var datesList = document.querySelector('.datesList');
+    //var divClear = getClassedTag('div', 'clear', '');
 
     // reset datesList;
     datesList.innerHTML = '';
@@ -89,7 +90,7 @@ function populateList(){
             break;
         }
 
-        //var divClear = getClassedTag('div', 'clear', '');
+        
 
         // 데이터를 그대로 표시
         var divDateNo = getClassedTag('div', 'dateNoInternal', entryNo);
@@ -141,6 +142,8 @@ function populateList(){
 
 
         // 날짜 wrapper
+        var divLabelDate = getClassedTag('li', 'clearfix', '');
+
         var divLabelFromYear = getClassedTag('div', 'label_year', 
             getClassedTag('span', 'from_year', dateEntry[DLE_JSON_COL_FROM_YEAR]));
         var divLabelFromMonth = getClassedTag('div', 'label_month',
@@ -179,14 +182,27 @@ function populateList(){
         var toDateStr = '';
         if(desiredDates[DLE_JSON_COL_FROM_DATEOBJ]){
             var dateFromTarget = desiredDates[DLE_JSON_COL_FROM_DATEOBJ];
-            fromDateStr = dateFromTarget.getFullYear()+'-'+(dateFromTarget.getMonth() + 1)+'-'+dateFromTarget.getDate();
+            fromDateStr = dateFromTarget.getFullYear()+'-'+getTwoDigitNumber(dateFromTarget.getMonth() + 1)+'-'+getTwoDigitNumber(dateFromTarget.getDate());
         }
         if(desiredDates[DLE_JSON_COL_TO_DATEOBJ]){
             var dateToTarget = desiredDates[DLE_JSON_COL_TO_DATEOBJ]
-            toDateStr = dateToTarget.getFullYear()+'-'+(dateToTarget.getMonth() + 1)+'-'+dateToTarget.getDate();
+            toDateStr = dateToTarget.getFullYear()+'-'+getTwoDigitNumber(dateToTarget.getMonth() + 1)+'-'+getTwoDigitNumber(dateToTarget.getDate());
         }
         
         var divLabelFromDateCalc = getClassedTag('div', 'label_date_calc', '(오늘 기준 '+fromDateStr+' ~ '+toDateStr+')');
+
+
+        if(isFromDate){
+            divLabelDate.appendChild(divLabelFromYear);
+            divLabelDate.appendChild(divLabelFromMonth);
+            divLabelDate.appendChild(divLabelFromDate);
+        }
+        divLabelDate.appendChild(getClassedTag('div','label_tick','~'));
+        if(isToDate){
+            divLabelDate.appendChild(divLabelToYear);
+            divLabelDate.appendChild(divLabelToMonth);
+            divLabelDate.appendChild(divLabelToDate);
+        }
 
 
         // 항목에 내용 삽입
@@ -195,20 +211,7 @@ function populateList(){
         liTag.appendChild(divDateType);
         liTag.appendChild(divDateTypeInternal);
         liTag.appendChild(divDateAction);
-        if(isFromDate){
-            liTag.appendChild(divLabelFromYear);
-            liTag.appendChild(divLabelFromMonth);
-            liTag.appendChild(divLabelFromDate);
-        }
-        liTag.appendChild(getClassedTag('div','label_tick','~'));
-        if(isToDate){
-            liTag.appendChild(divLabelToYear);
-            liTag.appendChild(divLabelToMonth);
-            liTag.appendChild(divLabelToDate);
-        }
-
-        // for dev purpose
-        //liTag.appendChild(divClear);
+        liTag.appendChild(divLabelDate);
         liTag.appendChild(divLabelFromDateCalc);
 
         // li 태그에 클릭하면 수정되도록 준비

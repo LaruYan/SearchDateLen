@@ -8,7 +8,19 @@
 .clear{
     clear:both;
 }
+.hidden {
+    display:none;
+}
 
+body{ /* 페이지 기본으로 주어진 여백은 없앤다 */
+    margin: 0;
+    padding: 0;
+}
+
+.wrapper{ /* 전체 감싸는 레이아웃 */
+    margin: 0 auto;
+    width: 36em;
+}
 
 .datesList{ /* 설정된 날짜조건들 목록 */
     list-style: none;
@@ -19,10 +31,9 @@
 .dateEntry{ /* 설정된 각 날짜조건들 */
     position: relative;
     list-style: none;
-    padding: 0;
+    padding: 0.5em;
     margin: 0;
     width:100%;
-    height:5em;
     background:#00000011
 }
 .dateEntry:nth-child(even){ /* 설정된 각 날짜조건들 (짝수번째) */
@@ -62,8 +73,6 @@
     float:left;
 }
 .label_date_calc{ /* 날짜조건 (계산됨) */
-    float:left;
-    margin-left:0.6em;
     font-size:1.3em;
     font-family: monospace;
 }
@@ -74,10 +83,10 @@
     float:left;
 }
 
-input[type="number"] { /* 숫자 입력칸의 숫자를 오른쪽 정렬 */
-    text-align: right;
+.inputArea{ /* 입력 영역 */
+    padding: 0.5em;
 }
 
-.hidden { /* 숨김 항목 */
-    display:none;
+input[type="number"] { /* 숫자 입력칸의 숫자를 오른쪽 정렬 */
+    text-align: right;
 }
