@@ -220,11 +220,11 @@ function populateList(){
         // 항목에 내용 삽입
         liTag.appendChild(divDateNo);
         liTag.appendChild(divDateName);
+        liTag.appendChild(divLabelDate);
         liTag.appendChild(divDateType);
         liTag.appendChild(divDateTypeInternal);
-        liTag.appendChild(divDateAction);
-        liTag.appendChild(divLabelDate);
         liTag.appendChild(divLabelFromDateCalc);
+        liTag.appendChild(divDateAction);
 
         // li 태그에 클릭하면 수정되도록 준비
         // this를 써서 이 객체에 해당되는 것만 사용하도록 해야한다.

@@ -1,4 +1,37 @@
 @charset "utf-8";
+:root { /* 공통 변수 모음 */
+    /* 색상 */
+    --primary-color: #3700B3;
+    --secondary-color: #BB86FC;
+    --dateEntry-bgcolor: #80808011;
+    --dateEntry-bgcolor-even: #80808033;
+    --opacity-dateCalc: 0.67;
+
+
+    /* 여백 및 크기 */
+    --width-options-page: 36em;
+    --margin-date-label: 0.3em;
+    --margin-input-area: 1.0em;
+    --margin-input-area-half: calc( var(--margin-input-area) / 2 );
+    --padding-dateEntry-entire: 0.7em;
+
+
+    /* 글꼴 크기 */
+    --font-size-basic: 1.0em;
+    --font-size-header: 1.7em;
+    --font-size-header-desc: 1.1em;
+    --font-size-input-common: 1.1em;
+    --font-size-versionNo: 1.0em;
+    --font-size-dateName: 1.5em;
+    --font-size-dateType: 1.0em;
+    --font-size-dateDate: 1.2em;
+    --font-size-dateCalc: 1.3em;
+    --font-size-input-label: 1.2em;
+
+    /* 기타 */
+    --margin-to-center-horizontally: 0 auto;
+    --transition-delay: 0.3s;
+}
 
 .clearfix::after {
     content: "";
@@ -26,16 +59,16 @@ body{ /* 페이지 기본으로 주어진 여백은 없앤다 */
     padding: 0;
 }
 button{ /* 호버된 버튼에 강조 되나? */
-    transition-duration: 0.3s;
+    transition-duration: var(--transition-delay);
 }
 button:hover{ /* 호버된 버튼에 강조. 되지만 모양이 영 좋지 않다 */
-    background:#3700B3;
+    background: var(--primary-color);
     color:white;
 }
 
 .wrapper{ /* 전체 감싸는 레이아웃 */
-    margin: 0 auto;
-    width: 36em;
+    margin: var(--margin-to-center-horizontally);
+    width: var(--width-options-page);
 }
 
 .headerArea{ /* 헤더 영역 */
@@ -44,17 +77,17 @@ button:hover{ /* 호버된 버튼에 강조. 되지만 모양이 영 좋지 않�
 }
 
 .headerTitle{ /* 헤더 타이틀 영역 */
-    font-size: 1.7em;
+    font-size: var(--font-size-header);
     font-weight: bold;
 }
 
 .headerDesc{
-    font-size: 1.1em;
+    font-size: var(--font-size-header-desc);
 }
 
 .versionNo{ /*버전 번호*/
     text-align: right;
-    font-size: 1.0em;
+    font-size: var(--font-size-versionNo);
 }
 
 .headerDivider{
@@ -70,22 +103,22 @@ button:hover{ /* 호버된 버튼에 강조. 되지만 모양이 영 좋지 않�
 .dateEntry{ /* 설정된 각 날짜조건들 */
     position: relative;
     list-style: none;
-    padding: 0.7em;
+    padding: var(--padding-dateEntry-entire);
     margin: 0;
     width:100%;
-    background:#00000011
+    background: var(--dateEntry-bgcolor);
 }
 .dateEntry:nth-child(even){ /* 설정된 각 날짜조건들 (짝수번째) */
-    background:#00000033
+    background: var(--dateEntry-bgcolor-even);
 }
 .entryHover{
-    transition-duration: 0.3s;
+    transition-duration: var(--transition-delay);
 }
 .entryHover:hover{ /* 각 항목 rollOver*/
-    background: #BB86FC;
+    background: var(--secondary-color);
 }
 .dateEntry.selected_dateEntry,.dateEntry:nth-child(even).selected_dateEntry{
-    background: #BB86FC;
+    background: var(--secondary-color);
 }
 
 .dateNoInternal{ /* 날짜조건의 고유순번 (숨김) */
@@ -94,16 +127,16 @@ button:hover{ /* 호버된 버튼에 강조. 되지만 모양이 영 좋지 않�
 
 .dateAction{ /* 날짜 조건의 행동 부분(수정/삭제) */
     position: absolute;
-    top: 0.7em;
-    right: 0.7em;
+    top: var(--padding-dateEntry-entire);
+    right: var(--padding-dateEntry-entire);
 }
 
 .dateName{ /* 날짜조건의 이름 */
-    font-size:1.5em;
+    font-size: var(--font-size-dateName);
 }
 
 .dateType{ /* 날짜조건의 형식 (human readable) */
-    font-size:1.2em;
+    font-size: var(--font-size-dateType);
 }
 .dateTypeInternal{ /* 날짜조건의 형식 (real data, 숨김) */
     display:none;
@@ -111,33 +144,36 @@ button:hover{ /* 호버된 버튼에 강조. 되지만 모양이 영 좋지 않�
 
 .label_year{ /* 날짜조건의 년도 */
     float:left;
-    margin-right: 0.3em;
+    margin-right: var(--margin-date-label);
+    font-size: var(--font-size-dateDate);
 }
 .label_month{ /* 날짜조건의 월 */
     float:left;
-    margin-right: 0.3em;
+    margin-right: var(--margin-date-label);
+    font-size: var(--font-size-dateDate);
 }
 .label_date{ /* 날짜조건의 일 */
     float:left;
+    font-size: var(--font-size-dateDate);
 }
 .label_date_calc{ /* 날짜조건 (계산됨) */
-    font-size:1.3em;
+    font-size: var(--font-size-dateCalc);
     font-family: monospace;
-    opacity: 0.66;
+    opacity: var(--opacity-dateCalc);
 }
 
 .label_tick{ /* 날짜조건의 구분자 (human readable) */
-    margin-left: 0.3em;
-    margin-right: 0.3em;
+    margin-left: var(--margin-date-label);
+    margin-right: var(--margin-date-label);
     float:left;
 }
 
 .inputArea{ /* 입력 구역 */
-    margin-top: 1.0em;
-    padding: 0.5em;
+    margin-top: var(--margin-input-area);
+    padding: var(--margin-input-area-half);
 }
 .inputHdTitle{  /* 입력 영역 제목*/
-    font-size: 1.7em;
+    font-size: var(--font-size-header);
     font-weight: bold;
 }
 .inputBtns{ /* 추가/수정, 삭제 버튼 */
@@ -145,36 +181,40 @@ button:hover{ /* 호버된 버튼에 강조. 되지만 모양이 영 좋지 않�
 }
 
 .inputUi { /* 입력 영역 */
-    padding: 0.5em;
+    padding: var(--margin-input-area-half);
+}
+input,select,button{ /* 각종 div가 아닌 상호작용가능한 UI 요소들 */
+    font-size: var(--font-size-basic);
 }
 
 .label_input{ /* 입력 영역 레이블 */
-    font-size:1.2em;
-    margin:0.3em;
-    color:#3700B3;
+    font-size: var(--font-size-input-label);
+    margin: var(--margin-date-label);
+    color: var(--primary-color);
 }
 
 .input_common{ /* 입력 영역 텍스트*/
-    font-size: 1.1em;
+    font-size: var(--font-size-input-common);
 }
 
 .label_desc{ /* 입력 영역 설명 */
-    font-size:1.0em;
-    margin: 0.5em;
+    font-size: var(--margin-input-area);
+    margin: var(--margin-input-area-half);
 }
 
 .input_area_name{ /* 이름 영역 */
-    margin-right: 1.0em;
-    margin-bottom: 1.0em;
+    margin-right: var(--margin-input-area);
+    margin-bottom: var(--margin-input-area);
 }
 .input_area_type{ /* 형식 영역 */
-    margin-left: 1.0em;
-    margin-bottom: 1.0em;
+    margin-left: var(--margin-input-area);
+    margin-bottom: var(--margin-input-area);
 }
 .input_area_date{ /* 날짜 영역 */
     
-    margin-bottom: 1.0em;
+    margin-bottom: var(--margin-input-area);
 }
+
 
 input[type="number"] { /* 숫자 입력칸의 숫자를 오른쪽 정렬 */
     text-align: right;
