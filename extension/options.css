@@ -23,13 +23,22 @@ body{ /* 페이지 기본으로 주어진 여백은 없앤다 */
 }
 
 .headerArea{ /* 헤더 영역 */
+    width:100%;
     padding:0.7em;
 }
 
 .headerTitle{ /* 헤더 타이틀 영역 */
     font-size: 1.7em;
     font-weight: bold;
-    margin-bottom: 0.5em;
+}
+
+.versionNo{ /*버전 번호*/
+    text-align: right;
+    text-size: 1.0em;
+}
+
+.headerDivider{
+    margin:1.0em 0;
 }
 
 .datesList{ /* 설정된 날짜조건들 목록 */
