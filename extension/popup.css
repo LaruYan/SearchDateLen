@@ -1,6 +1,24 @@
+@charset "utf-8";
+:root { /* 공통 변수 모음 */
+    /* 색상 */
+    --primary-color: #3700B3;
+    --secondary-color: #BB86FC;
+    --third-color: #03DAC5;
+    --secondary-color-trans: #BB86FC40;
+
+    /* 여백과 크기 */
+    --margin-entry-verti: 0.4em;
+    --margin-entry-horiz: calc( var(--margin-entry-verti) * 2 );
+    --padding-inner-popup: 0.5em;
+    --padding-inner-popup-x2: calc( var(--padding-inner-popup) * 2 );
+
+    /* 기타 */
+    --margin-to-center-horizontally: 0 auto;
+    --transition-delay: 0.3s;
+}
 body{ /* 팝업 전체 */
     width:15em;
-    padding:0.5em;
+    padding: var(--padding-inner-popup-x2);
     margin:0;
 }
 
@@ -19,17 +37,18 @@ a:hover {
 
 a:active {
     text-decoration: underline;
-    color:#03DAC5;
+    color:var(--third-color);
 }
 
 
 .title{ /* 제목 */
-    margin: 0 0.5em;
+    margin: 0;
+    padding: 0;
     font-size: 1.7em;
     font-weight: bold;
 }
 .versionNo{ /* 버전 번호 */ 
-    margin: 0 1.0em;
+    margin: 0 var(--padding-inner-popup);
     text-align: right;
     font-size:1.0em;
 }
@@ -39,23 +58,23 @@ ul{
     margin: 0;
 }
 .popupDivider{ /* 팝업 제목과 링크를 나눠주는 분리자*/
-    margin:1.0em 0.5em;
+    margin: var(--padding-inner-popup) 0;
 }
 .listEntry{ /* 각 리스트 항목 */
-    padding-left: 0.8em;
-    padding-right: 0.8em;
-    padding-top: 0.4em;
-    padding-bottom: 0.4em;
+    padding-left: var(--margin-entry-horiz);
+    padding-right: var(--margin-entry-horiz);
+    padding-top: var(--margin-entry-verti);
+    padding-bottom: var(--margin-entry-verti);
 }
 .entryHover{
-    transition-duration: 0.3s;
+    transition-duration: var(--transition-delay);
 }
 .entryHover:hover{ /* 각 항목 rollOver*/
-    background: #BB86FC40;
+    background: var(--secondary-color-trans);
 }
 .link{ /* 링크 항목 */
     font-size: 1.1em;
-    color: #3700B3;
+    color: var(--primary-color);
 }
 .author{
     font-size: 0.9em;
