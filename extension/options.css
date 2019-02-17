@@ -32,6 +32,10 @@ body{ /* 페이지 기본으로 주어진 여백은 없앤다 */
     font-weight: bold;
 }
 
+.headerDesc{
+    font-size: 1.1em;
+}
+
 .versionNo{ /*버전 번호*/
     text-align: right;
     font-size: 1.0em;
