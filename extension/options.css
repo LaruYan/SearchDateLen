@@ -84,7 +84,7 @@ button:hover{ /* 호버된 버튼에 강조. 되지만 모양이 영 좋지 않�
 .entryHover:hover{ /* 각 항목 rollOver*/
     background: #BB86FC;
 }
-.selected_dateEntry{
+.dateEntry.selected_dateEntry,.dateEntry:nth-child(even).selected_dateEntry{
     background: #BB86FC;
 }
 
