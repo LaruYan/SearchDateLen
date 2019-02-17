@@ -55,7 +55,7 @@ function populateList(){
         var dateEntry = datesData[entryNo];
 
         // 항목 컨테이너
-        var liTag = getClassedTag('li', 'dateEntry clearfix', '');
+        var liTag = getClassedTag('li', 'dateEntry entryHover clearfix', '');
 
         // 종류에 따라 표시방식 대응
         var isAbsoluteDate = false;
@@ -136,6 +136,7 @@ function populateList(){
         btnActModify.setAttribute('entryNo', entryNo);
         btnActModify.innerHTML = '수정';
         btnActModify.addEventListener('click', function () {
+            selectListEntry(this.getAttribute('entryNo'));
             prepareInput(this.getAttribute('entryNo'));
         });
         divDateAction.appendChild(btnActModify);
@@ -237,6 +238,28 @@ function populateList(){
 
     alertAndLog('searchDateLen: [options] finished datesList for '+datesData.length+' item(s).');
 }
+
+
+
+/**
+ * 선택된 항목만 강조합니다.
+ * @param {*} entryNo 
+ */
+function selectListEntry(entryNo){
+    var dateEntries = document.querySelectorAll('.dateEntry');
+    for(var eNo = 0; eNo < dateEntries.length; eNo++){
+        var dateNoInternal = dateEntries[eNo].querySelector('.dateNoInternal');
+        if(dateNoInternal){
+            //클래스가 두 번 추가될 수 있으므로 없애는건 무조건 하자
+            dateEntries[eNo].classList.remove("selected_dateEntry");
+            
+            if(dateNoInternal.innerHTML == entryNo){
+                dateEntries[eNo].classList.add("selected_dateEntry");
+            }
+        }
+    }
+}
+
 
 
 /**
@@ -433,6 +456,8 @@ function prepareInput(entryNo = -1){
     divAreaInDate.appendChild(divInputDateRel);
     divAreaInDate.appendChild(divInputDateAbs);
 
+
+    // 등록(수정/추가) 버튼
     var btnInputSubmit = document.createElement('button');
     btnInputSubmit.setAttribute('type','button');
     btnInputSubmit.innerHTML = submitBtnTxt;
@@ -441,6 +466,16 @@ function prepareInput(entryNo = -1){
     // 대신 addEventListener를 사용하세요
     btnInputSubmit.addEventListener('click', function () {
         submitDateEntry(document.querySelector('#inputEntry #input_no_internal').value);
+    });
+
+
+    // 취소 버튼
+    var btnInputCancel = document.createElement('button');
+    btnInputCancel.setAttribute('type','button');
+    btnInputCancel.innerHTML = '취소';
+    btnInputCancel.addEventListener('click', function () {
+        selectListEntry(-1);
+        prepareInput(-1);
     });
 
     //항목 변경시 표시 설정
@@ -455,6 +490,7 @@ function prepareInput(entryNo = -1){
     inputEntry.appendChild(divAreaInDnT);
     inputEntry.appendChild(divAreaInDate);
     inputEntry.appendChild(btnInputSubmit); 
+    inputEntry.appendChild(btnInputCancel);
     
     
 

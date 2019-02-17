@@ -65,6 +65,15 @@ body{ /* 페이지 기본으로 주어진 여백은 없앤다 */
 .dateEntry:nth-child(even){ /* 설정된 각 날짜조건들 (짝수번째) */
     background:#00000033
 }
+.entryHover{
+    transition-duration: 0.3s;
+}
+.entryHover:hover{ /* 각 항목 rollOver*/
+    background: #BB86FC;
+}
+.selected_dateEntry{
+    background: #BB86FC;
+}
 
 .dateNoInternal{ /* 날짜조건의 고유순번 (숨김) */
     display:none;
