@@ -11,13 +11,26 @@
 .hidden {
     display:none;
 }
-.floatLeft{
+.floatLeft{ /* 직전 객체의 오른쪽에 붙기 */
     float:left;
+}
+.spaceLeft{ /* 왼쪽 띄우기 */
+    margin-left:auto;
+}
+.spaceRight{ /* 오른쪽 띄우기 */
+    margin-right:auto;
 }
 
 body{ /* 페이지 기본으로 주어진 여백은 없앤다 */
     margin: 0;
     padding: 0;
+}
+button{ /* 호버된 버튼에 강조 되나? */
+    transition-duration: 0.3s;
+}
+button:hover{ /* 호버된 버튼에 강조. 되지만 모양이 영 좋지 않다 */
+    background:#3700B3;
+    color:white;
 }
 
 .wrapper{ /* 전체 감싸는 레이아웃 */
@@ -119,16 +132,48 @@ body{ /* 페이지 기본으로 주어진 여백은 없앤다 */
     float:left;
 }
 
-.inputArea{ /* 입력 영역 */
+.inputArea{ /* 입력 구역 */
+    margin-top: 1.0em;
+    padding: 0.5em;
+}
+.inputHdTitle{  /* 입력 영역 제목*/
+    font-size: 1.7em;
+    font-weight: bold;
+}
+.inputBtns{ /* 추가/수정, 삭제 버튼 */
+    text-align:right;
+}
+
+.inputUi { /* 입력 영역 */
     padding: 0.5em;
 }
 
 .label_input{ /* 입력 영역 레이블 */
-    font-size:1.1em;
+    font-size:1.2em;
+    margin:0.3em;
+    color:#3700B3;
+}
+
+.input_common{ /* 입력 영역 텍스트*/
+    font-size: 1.1em;
 }
 
 .label_desc{ /* 입력 영역 설명 */
     font-size:1.0em;
+    margin: 0.5em;
+}
+
+.input_area_name{ /* 이름 영역 */
+    margin-right: 1.0em;
+    margin-bottom: 1.0em;
+}
+.input_area_type{ /* 형식 영역 */
+    margin-left: 1.0em;
+    margin-bottom: 1.0em;
+}
+.input_area_date{ /* 날짜 영역 */
+    
+    margin-bottom: 1.0em;
 }
 
 input[type="number"] { /* 숫자 입력칸의 숫자를 오른쪽 정렬 */
