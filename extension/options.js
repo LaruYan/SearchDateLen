@@ -281,13 +281,21 @@ function prepareInput(entryNo = -1){
     
     // input_no_internal input
     var inputNoInternal = getInputTextTag('input_no_internal', true, entryNo);
+
+    // 이름 영역 div
+    var divAreaInName = getClassedTag('div','input_area_name floatLeft','');
     // 이름 레이블 div
     var divInputName = getClassedTag('div','label_input','이름');
     // input_name input
     var inputName = getInputTextTag('input_name', false, dateEntry[DLE_JSON_COL_NAME]);
+    // 영역에 태그 삽입
+    divAreaInName.appendChild(divInputName);
+    divAreaInName.appendChild(inputName);
+
+    // 형식 영역 div
+    var divAreaInType = getClassedTag('div','input_area_type floatLeft','');
     // 형식 레이블 div
     var divInputType = getClassedTag('div','label_input','형식');
-
     // input_type select
     var selectInputType = getClassedTag('select');
     selectInputType.setAttribute('name', 'input_type');
@@ -296,6 +304,16 @@ function prepareInput(entryNo = -1){
     for(var typeNo = 0; typeNo < DLE_TYPES.length; typeNo++){
         selectInputType.appendChild(getSelectedOptionTag(LABEL_DLE_TYPES[typeNo], DLE_TYPES[typeNo], dateEntry[DLE_JSON_COL_TYPE]));
     }
+    // 영역에 태그 삽입
+    divAreaInType.appendChild(divInputType);    
+    divAreaInType.appendChild(selectInputType);
+
+     // 날짜 및 형식 묶어서
+     var divAreaInDnT = getClassedTag('div', 'input_area_date_N_type clearfix', '');
+     divAreaInDnT.appendChild(divAreaInName);
+     divAreaInDnT.appendChild(divAreaInType);
+
+
 
     // 상대적 기간 컨테이너 div
     var divInputDateRel = getClassedTag('div');
@@ -348,7 +366,7 @@ function prepareInput(entryNo = -1){
     divInputDateRel.appendChild(divInputRelTo);
 
     // 상대적 기간 설명
-    var divInputRelLabel = getClassedTag('div', 'label_input','입력 범위: 년('+LIMIT_YEARS_REL_MAXIMUM+'~'+LIMIT_YEARS_REL_MINIMUM+'), 개월('+LIMIT_MONTHS_REL_MAXIMUM+'~'+LIMIT_MONTHS_REL_MINIMUM+'), 일('+LIMIT_DAYS_REL_MAXIMUM+'~'+LIMIT_DAYS_REL_MINIMUM+'). 미래 설정 불가');
+    var divInputRelLabel = getClassedTag('div', 'label_desc','입력 범위: 년('+LIMIT_YEARS_REL_MAXIMUM+'~'+LIMIT_YEARS_REL_MINIMUM+'), 개월('+LIMIT_MONTHS_REL_MAXIMUM+'~'+LIMIT_MONTHS_REL_MINIMUM+'), 일('+LIMIT_DAYS_REL_MAXIMUM+'~'+LIMIT_DAYS_REL_MINIMUM+'). 미래 설정 불가');
     divInputDateRel.appendChild(divInputRelLabel);
 
 
@@ -406,8 +424,14 @@ function prepareInput(entryNo = -1){
 
 
     // 절대적 기간 설명
-    var divInputAbsLabel = getClassedTag('div', 'label_input','날짜에 0이 입력되어 있으면 계산시 오늘을 기준으로 0 대신 채웁니다.<br />단, 년도에 한해 ('+LIMIT_YEARS_HBD_MINIMUM+'~'+LIMIT_YEARS_HBD_MAXIMUM+') 범위로 상대적 기간 처럼 사용할 수 있음. 음수는 과거를 뜻하며, 시작일자가 미래인 경우 시작일자와 종료일자가 오늘로부터 1년 전까지 당겨질 수 있습니다.');
+    var divInputAbsLabel = getClassedTag('div', 'label_desc','날짜에 0이 입력되어 있으면 계산시 오늘을 기준으로 0 대신 채웁니다.<br />단, 년도에 한해 ('+LIMIT_YEARS_HBD_MINIMUM+'~'+LIMIT_YEARS_HBD_MAXIMUM+') 범위로 상대적 기간 처럼 사용할 수 있음. 음수는 과거를 뜻하며, 시작일자가 미래인 경우 시작일자와 종료일자가 오늘로부터 1년 전까지 당겨질 수 있습니다.');
     divInputDateAbs.appendChild(divInputAbsLabel);
+
+
+    // 날짜 입력 영역
+    var divAreaInDate = getClassedTag('div','input_area_date','');
+    divAreaInDate.appendChild(divInputDateRel);
+    divAreaInDate.appendChild(divInputDateAbs);
 
     var btnInputSubmit = document.createElement('button');
     btnInputSubmit.setAttribute('type','button');
@@ -425,14 +449,11 @@ function prepareInput(entryNo = -1){
     });
     showProperInputDate(selectInputType.value, divInputDateRel, divInputDateAbs);
 
+
     // 페이지에 적용
     inputEntry.appendChild(inputNoInternal);
-    inputEntry.appendChild(divInputName);
-    inputEntry.appendChild(inputName);
-    inputEntry.appendChild(divInputType);
-    inputEntry.appendChild(selectInputType);
-    inputEntry.appendChild(divInputDateRel);
-    inputEntry.appendChild(divInputDateAbs);
+    inputEntry.appendChild(divAreaInDnT);
+    inputEntry.appendChild(divAreaInDate);
     inputEntry.appendChild(btnInputSubmit); 
     
     

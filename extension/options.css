@@ -11,6 +11,9 @@
 .hidden {
     display:none;
 }
+.floatLeft{
+    float:left;
+}
 
 body{ /* 페이지 기본으로 주어진 여백은 없앤다 */
     margin: 0;
@@ -109,6 +112,14 @@ body{ /* 페이지 기본으로 주어진 여백은 없앤다 */
 
 .inputArea{ /* 입력 영역 */
     padding: 0.5em;
+}
+
+.label_input{ /* 입력 영역 레이블 */
+    font-size:1.1em;
+}
+
+.label_desc{ /* 입력 영역 설명 */
+    font-size:1.0em;
 }
 
 input[type="number"] { /* 숫자 입력칸의 숫자를 오른쪽 정렬 */
