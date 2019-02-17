@@ -22,6 +22,16 @@ body{ /* 페이지 기본으로 주어진 여백은 없앤다 */
     width: 36em;
 }
 
+.headerArea{ /* 헤더 영역 */
+    padding:0.7em;
+}
+
+.headerTitle{ /* 헤더 타이틀 영역 */
+    font-size: 1.7em;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+}
+
 .datesList{ /* 설정된 날짜조건들 목록 */
     list-style: none;
     padding: 0;
@@ -31,7 +41,7 @@ body{ /* 페이지 기본으로 주어진 여백은 없앤다 */
 .dateEntry{ /* 설정된 각 날짜조건들 */
     position: relative;
     list-style: none;
-    padding: 0.5em;
+    padding: 0.7em;
     margin: 0;
     width:100%;
     background:#00000011
@@ -46,8 +56,8 @@ body{ /* 페이지 기본으로 주어진 여백은 없앤다 */
 
 .dateAction{ /* 날짜 조건의 행동 부분(수정/삭제) */
     position: absolute;
-    top: 1em;
-    right: 1em;
+    top: 0.7em;
+    right: 0.7em;
 }
 
 .dateName{ /* 날짜조건의 이름 */
@@ -75,6 +85,7 @@ body{ /* 페이지 기본으로 주어진 여백은 없앤다 */
 .label_date_calc{ /* 날짜조건 (계산됨) */
     font-size:1.3em;
     font-family: monospace;
+    opacity: 0.66;
 }
 
 .label_tick{ /* 날짜조건의 구분자 (human readable) */
