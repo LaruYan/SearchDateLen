@@ -48,7 +48,7 @@ ul{
     transition-duration: 0.3s;
 }
 .entryHover:hover{ /* 각 항목 rollOver*/
-    background: #00000020;
+    background: #80808020;
 }
 .link{ /* 링크 항목 */
     font-size: 1.1em;
