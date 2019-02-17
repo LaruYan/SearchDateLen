@@ -6,6 +6,7 @@ body{ /* 팝업 전체 */
 
 a:link {
     text-decoration: none;
+    color:inherit;
 }
 
 a:visited {
@@ -18,6 +19,7 @@ a:hover {
 
 a:active {
     text-decoration: underline;
+    color:#03DAC5;
 }
 
 
@@ -49,10 +51,11 @@ ul{
     transition-duration: 0.3s;
 }
 .entryHover:hover{ /* 각 항목 rollOver*/
-    background: #80808020;
+    background: #BB86FC40;
 }
 .link{ /* 링크 항목 */
     font-size: 1.1em;
+    color: #3700B3;
 }
 .author{
     font-size: 0.9em;
