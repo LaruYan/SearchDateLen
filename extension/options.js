@@ -25,6 +25,7 @@ function loadStorage(){
         populateVersionNo(getVersionNo());
         populateList();
         prepareInput();
+        populateOnceInputBtn();
     });
 }
 
@@ -457,27 +458,6 @@ function prepareInput(entryNo = -1){
     divAreaInDate.appendChild(divInputDateAbs);
 
 
-    // 등록(수정/추가) 버튼
-    var btnInputSubmit = document.createElement('button');
-    btnInputSubmit.setAttribute('type','button');
-    btnInputSubmit.innerHTML = submitBtnTxt;
-    // 아래 방법은 content security policy에서 inline javascript를 제한하는 정책을 위배 - 작동 안됨
-    //btnInputSubmit.setAttribute('onclick','submitDateEntry();');
-    // 대신 addEventListener를 사용하세요
-    btnInputSubmit.addEventListener('click', function () {
-        submitDateEntry(document.querySelector('#inputEntry #input_no_internal').value);
-    });
-
-
-    // 취소 버튼
-    var btnInputCancel = document.createElement('button');
-    btnInputCancel.setAttribute('type','button');
-    btnInputCancel.innerHTML = '취소';
-    btnInputCancel.addEventListener('click', function () {
-        selectListEntry(-1);
-        prepareInput(-1);
-    });
-
     //항목 변경시 표시 설정
     selectInputType.addEventListener('change', function () {
         showProperInputDate(this.value, divInputDateRel, divInputDateAbs);
@@ -489,14 +469,47 @@ function prepareInput(entryNo = -1){
     inputEntry.appendChild(inputNoInternal);
     inputEntry.appendChild(divAreaInDnT);
     inputEntry.appendChild(divAreaInDate);
-    inputEntry.appendChild(btnInputSubmit); 
-    inputEntry.appendChild(btnInputCancel);
-    
+    //inputEntry.appendChild(btnInputSubmit); 
+    //inputEntry.appendChild(btnInputCancel);
+    setInputSubmitBtnTxt(submitBtnTxt);
     
 
     alertAndLog('searchDateLen: [options] finished preparing input area.');
 }
 
+
+function populateOnceInputBtn(){
+
+    // 등록(수정/추가) 버튼
+    var btnInputSubmit = document.getElementById('btnInputSubmit');
+    //var btnInputSubmit = document.createElement('button');
+    //btnInputSubmit.setAttribute('type','button');
+    //btnInputSubmit.innerHTML = submitBtnTxt;
+    // 아래 방법은 content security policy에서 inline javascript를 제한하는 정책을 위배 - 작동 안됨
+    //btnInputSubmit.setAttribute('onclick','submitDateEntry();');
+    // 대신 addEventListener를 사용하세요
+    //btnInputSubmit.removeEventListener('click'); // 하나는 안됨 문법 오류
+    btnInputSubmit.addEventListener('click', function () {
+        submitDateEntry(document.querySelector('#inputEntry #input_no_internal').value);
+    });
+
+
+    // 취소 버튼    
+    var btnInputCancel = document.getElementById('btnInputCancel');
+    //var btnInputCancel = document.createElement('button');
+    //btnInputCancel.setAttribute('type','button');
+    //btnInputCancel.innerHTML = '취소';
+    //btnInputCancel.removeEventListener('click'); // 하나는 안됨 문법 오류
+    btnInputCancel.addEventListener('click', function () {
+        selectListEntry(-1);
+        prepareInput(-1);
+    });
+}
+
+function setInputSubmitBtnTxt(submitBtnText){
+    var btnInputSubmit = document.getElementById('btnInputSubmit');
+    btnInputSubmit.innerHTML = submitBtnText;
+}
 
 /**
  * 선택된 날짜 형식에 따라 상대적/절대적 날짜 항목 입력칸을 표시
