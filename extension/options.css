@@ -34,7 +34,7 @@ body{ /* 페이지 기본으로 주어진 여백은 없앤다 */
 
 .versionNo{ /*버전 번호*/
     text-align: right;
-    text-size: 1.0em;
+    font-size: 1.0em;
 }
 
 .headerDivider{

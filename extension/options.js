@@ -22,11 +22,18 @@ function loadStorage(){
     chrome.storage.sync.get(function (data) {
         datesJsonStr = data.dates;
         initData();
+        populateVersionNo();
         populateList();
         prepareInput();
     });
 }
 
+/**
+ * 버전 정보 로그
+ */
+function populateVersionNo(){     
+    document.getElementById('versionNo').innerHTML = getVersionNo();
+}
 
 /**
  * dates 목록을 꾸린다.

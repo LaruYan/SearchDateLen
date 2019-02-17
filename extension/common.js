@@ -19,6 +19,14 @@ function alertAndLog(msg){
     console.log(msg);
 }
 
+/**
+ * 버전 정보를 반환합니다.
+ */
+function getVersionNo(){
+    alertAndLog('searchDateLen: [common] SearchDateLen version: ' + chrome.runtime.getManifest().version);
+    return chrome.runtime.getManifest().version;
+}
+
 // JSON 컬럼 이름
 const DLE_JSON_COL_NAME = 'name';
 const DLE_JSON_COL_TYPE = 'type';
