@@ -4,6 +4,7 @@
     "name": "검색 기간 확장",
     "description": "네이버, 다음 PC 검색 페이지의 검색 기간을 더 세분화시켜줍니다.",
     "version": "0.2",
+    "icons": { "48": "icon.png" },
    
     "browser_action": {
       "default_icon": "icon.png",
