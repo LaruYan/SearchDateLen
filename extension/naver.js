@@ -23,6 +23,9 @@ function injectDates(){
 
     var wrapper = document.createElement('div');
 
+    // 네이버는 값을 입력하지 않으면 진행되지 않습니다. 따라서 빈 칸을 오늘로 채워야 합니다.
+    const today = new Date();
+
     for(var entry = 0; entry < datesData.length; entry++){
         var dateEntry = datesData[entry];
         
@@ -34,10 +37,14 @@ function injectDates(){
         if(desiredDates[DLE_JSON_COL_FROM_DATEOBJ]){
             var dateFromTarget = desiredDates[DLE_JSON_COL_FROM_DATEOBJ];
             fromDate = getDateStringNaver(dateFromTarget.getFullYear(), (dateFromTarget.getMonth() + 1), dateFromTarget.getDate());
+        }else{
+            fromDate = getDateStringNaver(today.getFullYear(), (today.getMonth() + 1), today.getDate());
         }
         if(desiredDates[DLE_JSON_COL_TO_DATEOBJ]){
             var dateToTarget = desiredDates[DLE_JSON_COL_TO_DATEOBJ]
             toDate = getDateStringNaver(dateToTarget.getFullYear(), (dateToTarget.getMonth() + 1), dateToTarget.getDate());
+        }else{
+            toDate = getDateStringNaver(today.getFullYear(), (today.getMonth() + 1), today.getDate());
         }
 
         // 큰따옴표를 안에다 넣어두면 DOM 삽입시 &quot;으로 자체 이스케이프된다.
