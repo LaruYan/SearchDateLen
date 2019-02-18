@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', function () {
     alertAndLog('searchDateLen: [options] DOMContentLoaded');
     
     loadStorage();
+    
+    populateOnceInputBtn();
 });
 
 
@@ -25,7 +27,6 @@ function loadStorage(){
         populateVersionNo(getVersionNo());
         populateList();
         prepareInput();
-        populateOnceInputBtn();
     });
 }
 
