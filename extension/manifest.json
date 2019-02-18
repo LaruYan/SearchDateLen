@@ -23,7 +23,11 @@
         "js": ["common.js", "utils.js", "storage.js", "inject_common.js", "daum.js"]
       },
       {
-        "matches": ["https://www.google.com/search?*", "https://www.google.com/search?*"],
+        "matches": [ "*://*/*" ],
+        "include_globs": [
+          "*://*.google.*/search*",
+          "*://google.*/search*"
+        ],
         "run_at": "document_idle",
         "js": ["common.js", "utils.js", "storage.js", "inject_common.js", "google.js"]
       }
