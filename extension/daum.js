@@ -52,12 +52,13 @@ function injectDates(){
 
         // 큰따옴표를 안에다 넣어두면 DOM 삽입시 &quot;으로 자체 이스케이프된다.
         var contentString = [
-            "var inputDates = document.querySelectorAll('#daumGnb .box_date .item_date');",
+            "var datesList = document.querySelector('.box_date');",
+            "var inputDates = datesList.querySelectorAll('.item_date');",
             "var from = inputDates[0].querySelector('input');",
             "var to = inputDates[1].querySelector('input');",
             "from.value = '"+fromDate+"';",
             "to.value = '"+toDate+"';",
-            "document.querySelector('#daumGnb .box_date .btn_confirm').click();"
+            "datesList.querySelector('.btn_confirm').click();"
         ].join(' ');
         var aTag = document.createElement('a');
         aTag.classList.add('tit_item');
@@ -71,7 +72,7 @@ function injectDates(){
 
     if (wrapper.hasChildNodes) {
         var unescaped = (wrapper.innerHTML);
-        document.querySelector('#daumGnb .layer_opt[data-so-wrapper="period"] .list_opt').insertAdjacentHTML('beforeend', unescaped);
+        document.querySelector('.layer_opt[data-so-wrapper="period"] .list_opt').insertAdjacentHTML('beforeend', unescaped);
     }
 
 }
