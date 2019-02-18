@@ -41,13 +41,13 @@ function injectDates(){
             var dateFromTarget = desiredDates[DLE_JSON_COL_FROM_DATEOBJ];
             fromDate = getDateStringGoogle(dateFromTarget.getFullYear(), (dateFromTarget.getMonth() + 1), dateFromTarget.getDate());
         }else{
-            fromDate = getDateStringGoogle(today.getFullYear(), (today.getMonth() + 1), today.getDate());
+            //fromDate = getDateStringGoogle(today.getFullYear(), (today.getMonth() + 1), today.getDate());
         }
         if(desiredDates[DLE_JSON_COL_TO_DATEOBJ]){
             var dateToTarget = desiredDates[DLE_JSON_COL_TO_DATEOBJ]
             toDate = getDateStringGoogle(dateToTarget.getFullYear(), (dateToTarget.getMonth() + 1), dateToTarget.getDate());
         }else{
-            toDate = getDateStringGoogle(today.getFullYear(), (today.getMonth() + 1), today.getDate());
+            //toDate = getDateStringGoogle(today.getFullYear(), (today.getMonth() + 1), today.getDate());
         }
 
         // 큰따옴표를 안에다 넣어두면 DOM 삽입시 &quot;으로 자체 이스케이프된다.
