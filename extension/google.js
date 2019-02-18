@@ -23,15 +23,10 @@ function injectDates(){
 
     var wrapper = document.createElement('div');
 
-    // 다음은 빈 칸을 제시하면 오늘 날짜로 치환하고 입력한 날짜가 한개 뿐이면 종료일자로 생각합니다.
-    // 이 때 시작일자가 오늘이 되는 문제를 방지하기 위해 오늘을 빈 칸에 채워넣어야 합니다.
-    const today = new Date();
-
     for(var entry = 0; entry < datesData.length; entry++){
         var dateEntry = datesData[entry];
 
-        
-
+        // 구글은 빈 날짜를 '오늘'로 인식합니다. today 계산할 필요가 없음
         var fromDate = '';
         var toDate = '';
 
@@ -40,23 +35,15 @@ function injectDates(){
         if(desiredDates[DLE_JSON_COL_FROM_DATEOBJ]){
             var dateFromTarget = desiredDates[DLE_JSON_COL_FROM_DATEOBJ];
             fromDate = getDateStringGoogle(dateFromTarget.getFullYear(), (dateFromTarget.getMonth() + 1), dateFromTarget.getDate());
-        }else{
-            //fromDate = getDateStringGoogle(today.getFullYear(), (today.getMonth() + 1), today.getDate());
         }
         if(desiredDates[DLE_JSON_COL_TO_DATEOBJ]){
             var dateToTarget = desiredDates[DLE_JSON_COL_TO_DATEOBJ]
             toDate = getDateStringGoogle(dateToTarget.getFullYear(), (dateToTarget.getMonth() + 1), dateToTarget.getDate());
-        }else{
-            //toDate = getDateStringGoogle(today.getFullYear(), (today.getMonth() + 1), today.getDate());
         }
 
         // 큰따옴표를 안에다 넣어두면 DOM 삽입시 &quot;으로 자체 이스케이프된다.
         var contentString = [
             "var inputDates = document.querySelector('.cdr_frm');",
-            //"var from = inputDates.querySelector('.cdr_min');",
-            //"var to = inputDates.querySelector('.cdr_max');",
-            //"from.value = '"+fromDate+"';",
-            //"to.value = '"+toDate+"';",
             "var wholeInput = inputDates.querySelector('.ctbs');",
             "wholeInput.value = 'cdr:1,cd_min:"+fromDate+",cd_max:"+toDate+"';",
             "document.querySelector('.cdr_go').click();"
