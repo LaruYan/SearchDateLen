@@ -53,10 +53,12 @@ function injectDates(){
         // 큰따옴표를 안에다 넣어두면 DOM 삽입시 &quot;으로 자체 이스케이프된다.
         var contentString = [
             "var inputDates = document.querySelector('.cdr_frm');",
-            "var from = inputDates.querySelector('.cdr_min');",
-            "var to = inputDates.querySelector('.cdr_max');",
-            "from.value = '"+fromDate+"';",
-            "to.value = '"+toDate+"';",
+            //"var from = inputDates.querySelector('.cdr_min');",
+            //"var to = inputDates.querySelector('.cdr_max');",
+            //"from.value = '"+fromDate+"';",
+            //"to.value = '"+toDate+"';",
+            "var wholeInput = inputDates.querySelector('.ctbs');",
+            "wholeInput.value = 'cdr:1,cd_min:"+fromDate+",cd_max:"+toDate+"';",
             "document.querySelector('.cdr_go').click();"
         ].join(' ');
         var aTag = document.createElement('a');
