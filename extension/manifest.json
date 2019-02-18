@@ -21,6 +21,11 @@
         "matches": ["http://search.daum.net/*", "https://search.daum.net/*"],
         "run_at": "document_idle",
         "js": ["common.js", "utils.js", "storage.js", "inject_common.js", "daum.js"]
+      },
+      {
+        "matches": ["https://www.google.com/search?*", "https://www.google.com/search?*"],
+        "run_at": "document_idle",
+        "js": ["common.js", "utils.js", "storage.js", "inject_common.js", "google.js"]
       }
     ],
 
