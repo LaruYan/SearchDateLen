@@ -42,8 +42,9 @@ function injectDates(){
 
         // 큰따옴표를 안에다 넣어두면 DOM 삽입시 &quot;으로 자체 이스케이프된다.
         var contentString = [
-            "var from = document.getElementById('_nx_date_from');",
-            "var to = document.getElementById('_nx_date_to');",
+            "var inputDates = document.querySelector('#_nx_option_date');",
+            "var from = inputDates.querySelector('._input_box_start input');",
+            "var to = inputDates.querySelector('._input_box_end input');",
             "from.value = '"+fromDate+"';",
             "to.value = '"+toDate+"';",
             //"nx_searchOptionSelect('p', 'direct');",
@@ -51,7 +52,8 @@ function injectDates(){
 
             //https://stackoverflow.com/a/13333988
             // Content Script에 접근하는 방법 backtick 으로 3-depth 따옴표 달성
-            "location.href = 'javascript:nx_searchOptionSelect(`p`, `direct`); void 0';"
+            //"location.href = 'javascript:nx_searchOptionSelect(`p`, `direct`); void 0';"
+            "inputDates.querySelector('._btn_submit').click();"
         ].join(' ');
         var aTag = document.createElement('a');
         aTag.setAttribute('href', '#');
