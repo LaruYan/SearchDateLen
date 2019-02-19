@@ -37,8 +37,8 @@
 
 * A. Name : A name of entry. On search pages, only displays this name. if it's too long, it can squeezed out.
 * B. Type of entry : This rules how C and D is calculated and show or hide those. refer section *'Type of entry'*.
-* C. **Start** period : Here to set this date range **starts with** how many years(y), months(m) or days(d) from today to calculate. You can set this up to 99 years, 999months, and 9999 days but can't set it to future.
-* D. **End** period : Here to set this date range **ends with** how many years(y), months(m) or days(d) from today to calculate. You can set this up to 99 years, 999months, and 9999 days but can't set it to future.
+* C. **Start** period : Here to set this date range **starts with** how many years(y), months(m) or days(d) from today to calculate. You can set this up to 99 years, 999months, and 9999 days from today but can't be set to future.
+* D. **End** period : Here to set this date range **ends with** how many years(y), months(m) or days(d) from today to calculate. You can set this up to 99 years, 999months, and 9999 days from today but can't be set to future.
 * E. Cancel button : Discards these changes.
 * F. Add/Modify button : Submit these changes.
 
@@ -60,9 +60,9 @@
 
 ## Type of entry
 
-* a. 해당 일수 부터 : 몇 년, 몇 개월 또는 며칠 전 **부터**인지를 설정할 때 사용합니다. 최대 99년 999개월 9999일까지 가능하며 미래로 설정할 수 없습니다.
-* b. 해당 일수 까지 : 몇 년, 몇 개월 또는 며칠 전 **까지**인지를 설정할 때 사용합니다. 최대 99년 999개월 9999일까지 가능하며 미래로 설정할 수 없습니다.
-* c. 해당 기간 (상대적) : a와 b가 동시에 설정된 것으로 해당 기간 동안의 결과만 추릴 때 사용합니다.
-* d. 특정 날짜 부터 : 특정년도, 특정월, 특정일 **부터**인지를 설정할 때 사용합니다. 년도에 한해 -99년의 과거로 설정할 수 있습니다. 각 항목을 0으로 설정하면 오늘 날짜를 기준으로 채워지며 이 때 미래가 된다면 1년 이내의 과거로 계산될 수 있습니다. 0으로 설정되지 않은 항목은 그대로 유지되고 세 값 모두 0이 아니면 미래로 유지됩니다.
-* e. 특정 날짜 까지 : 특정년도, 특정월, 특정일 **까지**인지를 설정할 때 사용합니다. 년도에 한해 -99년의 과거로 설정할 수 있습니다. 각 항목을 0으로 설정하면 오늘 날짜를 기준으로 채워집니다. 미래로 설정할 수 있습니다.
-* f. 특정 기간 (절대적) : d와 e가 동시에 설정된 것으로 특정 기간의 결과만 추릴 때 사용합니다. d의 기준에 따라 d와 e 모두 1년 이내의 과거가 될 수 있습니다.
+* a. 해당 일수 부터 = From days ago : Use this to set date range **starts with** how many years, months or days from today to calculate. You can set date range up to 99 years, 999months, and 9999 days from today but can't be set to future.
+* b. 해당 일수 까지 = Until days ago: Use this to set date range **ends with** how many years, months or days from today to calculate. You can set date range up to 99 years, 999months, and 9999 days from today but can't be set to future.
+* c. 해당 기간 (상대적) = Specific date range (relative) : Use this to set both a and b, pick results within range.
+* d. 특정 날짜 부터 = From specific date : Use this to set date range **starts with** specific year, month, date. You can set minus down to -99 for setting some years ago. If set one of those to 0, those will be filled as today and if this becomes future, can be pulled back up to 1 year. When no 0s specified, won't be pulled back and stay in future.
+* e. 특정 날짜 까지 = Until specific date : Use this to set date range **ends with** specific year, month, date. You can set minus down to -99 for setting some years ago. If set one of those to 0, those will be filled as today. Can be set to future.
+* f. 특정 기간 (절대적) = Specific date range (absolute) : Use this to set both a and b, pick results within range. According to specs of d, both d and e can pulled back up to 1 year.
