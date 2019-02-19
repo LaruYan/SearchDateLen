@@ -2,6 +2,8 @@
 
 # SearchDateLen
 
+[Chrome Extension (Awaiting Review)](https://chrome.google.com/webstore/detail/clmmggmcaclhdaajggmedmaogoelfhpi)
+
 get more finer control (customizable) for date range, in search pages on Naver, Daum and Google.
 
 feel free to contribute via pull requests, Thank you.
