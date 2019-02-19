@@ -16,7 +16,7 @@
 ![searchDateLen option page](https://github.com/SD810/SearchDateLen/blob/master/document/imgs/OptionsPage.png?raw=true "searchDateLen option page")
 
 1. Information area of each entry.
-  * A. Name : A name of entry. On search pages, only shows this name.
+  * A. Name : A name of entry. On search pages, only displays this name.
   * B. Set Period/date : The period or date you have set.
   * C. Type of entry : This rules how B is calculated. refer section *'Type of entry'*.
   * D. Calculated B on today : Prints how B is calculated on today. Good to check you've set it right.
@@ -35,12 +35,12 @@
 
 ![searchDateLen add or modify, relative](https://github.com/SD810/SearchDateLen/blob/master/document/imgs/AddOrModify_rel.png?raw=true "searchDateLen add or modify, relative")
 
-* A. 항목 이름 : 항목의 이름입니다. 검색 페이지에 나오는 이름이며, 너무 길면 밖으로 삐져나갈 수 있습니다.
-* B. 항목의 날짜 형식 : C와 D를 어떻게 계산할지 규정하는 설정이며 C와 D 둘 중 하나를 때에 따라 숨깁니다. *'항목의 날짜 형식'* 섹션을 참고하세요.
-* C. **시작** 기간 : 몇 년(y), 몇 개월(m) 또는 며칠 전(d) **부터**인지를 설정하는 곳입니다. 최대 99년 999개월 9999일까지 가능하며 미래로 설정할 수 없습니다.
-* D. **종료** 기간 : 몇 년(y), 몇 개월(m) 또는 며칠 전(d) **까지**인지를 설정하는 곳입니다. 최대 99년 999개월 9999일까지 가능하며 미래로 설정할 수 없습니다.
-* E. 취소 버튼 : 작성된 내용을 버립니다.
-* F. 추가/수정 버튼 : 작성된 내용을 반영합니다.
+* A. Name : A name of entry. On search pages, only displays this name. if it's too long, it can squeezed out.
+* B. Type of entry : This rules how C and D is calculated and show or hide those. refer section *'Type of entry'*.
+* C. **Start** period : Here to set this date range **starts with** how many years(y), months(m) or days(d) from today to calculate. You can set this up to 99 years, 999months, and 9999 days but can't set it to future.
+* D. **End** period : Here to set this date range **ends with** how many years(y), months(m) or days(d) from today to calculate. You can set this up to 99 years, 999months, and 9999 days but can't set it to future.
+* E. Cancel button : Discards these changes.
+* F. Add/Modify button : Submit these changes.
 
 
 
@@ -49,12 +49,12 @@
 
 ![searchDateLen add or modify, absolute](https://github.com/SD810/SearchDateLen/blob/master/document/imgs/AddOrModify_abs.png?raw=true "searchDateLen add or modify, absolute")
 
-* A. 항목 이름 : 항목의 이름입니다. 검색 페이지에 나오는 이름이며, 너무 길면 밖으로 삐져나갈 수 있습니다.
-* B. 항목의 날짜 형식 : C와 D를 어떻게 계산할지 규정하는 설정이며 C와 D 둘 중 하나를 때에 따라 숨깁니다. *'항목의 날짜 형식'* 섹션을 참고하세요.
-* C. **시작** 일자 : 특정년도(yyyy), 특정월(mm), 특정일(dd) **부터**인지를 설정하는 곳입니다. 년도에 한해 -99년의 과거로 설정할 수 있습니다. 각 항목을 0으로 설정하면 오늘 날짜를 기준으로 채워지며 이 때 미래가 된다면 1년 이내의 과거로 계산될 수 있습니다. 0으로 설정되지 않은 항목은 그대로 유지되고 세 값 모두 0이 아니면 미래로 유지됩니다.
-* D. **종료** 일자 : 특정년도(yyyy), 특정월(mm), 특정일(dd) **까지**인지를 설정하는 곳입니다. 년도에 한해 -99년의 과거로 설정할 수 있습니다. 각 항목을 0으로 설정하면 오늘 날짜를 기준으로 채워집니다. 미래로 설정할 수 있습니다.
-* E. 취소 버튼 : 작성된 내용을 버립니다.
-* F. 추가/수정 버튼 : 작성된 내용을 반영합니다.
+* A. Name : A name of entry. On search pages, only displays this name. if it's too long, it can squeezed out.
+* B. Type of entry : This rules how C and D is calculated and show or hide those. refer section *'Type of entry'*.
+* C. **Start** date : Here to set this date range **starts with** specific year(yyyy), month(mm), date(dd). You can set minus down to -99 for setting some years ago. If set one of those to 0, those will be filled as today and if this becomes future, can be pulled back up to 1 year. When no 0s specified, won't be pulled back and stay in future.
+* D. **End** date : Here to set this date range **ends with** specific year(yyyy), month(mm), date(dd). You can set minus down to -99 for setting some years ago. If set one of those to 0, those will be filled as today. Can be set to future.
+* E. Cancel button : Discards these changes.
+* F. Add/Modify button : Submit these changes.
 
 
 
