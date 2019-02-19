@@ -4,11 +4,15 @@
 
 [Chrome Extension (Awaiting Review)](https://chrome.google.com/webstore/detail/clmmggmcaclhdaajggmedmaogoelfhpi)
 
-get more finer control (customizable) for date range, in search pages on Naver, Daum and Google.
+Get more finer control (customizable) for date range, more than just 1 day, 1 week, 1 month and 1 year, in search pages on Naver, Daum and Google.
+
+adds 3 months, 6 months, 9 months, 1 year and a half, 2 years, first half, second half, first quarter, second quarter, third quarter, fourth quarter via preset, and you can add more like specific date range.
 
 feel free to contribute via pull requests, Thank you.
 
-네이버, 다음, 구글 검색 도중 더 세분화된 기간 설정을 제공합니다. 사용자 정의도 됩니다.
+네이버, 다음, 구글 검색시 1일, 1주, 1개월, 1년 뿐만 아니라 더 세분화된 기간 설정을 제공합니다. 사용자 정의도 됩니다.
+
+3개월, 6개월, 9개월, 1년 반, 2년, 반기별, 분기별 프리셋이 제공되고 특정 기간 같은 더 많은 것을 추가할 수 있습니다.
 
 부담갖지 마시고 풀리퀘 넣어주세요. 감사합니다.
 
