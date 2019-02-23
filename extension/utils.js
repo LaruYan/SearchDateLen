@@ -263,6 +263,16 @@ function getInputNumberTag(nameAndId, minValue = 0, maxValue = 9999, value = 0){
     inputTag.setAttribute('min', minValue);
     inputTag.setAttribute('max', maxValue);
 
+    // 파이어폭스에서 min max 에 따라 길이가 조정되지 않습니다. 따라서 수동지정하면 됩니다.
+    var maxValueStr = maxValue.toString();
+    var minValueStr = minValue.toString();
+    if(maxValueStr.length > minValueStr.length){
+        inputTag.style.width = maxValueStr.length + 'em';
+    }else{
+        inputTag.style.width = minValueStr.length + 'em';
+    }
+    
+
     // 여기는 문자열을 처리하지 않으므로 parseInt 없이도 괜찮을 것
     if(value < minValue){
         value = minValue;
