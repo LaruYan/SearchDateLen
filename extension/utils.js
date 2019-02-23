@@ -267,11 +267,13 @@ function getInputNumberTag(nameAndId, minValue = 0, maxValue = 9999, value = 0){
     var maxValueStr = maxValue.toString();
     var minValueStr = minValue.toString();
     if(maxValueStr.length > minValueStr.length){
-        inputTag.style.width = maxValueStr.length + 'em';
+        // 크롬 테스트 과정에서 1칸 더 넣는게 안짤리고 나올것 같습니다.
+        inputTag.style.width = (maxValueStr.length + 1) + 'em';
     }else{
-        inputTag.style.width = minValueStr.length + 'em';
+        // 크롬 테스트 과정에서 1칸 더 넣는게 안짤리고 나올것 같습니다.
+        inputTag.style.width = (minValueStr.length + 1) + 'em';
     }
-    
+
 
     // 여기는 문자열을 처리하지 않으므로 parseInt 없이도 괜찮을 것
     if(value < minValue){

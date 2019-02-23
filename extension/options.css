@@ -27,6 +27,7 @@
     --font-size-dateDate: 1.2em;
     --font-size-dateCalc: 1.3em;
     --font-size-input-label: 1.2em;
+    --font-size-input-number: 1.2em;
 
     /* 기타 */
     --margin-to-center-horizontally: 0 auto;
@@ -216,6 +217,8 @@ input,select,button{ /* 각종 div가 아닌 상호작용가능한 UI 요소들 
 }
 
 
-input[type="number"] { /* 숫자 입력칸의 숫자를 오른쪽 정렬 */
+input[type="number"] { /* 숫자 입력칸의 숫자를 오른쪽 정렬, 고정폭 */
     text-align: right;
+    font-family: monospace;
+    font-size: var(--font-size-input-number);
 }
