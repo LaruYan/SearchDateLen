@@ -2,7 +2,7 @@
 
 # SearchDateLen
 
-[Chrome Extension (Awaiting Review)](https://chrome.google.com/webstore/detail/clmmggmcaclhdaajggmedmaogoelfhpi)
+[Chrome Extension 크롬 확장기능 다운로드](https://chrome.google.com/webstore/detail/clmmggmcaclhdaajggmedmaogoelfhpi)
 
 Get more finer control (customizable) for date range, more than just 1 day, 1 week, 1 month and 1 year, in search pages on Naver, Daum and Google.
 
@@ -23,6 +23,20 @@ feel free to contribute via pull requests, Thank you.
 
 [한국어 도움말](https://github.com/SD810/SearchDateLen/blob/master/document/HelpKorean.md)
 
+
+## Release Notes
+
+### 2019-02-23 0.3
+
+Fixed Naver blocks date which points future, so now limiting it to today. (incl. Daum, Google)
+
+네이버에서 미래를 지정하면 잘못된 날짜라고 거부하기 때문에 오늘 날짜로 제한합니다. (다음, 구글 포함)
+
+### 2019-02-19 0.2
+
+First release
+
+최초 게시
 
 ## Screenshots
 
