@@ -1,8 +1,8 @@
 {
     "manifest_version": 2,
    
-    "name": "검색 기간 확장",
-    "description": "구글, 네이버, 다음 PC 검색 페이지의 검색 기간을 더 세분화시켜줍니다.",
+    "name": "SearchDateLen: 검색 기간 확장",
+    "description": "구글, 네이버, 다음 PC 검색 페이지의 검색 기간을 더 세분화시켜줍니다. Get finer control over search date range.",
     "version": "0.3",
     "icons": { "48": "icon.png" },
    
