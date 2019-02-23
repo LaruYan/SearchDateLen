@@ -37,7 +37,7 @@ function injectDates(){
             fromDate = getDateStringGoogle(dateFromTarget.getFullYear(), (dateFromTarget.getMonth() + 1), dateFromTarget.getDate());
         }
         if(desiredDates[DLE_JSON_COL_TO_DATEOBJ]){
-            var dateToTarget = desiredDates[DLE_JSON_COL_TO_DATEOBJ]
+            var dateToTarget = desiredDates[DLE_JSON_COL_TO_DATEOBJ];
             toDate = getDateStringGoogle(dateToTarget.getFullYear(), (dateToTarget.getMonth() + 1), dateToTarget.getDate());
         }
 

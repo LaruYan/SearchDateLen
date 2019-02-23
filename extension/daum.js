@@ -44,7 +44,7 @@ function injectDates(){
             fromDate = getDateStringDaum(today.getFullYear(), (today.getMonth() + 1), today.getDate());
         }
         if(desiredDates[DLE_JSON_COL_TO_DATEOBJ]){
-            var dateToTarget = desiredDates[DLE_JSON_COL_TO_DATEOBJ]
+            var dateToTarget = desiredDates[DLE_JSON_COL_TO_DATEOBJ];
             toDate = getDateStringDaum(dateToTarget.getFullYear(), (dateToTarget.getMonth() + 1), dateToTarget.getDate());
         }else{
             toDate = getDateStringDaum(today.getFullYear(), (today.getMonth() + 1), today.getDate());
