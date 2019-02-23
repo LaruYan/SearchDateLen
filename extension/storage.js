@@ -32,22 +32,32 @@ function prepareStorage(){
 }
 
 /**
- * 크롬 스토리지에 JSON값을 저장한다.
- */
-function saveStorage(){
-    chrome.storage.sync.set({
-        dates: datesJsonStr
-    });
-}
-
-/**
  * 크롬 스토리지에 JSON값을 저장한다. 콜백 실행 가능
  * @param {function} callback 
  */
 function saveStorage(callback){
+    alertAndLog('searchDateLen: [storage] saveStorage()');
+
+    //크롬 스토리지에 JSON값을 저장한다.
     chrome.storage.sync.set({
         dates: datesJsonStr
     }, function() {
+        alertAndLog('searchDateLen: [storage] calling callback after saveStorage()');
+        callback.call();
+    });
+}
+
+/**
+ * 스토리지에 저장된 값을 읽어와 콜백 실행
+ * @param {function} callback 
+ */
+function loadStorage(callback){
+    alertAndLog('searchDateLen: [storage] loadStorage()');
+    //크롬 스토리지에 저장된 JSON값을 가져온다. 
+    chrome.storage.sync.get(function (data) {
+        datesJsonStr = data.dates;
+
+        alertAndLog('searchDateLen: [storage] calling callback after loadStorage()');
         callback.call();
     });
 }

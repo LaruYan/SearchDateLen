@@ -6,8 +6,7 @@
 
 
 //크롬 스토리지에 저장된 JSON값을 가져온다. 
-chrome.storage.sync.get(function (data) {
-    datesJsonStr = data.dates;
+loadStorage(function () {
     getVersionNo();
     initData();
     injectDates();
