@@ -32,11 +32,23 @@ function prepareStorage(){
 }
 
 /**
- * 크롬 스토리지에 JSON값을 저장한다. 
+ * 크롬 스토리지에 JSON값을 저장한다.
  */
 function saveStorage(){
     chrome.storage.sync.set({
         dates: datesJsonStr
+    });
+}
+
+/**
+ * 크롬 스토리지에 JSON값을 저장한다. 콜백 실행 가능
+ * @param {function} callback 
+ */
+function saveStorage(callback){
+    chrome.storage.sync.set({
+        dates: datesJsonStr
+    }, function() {
+        callback.call();
     });
 }
 

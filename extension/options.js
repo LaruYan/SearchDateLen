@@ -748,8 +748,8 @@ function insertDateEntry(index, item){
  */
 function saveAndReload(){
     prepareStorage();
-    saveStorage();
-
-    // 새로고침
-    loadStorage();
+    saveStorage(function(){
+        // 새로고침
+        loadStorage();
+    });
 }
