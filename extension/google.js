@@ -23,6 +23,10 @@ function injectDates(){
 
     var wrapper = document.createElement('div');
 
+    // 구글은 빈 칸을 제시하면 오늘 날짜로 치환합니다. 빈 칸 그대로여도 됩니다.
+    // UI 상으로는 미래 선택을 금지하고 있기 때문에 미래는 오늘로 치환해줍니다.
+    const today = new Date();
+
     for(var entry = 0; entry < datesData.length; entry++){
         var dateEntry = datesData[entry];
 
@@ -35,10 +39,21 @@ function injectDates(){
         if(desiredDates[DLE_JSON_COL_FROM_DATEOBJ]){
             var dateFromTarget = desiredDates[DLE_JSON_COL_FROM_DATEOBJ];
             fromDate = getDateStringGoogle(dateFromTarget.getFullYear(), (dateFromTarget.getMonth() + 1), dateFromTarget.getDate());
+        }else{
+            fromDate = getDateStringGoogle(today.getFullYear(), (today.getMonth() + 1), today.getDate());
         }
         if(desiredDates[DLE_JSON_COL_TO_DATEOBJ]){
             var dateToTarget = desiredDates[DLE_JSON_COL_TO_DATEOBJ];
-            toDate = getDateStringGoogle(dateToTarget.getFullYear(), (dateToTarget.getMonth() + 1), dateToTarget.getDate());
+
+            // 네이버는 미래를 지정하니 뱉어내기 시작했다.
+            // 다음도 그럴 수 있으니 대비책을
+            if(dateToTarget < today){
+                toDate = getDateStringGoogle(dateToTarget.getFullYear(), (dateToTarget.getMonth() + 1), dateToTarget.getDate());
+            }else{
+                toDate = getDateStringGoogle(today.getFullYear(), (today.getMonth() + 1), today.getDate());
+            }
+        }else{
+            toDate = getDateStringGoogle(today.getFullYear(), (today.getMonth() + 1), today.getDate());
         }
 
         // 큰따옴표를 안에다 넣어두면 DOM 삽입시 &quot;으로 자체 이스케이프된다.

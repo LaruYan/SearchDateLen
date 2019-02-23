@@ -45,7 +45,14 @@ function injectDates(){
         }
         if(desiredDates[DLE_JSON_COL_TO_DATEOBJ]){
             var dateToTarget = desiredDates[DLE_JSON_COL_TO_DATEOBJ];
-            toDate = getDateStringDaum(dateToTarget.getFullYear(), (dateToTarget.getMonth() + 1), dateToTarget.getDate());
+
+            // 네이버는 미래를 지정하니 뱉어내기 시작했다.
+            // 다음도 그럴 수 있으니 대비책을
+            if(dateToTarget < today) {
+                toDate = getDateStringDaum(dateToTarget.getFullYear(), (dateToTarget.getMonth() + 1), dateToTarget.getDate());
+            }else{
+                toDate = getDateStringDaum(today.getFullYear(), (today.getMonth() + 1), today.getDate());
+            }
         }else{
             toDate = getDateStringDaum(today.getFullYear(), (today.getMonth() + 1), today.getDate());
         }
