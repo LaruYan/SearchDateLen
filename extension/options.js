@@ -9,7 +9,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     alertAndLog('searchDateLen: [options] DOMContentLoaded');
     
-    loadStorage();
+    loadOptions();
     
     populateOnceInputBtn();
 });
@@ -18,17 +18,14 @@ document.addEventListener('DOMContentLoaded', function () {
 /**
  * 스토리지에 저장된 값을 읽어와 options.html 초기화
  */
-function loadStorage(){
-    alertAndLog('searchDateLen: [options] loadStorage()');
-    //크롬 스토리지에 저장된 JSON값을 가져온다. 
-    chrome.storage.sync.get(function (data) {
-        datesJsonStr = data.dates;
+function loadOptions(){
+    loadStorage(function(){
         initData();
         populateVersionNo(getVersionNo());
         populateList();
         prepareInput();
     });
-}
+};
 
 
 /**
@@ -748,8 +745,8 @@ function insertDateEntry(index, item){
  */
 function saveAndReload(){
     prepareStorage();
-    saveStorage();
-
-    // 새로고침
-    loadStorage();
+    saveStorage(function(){
+        // 새로고침
+        loadOptions();
+    });
 }
