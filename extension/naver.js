@@ -41,8 +41,14 @@ function injectDates(){
             fromDate = getDateStringNaver(today.getFullYear(), (today.getMonth() + 1), today.getDate());
         }
         if(desiredDates[DLE_JSON_COL_TO_DATEOBJ]){
-            var dateToTarget = desiredDates[DLE_JSON_COL_TO_DATEOBJ]
-            toDate = getDateStringNaver(dateToTarget.getFullYear(), (dateToTarget.getMonth() + 1), dateToTarget.getDate());
+            var dateToTarget = desiredDates[DLE_JSON_COL_TO_DATEOBJ];
+            
+            // 네이버는 미래를 지정하니 뱉어내기 시작했다.
+            if(dateToTarget < today) {
+                toDate = getDateStringNaver(dateToTarget.getFullYear(), (dateToTarget.getMonth() + 1), dateToTarget.getDate());
+            }else{
+                toDate = getDateStringNaver(today.getFullYear(), (today.getMonth() + 1), today.getDate());
+            }
         }else{
             toDate = getDateStringNaver(today.getFullYear(), (today.getMonth() + 1), today.getDate());
         }
