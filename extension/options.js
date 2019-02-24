@@ -12,6 +12,8 @@ document.addEventListener('DOMContentLoaded', function () {
     loadOptions();
     
     populateOnceInputBtn();
+
+    populateResetBtn();
 });
 
 
@@ -475,6 +477,18 @@ function prepareInput(entryNo = -1){
     alertAndLog('searchDateLen: [options] finished preparing input area.');
 }
 
+
+/**
+ * 초기화 버튼을 구성합니다.
+ */
+function populateResetBtn(){
+    var btnReset = document.getElementById('btnReset');
+    btnReset.addEventListener('click', function () {
+        initializeSearchDateLen(function(){
+            loadOptions();
+        });
+    });
+}
 
 function populateOnceInputBtn(){
 
