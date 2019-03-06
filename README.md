@@ -2,7 +2,9 @@
 
 # SearchDateLen
 
-[Chrome Extension 크롬 확장기능 다운로드](https://chrome.google.com/webstore/detail/clmmggmcaclhdaajggmedmaogoelfhpi)
+[download Chrome Extension 크롬 확장기능 다운로드](https://chrome.google.com/webstore/detail/clmmggmcaclhdaajggmedmaogoelfhpi)
+
+[download Firefox Add-on 파이어폭스 추가기능 다운로드](https://addons.mozilla.org/firefox/addon/searchdatelen/)
 
 Get more finer control (customizable) for date range, more than just 1 day, 1 week, 1 month and 1 year, in search pages on Naver, Daum and Google.
 
