@@ -1,18 +1,8 @@
 //
 //
-//  네이버 PC 페이지용 검색 기간 inject 스크립트
+//  네이버 모바일 페이지용 검색 기간 inject 스크립트
 //
 //
-
-/**
- * NAVER 날짜 형식에 맞게 yyyy.mm.dd 꼴의 문자열을 반환
- * @param {*} year 년도
- * @param {*} month 월
- * @param {*} date 일
- */
-function getDateStringNaver(year,month,date){
-    return year + '.' + getTwoDigitNumber(month) + '.' + getTwoDigitNumber(date);
-}
 
 /**
  * 날짜 목록을 기간 설정에 집어넣습니다.
@@ -23,7 +13,9 @@ function injectDates(){
 
     var wrapper = document.createElement('div');
 
-    // 네이버는 값을 입력하지 않으면 진행되지 않습니다. 따라서 빈 칸을 오늘로 채워야 합니다.
+    // 네이버 모바일 페이지는 a.spnew_bf.ico_calendar._start_trigger 를 수정해도
+    // 지정된 날짜가 submit시 적용되지 않음.
+    // UI 요소를 하나하나 클릭해야 합니다.
 
     // 오늘 날짜
     const today = fixDateTimeResidue(new Date());
@@ -91,10 +83,6 @@ function injectDates(){
         // 큰따옴표를 안에다 넣어두면 DOM 삽입시 &quot;으로 자체 이스케이프된다.
         var contentString = [
             "var datesFilter = document.querySelector('.lst_option .term');",
-            // UI 선택일자
-            "var selectYears;",
-            "var selectMonths;",
-            "var selectDays;",
 
             // 날짜선택: 펼침 UI
             // 열려있는건 not으로 제한해 다시 닫지 않습니다.
@@ -103,8 +91,14 @@ function injectDates(){
             "   calendarTrigger.click();",
             "}",
             "var dateSetUi = datesFilter.querySelector('.set_calendar');",
+
             // 전체 목록
             "var wholeList = datesFilter.querySelectorAll('._wholeList ._eachList');",
+
+            // UI상 일자 선택 부분
+            "var selectYears;",
+            "var selectMonths;",
+            "var selectDays;",
 
             // 시작일 설정
             // 매번 querySelectorAll을 돌려야 바뀐 년월에 대한 일을 표시해줄 수 있습니다.
@@ -134,6 +128,7 @@ function injectDates(){
             "        break;",
             "    } ",
             "}",
+
             // 종료일 설정
             // querySelectorAll을 더 돌려야하는건 같음.
             "var clickableToDate = dateSetUi.querySelector('._end_trigger');",

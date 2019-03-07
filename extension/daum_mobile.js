@@ -1,6 +1,6 @@
 //
 //
-//  다음 PC 페이지용 검색 기간 inject 스크립트
+//  다음 모바일 페이지용 검색 기간 inject 스크립트
 //
 //
 
@@ -94,10 +94,12 @@ function injectDates(){
         var contentString = [
             "var datesFilter = document.querySelector('.d_filter');",
             "var datesList = datesFilter.querySelector('.date_selected');",
-            // UI 선택일자
+
+            // UI상 일자 선택 부분
             "var selectYears;",
             "var selectMonths;",
             "var selectDays;",
+
             // 시작일 설정
             // 시작일 버튼을 한 번만 클릭하면 날짜가 한 번에 적용되지 않는다
             // 클릭 후 다시 querySelectorAll 을 돌려야 년월일이 적용된다.
@@ -113,53 +115,42 @@ function injectDates(){
             "        break;",
             "    } ",
             "}",
-            //"console.log('month');",
             "selectMonths = datesFilter.querySelectorAll('.date_opt ul[data-type=months] li');",
             "for(var monthRow = 0; monthRow < selectMonths.length; monthRow++){",
-            //"    console.log(selectMonths[monthRow].getAttribute('data-value') +' trying');",
             "    if(selectMonths[monthRow].getAttribute('data-value') == "+fromMonth+"){",
             "        selectMonths[monthRow].click();",
             "        break;",
             "    } ",
             "}",
-            //"console.log('day');",
             "selectDays = datesFilter.querySelectorAll('.date_opt ul[data-type=days] li');",
             "for(var dayRow = 0; dayRow < selectDays.length; dayRow++){",
-            //"    console.log(selectDays[dayRow].getAttribute('data-value') +' trying');",
             "    if(selectDays[dayRow].getAttribute('data-value') == "+fromDay+"){",
             "        selectDays[dayRow].click();",
             "        break;",
             "    } ",
             "}",
+
             // 종료일 설정. 종료일은 한 번만 클릭해도 된다.
             // 아마도 펼치는 과정이 없어서 그런듯
             // querySelectorAll을 더 돌려야하는건 같음.
-            //"datesList.querySelector('.btn_ed').click();"
             "var clickableToDate = datesList.querySelector('.btn_ed');",
             "clickableToDate.click();",
-            //"clickableToDate.click();",
-            //"console.log('year');",
             "selectYears = datesFilter.querySelectorAll('.date_opt ul[data-type=years] li');",
             "for(var yearRow = 0; yearRow < selectYears.length; yearRow++){",
-            //"    console.log(selectYears[yearRow].getAttribute('data-value') +' trying');",
             "    if(selectYears[yearRow].getAttribute('data-value') == "+toYear+"){",
             "        selectYears[yearRow].click();",
             "        break;",
             "    } ",
             "}",
-            //"console.log('month');",
             "selectMonths = datesFilter.querySelectorAll('.date_opt ul[data-type=months] li');",
             "for(var monthRow = 0; monthRow < selectMonths.length; monthRow++){",
-            //"    console.log(selectMonths[monthRow].getAttribute('data-value') +' trying');",
             "    if(selectMonths[monthRow].getAttribute('data-value') == "+toMonth+"){",
             "        selectMonths[monthRow].click();",
             "        break;",
             "    } ",
             "}",
-            //"console.log('day');",
             "selectDays = datesFilter.querySelectorAll('.date_opt ul[data-type=days] li');",
             "for(var dayRow = 0; dayRow < selectDays.length; dayRow++){",
-            //"    console.log(selectDays[dayRow].getAttribute('data-value') +' trying');",
             "    if(selectDays[dayRow].getAttribute('data-value') == "+toDay+"){",
             "        selectDays[dayRow].click();",
             "        break;",
