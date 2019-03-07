@@ -5,16 +5,6 @@
 //
 
 /**
- * Daum 모바일 날짜 형식에 맞게 yyyy.m.d 꼴의 문자열을 반환
- * @param {*} year 년도
- * @param {*} month 월
- * @param {*} date 일
- */
-function getDateStringDaumMobile(year,month,date){
-    return year + '.' + month + '.' + date;
-}
-
-/**
  * 날짜 목록을 기간 설정에 집어넣습니다.
  * 
  * *공통 메소드*
@@ -80,7 +70,7 @@ function injectDates(){
 
             
             if(dateToTarget < minDate) {
-                //다음 모바일은 1990년 1월 1일부터 선택 가능
+                // 다음 모바일은 1990년 1월 1일부터 선택 가능
                 toYear = minDate.getFullYear();
                 toMonth = minDate.getMonth() + 1;
                 toDay = minDate.getDate();
@@ -89,8 +79,7 @@ function injectDates(){
                 toMonth = dateToTarget.getMonth() + 1;
                 toDay = dateToTarget.getDate();
             }else{
-                // 네이버는 미래를 지정하니 뱉어내기 시작했다.
-                // 다음도 그럴 수 있으니 대비책을
+                // 다음 모바일에서는 오늘 날짜 이후를 고를 수 없을 것
                 toYear = today.getFullYear();
                 toMonth = today.getMonth() + 1;
                 toDay = today.getDate();
