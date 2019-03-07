@@ -3,7 +3,7 @@
    
     "name": "SearchDateLen: 검색 기간 확장",
     "description": "구글, 네이버, 다음 PC 검색 페이지의 검색 기간을 더 세분화시켜줍니다. Get finer control over search date range.",
-    "version": "0.3",
+    "version": "0.4",
     "icons": { "48": "icon.png" },
    
     "browser_specific_settings": {
@@ -32,6 +32,11 @@
         "matches": ["http://search.daum.net/*", "https://search.daum.net/*"],
         "run_at": "document_idle",
         "js": ["common.js", "utils.js", "storage.js", "inject_common.js", "daum.js"]
+      },
+      {
+        "matches": ["http://m.search.daum.net/*", "https://m.search.daum.net/*"],
+        "run_at": "document_idle",
+        "js": ["common.js", "utils.js", "storage.js", "inject_common.js", "daum_mobile.js"]
       },
       {
         "matches": [ "*://*/*" ],
