@@ -17,7 +17,7 @@ var datesData = null;
  * @param {function} callback
  */
 function initializeSearchDateLen(callback = null){
-    datesJsonStr = '[{"name":"3M","type":"rel_from","from_year":"0","from_month":"3","from_date":"0","to_year":"0","to_month":"0","to_date":"0"},{"name":"6M","type":"rel_from","from_year":"0","from_month":"6","from_date":"0","to_year":"0","to_month":"0","to_date":"0"},{"name":"H1","type":"abs_range","from_year":"0","from_month":"1","from_date":"1","to_year":"0","to_month":"6","to_date":"30"},{"name":"H2","type":"abs_range","from_year":"0","from_month":"7","from_date":"1","to_year":"0","to_month":"12","to_date":"31"},{"name":"1Q","type":"abs_range","from_year":"0","from_month":"1","from_date":"1","to_year":"0","to_month":"3","to_date":"31"},{"name":"2Q","type":"abs_range","from_year":"0","from_month":"4","from_date":"1","to_year":"0","to_month":"6","to_date":"30"},{"name":"3Q","type":"abs_range","from_year":"0","from_month":"7","from_date":"1","to_year":"0","to_month":"9","to_date":"30"},{"name":"4Q","type":"abs_range","from_year":"0","from_month":"10","from_date":"1","to_year":"0","to_month":"12","to_date":"31"}]';
+    datesJsonStr = '[{"name":"3M","type":"rel_from","from_year":"0","from_month":"3","from_date":"0","to_year":"0","to_month":"0","to_date":"0"},{"name":"6M","type":"rel_from","from_year":"0","from_month":"6","from_date":"0","to_year":"0","to_month":"0","to_date":"0"},{"name":"9M","type":"rel_from","from_year":"0","from_month":"9","from_date":"0","to_year":"0","to_month":"0","to_date":"0"},{"name":"1Y6M","type":"rel_from","from_year":"1","from_month":"6","from_date":"0","to_year":"0","to_month":"0","to_date":"0"},{"name":"2Y","type":"rel_from","from_year":"2","from_month":"0","from_date":"0","to_year":"0","to_month":"0","to_date":"0"},{"name":"H1","type":"abs_range","from_year":"0","from_month":"1","from_date":"1","to_year":"0","to_month":"6","to_date":"30"},{"name":"H2","type":"abs_range","from_year":"0","from_month":"7","from_date":"1","to_year":"0","to_month":"12","to_date":"31"},{"name":"1Q","type":"abs_range","from_year":"0","from_month":"1","from_date":"1","to_year":"0","to_month":"3","to_date":"31"},{"name":"2Q","type":"abs_range","from_year":"0","from_month":"4","from_date":"1","to_year":"0","to_month":"6","to_date":"30"},{"name":"3Q","type":"abs_range","from_year":"0","from_month":"7","from_date":"1","to_year":"0","to_month":"9","to_date":"30"},{"name":"4Q","type":"abs_range","from_year":"0","from_month":"10","from_date":"1","to_year":"0","to_month":"12","to_date":"31"}]';
     saveStorage(callback);
 }
 
@@ -45,6 +45,7 @@ function prepareStorage(){
  */
 function saveStorage(callback){
     alertAndLog('searchDateLen: [storage] saveStorage()');
+    alertAndLog(datesJsonStr);
 
     //크롬 스토리지에 JSON값을 저장한다.
     chrome.storage.sync.set({
