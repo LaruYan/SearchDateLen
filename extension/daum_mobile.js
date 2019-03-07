@@ -36,7 +36,10 @@ function injectDates(){
     //sd: 20190205000000 <= 수정되야하는 값
     //ed: 20190307235959 <=  //
     //C.VO2.meta.filters (이건 아님)
+
     const today = fixDateTimeResidue(new Date());
+
+    //다음 모바일은 1990년 1월 1일부터 선택 가능
     const minDate = fixDateTimeResidue(new Date("1990-01-01"));
 
     for(var entry = 0; entry < datesData.length; entry++){
@@ -173,7 +176,7 @@ function injectDates(){
             "    } ",
             "}",
             
-            
+            // 적용하기
             "datesFilter.querySelector('.date_opt .btn_apply').click();"
         ].join(' ');
         var aTag = document.createElement('a');
