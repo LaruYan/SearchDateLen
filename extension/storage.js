@@ -49,7 +49,8 @@ function saveStorage(callback){
 
     //크롬 스토리지에 JSON값을 저장한다.
     chrome.storage.sync.set({
-        dates: datesJsonStr
+        dates: datesJsonStr,
+        debug_mode: isDebug
     }, function() {
         if(callback){
             alertAndLog('searchDateLen: [storage] calling callback after saveStorage()');
@@ -67,6 +68,7 @@ function loadStorage(callback){
     //크롬 스토리지에 저장된 JSON값을 가져온다. 
     chrome.storage.sync.get(function (data) {
         datesJsonStr = data.dates;
+        isDebug = data.debug_mode;
         if(callback){
             alertAndLog('searchDateLen: [storage] calling callback after loadStorage()');
             callback.call();

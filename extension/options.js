@@ -24,6 +24,7 @@ function loadOptions(){
     loadStorage(function(){
         initData();
         populateVersionNo(getVersionNo());
+        pupulateDebugFlag();
         populateList();
         prepareInput();
     });
@@ -38,6 +39,17 @@ function populateVersionNo(verText){
     document.getElementById('versionNo').innerHTML = verText;
 }
 
+/**
+ * 개발자 모드 체크
+ */
+function pupulateDebugFlag(){
+    var ckbDevMode = document.getElementById('ckbDebugMode');
+    ckbDevMode.checked = isDebug;
+    ckbDevMode.addEventListener('change', function () {
+        isDebug = ckbDevMode.checked;
+        saveAndReload();
+    });
+}
 
 /**
  * dates 목록을 꾸린다.
