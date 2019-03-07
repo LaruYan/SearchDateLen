@@ -24,6 +24,8 @@ function injectDates(){
     var wrapper = document.createElement('div');
 
     // 네이버는 값을 입력하지 않으면 진행되지 않습니다. 따라서 빈 칸을 오늘로 채워야 합니다.
+
+    // 오늘 날짜
     const today = fixDateTimeResidue(new Date());
 
     for(var entry = 0; entry < datesData.length; entry++){

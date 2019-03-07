@@ -37,6 +37,7 @@ function injectDates(){
     //ed: 20190307235959 <=  //
     //C.VO2.meta.filters (이건 아님)
 
+    // 오늘 날짜
     const today = fixDateTimeResidue(new Date());
 
     //다음 모바일은 1990년 1월 1일부터 선택 가능
