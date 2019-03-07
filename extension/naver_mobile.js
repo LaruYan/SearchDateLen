@@ -105,7 +105,10 @@ function injectDates(){
             "var dateSetUi = datesFilter.querySelector('.set_calendar');",
             // 전체 목록
             "var wholeList = datesFilter.querySelectorAll('._wholeList ._eachList');",
+
             // 시작일 설정
+            // 매번 querySelectorAll을 돌려야 바뀐 년월에 대한 일을 표시해줄 수 있습니다.
+            // 찾았을 때 내부 a 태그를 클릭해야 함
             "var clickableFromDate = dateSetUi.querySelector('._start_trigger');",
             "clickableFromDate.click();",
             "console.log('year');",
@@ -130,36 +133,35 @@ function injectDates(){
             "        selectDays[dayRow].querySelector('a').click();",
             "        break;",
             "    } ",
-            "}"
+            "}",
             // 종료일 설정
             // querySelectorAll을 더 돌려야하는건 같음.
-            //"datesList.querySelector('.btn_ed').click();"
-            // "var clickableToDate = dateSetUi.querySelector('._end_trigger');",
-            // "clickableToDate.click();",
-            // "selectYears = wholeList[0].querySelectorAll('ul li');",
-            // "for(var yearRow = 0; yearRow < selectYears.length; yearRow++){",
-            // "    if(selectYears[yearRow].getAttribute('data-value') == "+toYear+"){",
-            // "        selectYears[yearRow].click();",
-            // "        break;",
-            // "    } ",
-            // "}",
-            // "selectMonths = wholeList[1].querySelectorAll('ul li');",
-            // "for(var monthRow = 0; monthRow < selectMonths.length; monthRow++){",
-            // "    if(selectMonths[monthRow].getAttribute('data-value') == "+toMonth+"){",
-            // "        selectMonths[monthRow].click();",
-            // "        break;",
-            // "    } ",
-            // "}",
-            // "selectDays = wholeList[2].querySelectorAll('ul li');",
-            // "for(var dayRow = 0; dayRow < selectDays.length; dayRow++){",
-            // "    if(selectDays[dayRow].getAttribute('data-value') == "+toDay+"){",
-            // "        selectDays[dayRow].click();",
-            // "        break;",
-            // "    } ",
-            // "}",
+            "var clickableToDate = dateSetUi.querySelector('._end_trigger');",
+            "clickableToDate.click();",
+            "selectYears = wholeList[0].querySelectorAll('ul li');",
+            "for(var yearRow = 0; yearRow < selectYears.length; yearRow++){",
+            "    if(selectYears[yearRow].getAttribute('data-value') == "+toYear+"){",
+            "        selectYears[yearRow].querySelector('a').click();",
+            "        break;",
+            "    } ",
+            "}",
+            "selectMonths = wholeList[1].querySelectorAll('ul li');",
+            "for(var monthRow = 0; monthRow < selectMonths.length; monthRow++){",
+            "    if(selectMonths[monthRow].getAttribute('data-value') == "+toMonth+"){",
+            "        selectMonths[monthRow].querySelector('a').click();",
+            "        break;",
+            "    } ",
+            "}",
+            "selectDays = wholeList[2].querySelectorAll('ul li');",
+            "for(var dayRow = 0; dayRow < selectDays.length; dayRow++){",
+            "    if(selectDays[dayRow].getAttribute('data-value') == "+toDay+"){",
+            "        selectDays[dayRow].querySelector('a').click();",
+            "        break;",
+            "    } ",
+            "}",
             
             // 적용하기
-            //"datesFilter.querySelector('.btn_area .btn_apply').click();"
+            "datesFilter.querySelector('.btn_area .btn_apply').click();"
         ].join(' ');
         var aTag = document.createElement('a');
         aTag.setAttribute('href', '#');
