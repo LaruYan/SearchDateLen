@@ -25,7 +25,9 @@ function injectDates(){
 
     // 구글은 빈 칸을 제시하면 오늘 날짜로 치환합니다. 빈 칸 그대로여도 됩니다.
     // UI 상으로는 미래 선택을 금지하고 있기 때문에 미래는 오늘로 치환해줍니다.
-    const today = new Date();
+    
+    // 오늘 날짜
+    const today = fixDateTimeResidue(new Date());
 
     for(var entry = 0; entry < datesData.length; entry++){
         var dateEntry = datesData[entry];

@@ -4,19 +4,22 @@
 //
 //
 
-// 디버그 플래그
+// 디버그 관련 플래그
+const isVerbose = false;
 var isDebug = false;
 
 /**
- * 디버그 플래그 true일 때만 다이얼로그를 띄우고
- * 디버그 플래그와 무관하게 콘솔에 로그
+ * 버보스 관련 플래그 true일 때만 다이얼로그를 띄우고
+ * 디버그 관련 플래그 true일 때만 콘솔에 로그
  * @param {*} msg 
  */
 function alertAndLog(msg){
     if(isDebug){
-        alert(msg);
+        if(isVerbose){
+            alert(msg);
+        }
+        console.log(msg);
     }
-    console.log(msg);
 }
 
 /**

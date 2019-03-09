@@ -25,7 +25,9 @@ function injectDates(){
 
     // 다음은 빈 칸을 제시하면 오늘 날짜로 치환하고 입력한 날짜가 한개 뿐이면 종료일자로 생각합니다.
     // 이 때 시작일자가 오늘이 되는 문제를 방지하기 위해 오늘을 빈 칸에 채워넣어야 합니다.
-    const today = new Date();
+
+    // 오늘 날짜
+    const today = fixDateTimeResidue(new Date());
 
     for(var entry = 0; entry < datesData.length; entry++){
         var dateEntry = datesData[entry];
