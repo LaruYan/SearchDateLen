@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
 function loadOptions(){
     loadStorage(function(){
         initData();
+        populateLanguate();
         populateVersionNo(getVersionNo());
         pupulateDebugFlag();
         populateList();
@@ -30,6 +31,21 @@ function loadOptions(){
     });
 };
 
+/**
+ * 언어에 따라 문자열 넣기
+ */
+function populateLanguate(){
+    // 언어 적용
+    document.title = chrome.i18n.getMessage("optionsPageTitle");
+    document.querySelector(".headerTitle").innerHTML = chrome.i18n.getMessage("optionsPageTitle");
+    document.querySelector(".headerDesc p").innerHTML = chrome.i18n.getMessage("optionsPageDesc");
+    document.querySelector("#btnReset").innerHTML = chrome.i18n.getMessage("optionsBtnReset");
+    document.querySelector("#ckbDebugMode").innerHTML = chrome.i18n.getMessage("optionsCkbDevMode");
+
+    document.querySelector(".inputHdTitle").innerHTML = chrome.i18n.getMessage("optionsPanelTitle");
+    document.querySelector("#btnInputCancel").innerHTML = chrome.i18n.getMessage("optionsBtnCancel");
+    document.querySelector("#btnInputSubmit").innerHTML = chrome.i18n.getMessage("optionsBtnSubmit");
+}
 
 /**
  * 버전 정보 넣기

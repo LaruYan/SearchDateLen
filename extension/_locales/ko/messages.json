@@ -75,12 +75,37 @@
     "message":"토요일"
   },
 
+  
+  "optionsPageTitle":{
+    "message": "검색 기간 확장 관리"
+  },
+  "optionsPageDesc":{
+    "message": "여기에서 검색 기간 확장에서 사용할 기간 항목들을 추가하거나 수정, 순서변경 및 삭제할 수 있습니다."
+  },
+  "optionsBtnReset":{
+    "message": "초기화"
+  },
+  "optionsCkbDevMode":{
+    "message": "개발자 모드"
+  },
+
+  "optionsPanelTitle":{
+    "message": "항목 추가 또는 수정"
+  },
+  "optionsBtnCancel":{
+    "message": "취소"
+  },
+  "optionsBtnSubmit":{
+    "message": "추가/수정"
+  },
+
   "optionBtnModify": {
     "message":"수정"
   },
   "optionBtnDelete": {
     "message":"삭제"
   },
+
 
   "dateRelYear":{
     "message":"년"
