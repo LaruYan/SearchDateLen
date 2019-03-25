@@ -147,7 +147,7 @@ function populateList(){
         var btnActModify = document.createElement('button');
         btnActModify.setAttribute('type','button');
         btnActModify.setAttribute('entryNo', entryNo);
-        btnActModify.innerHTML = '수정';
+        btnActModify.innerHTML = chrome.i18n.getMessage('optionBtnModify');
         btnActModify.addEventListener('click', function () {
             selectListEntry(this.getAttribute('entryNo'));
             prepareInput(this.getAttribute('entryNo'));
@@ -157,7 +157,7 @@ function populateList(){
         var btnActDelete = document.createElement('button');
         btnActDelete.setAttribute('type','button');
         btnActDelete.setAttribute('entryNo', entryNo);
-        btnActDelete.innerHTML = '삭제';
+        btnActDelete.innerHTML = chrome.i18n.getMessage('optionBtnDelete');
         btnActDelete.addEventListener('click', function () {
             actionRemoveDateEntry(this.getAttribute('entryNo'));
         });
@@ -184,20 +184,20 @@ function populateList(){
         
         if( ! isAbsoluteDate){
             // 상대적인 기간 (1년 6개월 전 등)
-            divLabelFromYear.innerHTML = divLabelFromYear.innerHTML + '년';
-            divLabelFromMonth.innerHTML = divLabelFromMonth.innerHTML + '개월';
-            divLabelFromDate.innerHTML = divLabelFromDate.innerHTML + '일';
-            divLabelToYear.innerHTML = divLabelToYear.innerHTML + '년';
-            divLabelToMonth.innerHTML = divLabelToMonth.innerHTML + '개월';
-            divLabelToDate.innerHTML = divLabelToDate.innerHTML + '일';
+            divLabelFromYear.innerHTML = divLabelFromYear.innerHTML + chrome.i18n.getMessage('dateRelYear');
+            divLabelFromMonth.innerHTML = divLabelFromMonth.innerHTML + chrome.i18n.getMessage('dateRelMonth');
+            divLabelFromDate.innerHTML = divLabelFromDate.innerHTML + chrome.i18n.getMessage('dateRelDate');
+            divLabelToYear.innerHTML = divLabelToYear.innerHTML + chrome.i18n.getMessage('dateRelYear');
+            divLabelToMonth.innerHTML = divLabelToMonth.innerHTML + chrome.i18n.getMessage('dateRelMonth');
+            divLabelToDate.innerHTML = divLabelToDate.innerHTML + chrome.i18n.getMessage('dateRelDate');
         }else{
             // 절대적인 기간 (2018년 6월 이전 등)
-            divLabelFromYear.innerHTML = divLabelFromYear.innerHTML + '년';
-            divLabelFromMonth.innerHTML = divLabelFromMonth.innerHTML + '월';
-            divLabelFromDate.innerHTML = divLabelFromDate.innerHTML + '일';
-            divLabelToYear.innerHTML = divLabelToYear.innerHTML + '년';
-            divLabelToMonth.innerHTML = divLabelToMonth.innerHTML + '월';
-            divLabelToDate.innerHTML = divLabelToDate.innerHTML + '일';
+            divLabelFromYear.innerHTML = divLabelFromYear.innerHTML + chrome.i18n.getMessage('dateAbsYear');
+            divLabelFromMonth.innerHTML = divLabelFromMonth.innerHTML + chrome.i18n.getMessage('dateAbsMonth');
+            divLabelFromDate.innerHTML = divLabelFromDate.innerHTML + chrome.i18n.getMessage('dateAbsDate');
+            divLabelToYear.innerHTML = divLabelToYear.innerHTML + chrome.i18n.getMessage('dateAbsYear');
+            divLabelToMonth.innerHTML = divLabelToMonth.innerHTML + chrome.i18n.getMessage('dateAbsMonth');
+            divLabelToDate.innerHTML = divLabelToDate.innerHTML + chrome.i18n.getMessage('dateAbsDate');
         }
 
         // 날짜(계산됨) div
@@ -213,7 +213,7 @@ function populateList(){
             toDateStr = dateToTarget.getFullYear()+'-'+getTwoDigitNumber(dateToTarget.getMonth() + 1)+'-'+getTwoDigitNumber(dateToTarget.getDate());
         }
         
-        var divLabelFromDateCalc = getClassedTag('div', 'label_date_calc', '(오늘 기준 '+fromDateStr+' ~ '+toDateStr+')');
+        var divLabelFromDateCalc = getClassedTag('div', 'label_date_calc', chrome.i18n.getMessage('datesBasedOnToday',fromDateStr,toDateStr));
 
 
         if(isFromDate){

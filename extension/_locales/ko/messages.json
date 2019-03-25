@@ -73,5 +73,45 @@
   },
   "dayOfWeekSaturday":{
     "message":"토요일"
+  },
+
+  "optionBtnModify": {
+    "message":"수정"
+  },
+  "optionBtnDelete": {
+    "message":"삭제"
+  },
+
+  "dateRelYear":{
+    "message":"년"
+  },
+  "dateRelMonth":{
+    "message":"개월"
+  },
+  "dateRelDate":{
+    "message":"일"
+  },
+  "dateAbsYear":{
+    "message":"년"
+  },
+  "dateAbsMonth":{
+    "message":"월"
+  },
+  "dateAbsDate":{
+    "message":"일"
+  },
+
+  "datesBasedOnToday": {
+    "message": "(오늘 기준 $startDate$ ~ $endDate$)",
+    "placeholders": {
+      "startDate": {
+        "content": "$1",
+        "example": "2019-01-01"
+      },
+      "endDate": {
+        "content": "$2",
+        "example": "2019-03-31"
+      }
+    }
   }
 }
