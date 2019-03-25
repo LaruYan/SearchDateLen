@@ -213,7 +213,7 @@ function populateList(){
             toDateStr = dateToTarget.getFullYear()+'-'+getTwoDigitNumber(dateToTarget.getMonth() + 1)+'-'+getTwoDigitNumber(dateToTarget.getDate());
         }
         
-        var divLabelFromDateCalc = getClassedTag('div', 'label_date_calc', chrome.i18n.getMessage('datesBasedOnToday',fromDateStr,toDateStr));
+        var divLabelFromDateCalc = getClassedTag('div', 'label_date_calc', '(' + chrome.i18n.getMessage("datesBasedOnToday") + ' ' + fromDateStr + ' ~ ' +toDateStr+')');
 
 
         if(isFromDate){

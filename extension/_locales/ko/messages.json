@@ -102,16 +102,6 @@
   },
 
   "datesBasedOnToday": {
-    "message": "(오늘 기준 $startDate$ ~ $endDate$)",
-    "placeholders": {
-      "startDate": {
-        "content": "$1",
-        "example": "2019-01-01"
-      },
-      "endDate": {
-        "content": "$2",
-        "example": "2019-03-31"
-      }
-    }
+    "message": "오늘 기준",
   }
 }
