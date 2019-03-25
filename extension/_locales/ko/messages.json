@@ -1,10 +1,32 @@
 {
-    "appName": {
-      "message": "SearchDateLen: 검색 기간 확장",
-      "description": "The title of the application, displayed in the web store."
-    },
-    "appDesc": {
-      "message": "구글, 네이버, 다음 PC 검색 페이지의 검색 기간을 더 세분화시켜줍니다. Get finer control over search date range.", 
-      "description":"The description of the application, displayed in the web store."
+  "appName": {
+    "message": "SearchDateLen: 검색 기간 확장",
+    "description": "The title of the application, displayed in the web store."
+  },
+  "appDesc": {
+    "message": "구글, 네이버, 다음 PC 검색 페이지의 검색 기간을 더 세분화시켜줍니다. Get finer control over search date range.", 
+    "description":"The description of the application, displayed in the web store."
+  },
+  "error": {
+    "message": "Error: $details$",
+    "description": "Generic error template. Expects error parameter to be passed in.",
+    "placeholders": {
+      "details": {
+        "content": "$1",
+        "example": "Failed to fetch RSS feed."
+      }
     }
+  },
+  "popupName": {
+    "message": "검색 기간 확장 팝업"
+  },
+  "popupTitle": {
+    "message": "검색 기간 확장"
+  },
+  "settings": {
+    "message": "설정"
+  },
+  "github": {
+    "message": "GitHub (도움말)"
   }
+}
