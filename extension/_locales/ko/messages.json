@@ -17,6 +17,7 @@
       }
     }
   },
+
   "popupName": {
     "message": "검색 기간 확장 팝업"
   },
@@ -28,5 +29,49 @@
   },
   "github": {
     "message": "GitHub (도움말)"
+  },
+
+  "dleTypesRelFrom":{
+    "message":"해당 일수 부터"
+  },
+  "dleTypesRelTo":{
+    "message":"해당 일수 까지"
+  },
+  "dleTypesRelRange":{
+    "message":"해당 기간 (상대적)"
+  },
+  "dleTypesAbsFrom":{
+    "message":"특정 날짜 부터"
+  },
+  "dleTypesAbsTo":{
+    "message":"특정 날짜 까지"
+  },
+  "dleTypesAbsRange":{
+    "message":"특정 기간 (절대적)"
+  },
+  
+  "dayOfWeekNaN":{
+    "message":"지정 안 함"
+  },
+  "dayOfWeekSunday":{
+    "message":"일요일"
+  },
+  "dayOfWeekMonday":{
+    "message":"월요일"
+  },
+  "dayOfWeekTuesday":{
+    "message":"화요일"
+  },
+  "dayOfWeekWednesday":{
+    "message":"수요일"
+  },
+  "dayOfWeekThursday":{
+    "message":"목요일"
+  },
+  "dayOfWeekFriday":{
+    "message":"금요일"
+  },
+  "dayOfWeekSaturday":{
+    "message":"토요일"
   }
 }

@@ -54,12 +54,12 @@ const DLE_TYPE_ABS_RANGE = 'abs_range';
 const DLE_TYPES = [DLE_TYPE_REL_FROM, DLE_TYPE_REL_TO, DLE_TYPE_REL_RANGE, DLE_TYPE_ABS_FROM, DLE_TYPE_ABS_TO, DLE_TYPE_ABS_RANGE];
 
 // 타입 형식들 표시용
-const LABEL_DLE_TYPES_REL_FROM = '해당 일수 부터';
-const LABEL_DLE_TYPES_REL_TO = '해당 일수 까지';
-const LABEL_DLE_TYPES_REL_RANGE = '해당 기간 (상대적)';
-const LABEL_DLE_TYPES_ABS_FROM = '특정 날짜 부터';
-const LABEL_DLE_TYPES_ABS_TO = '특정 날짜 까지';
-const LABEL_DLE_TYPES_ABS_RANGE = '특정 기간 (절대적)';
+const LABEL_DLE_TYPES_REL_FROM = chrome.i18n.getMessage('dleTypesRelFrom');
+const LABEL_DLE_TYPES_REL_TO = chrome.i18n.getMessage('dleTypesRelTo');
+const LABEL_DLE_TYPES_REL_RANGE = chrome.i18n.getMessage('dleTypesRelRange');
+const LABEL_DLE_TYPES_ABS_FROM = chrome.i18n.getMessage('dleTypesAbsFrom');
+const LABEL_DLE_TYPES_ABS_TO = chrome.i18n.getMessage('dleTypesAbsTo');
+const LABEL_DLE_TYPES_ABS_RANGE = chrome.i18n.getMessage('dleTypesAbsRange');
 const LABEL_DLE_TYPES = [LABEL_DLE_TYPES_REL_FROM, LABEL_DLE_TYPES_REL_TO, LABEL_DLE_TYPES_REL_RANGE, LABEL_DLE_TYPES_ABS_FROM, LABEL_DLE_TYPES_ABS_TO, LABEL_DLE_TYPES_ABS_RANGE];
 
 // 요일 -1 지정 안 함
@@ -74,14 +74,14 @@ const DAY_OF_WEEK_FRI = 5;
 const DAY_OF_WEEK_SAT = 6;
 
 //요일 표시용
-const LABEL_DAY_OF_WEEK_NAN = '지정 안 함';
-const LABEL_DAY_OF_WEEK_SUN = '일요일';
-const LABEL_DAY_OF_WEEK_MON = '월요일';
-const LABEL_DAY_OF_WEEK_TUE = '화요일';
-const LABEL_DAY_OF_WEEK_WED = '수요일';
-const LABEL_DAY_OF_WEEK_THU = '목요일';
-const LABEL_DAY_OF_WEEK_FRI = '금요일';
-const LABEL_DAY_OF_WEEK_SAT = '토요일';
+const LABEL_DAY_OF_WEEK_NAN = chrome.i18n.getMessage('dayOfWeekNaN');
+const LABEL_DAY_OF_WEEK_SUN = chrome.i18n.getMessage('dayOfWeekSunday');
+const LABEL_DAY_OF_WEEK_MON = chrome.i18n.getMessage('dayOfWeekMonday');
+const LABEL_DAY_OF_WEEK_TUE = chrome.i18n.getMessage('dayOfWeekTuesday');
+const LABEL_DAY_OF_WEEK_WED = chrome.i18n.getMessage('dayOfWeekWednesday');
+const LABEL_DAY_OF_WEEK_THU = chrome.i18n.getMessage('dayOfWeekThursday');
+const LABEL_DAY_OF_WEEK_FRI = chrome.i18n.getMessage('dayOfWeekFriday');
+const LABEL_DAY_OF_WEEK_SAT = chrome.i18n.getMessage('dayOfWeekSaturday');
 
 // 상대적 기간 설정시 한계
 const LIMIT_YEARS_REL_MINIMUM = 0;
