@@ -38,9 +38,9 @@ function populateLanguate(){
     // 언어 적용
     document.title = chrome.i18n.getMessage("optionsPageTitle");
     document.querySelector(".headerTitle").innerHTML = chrome.i18n.getMessage("optionsPageTitle");
-    document.querySelector(".headerDesc p").innerHTML = chrome.i18n.getMessage("optionsPageDesc");
+    document.querySelector(".headerDesc span").innerHTML = chrome.i18n.getMessage("optionsPageDesc");
     document.querySelector("#btnReset").innerHTML = chrome.i18n.getMessage("optionsBtnReset");
-    document.querySelector("#ckbDebugMode").innerHTML = chrome.i18n.getMessage("optionsCkbDevMode");
+    document.querySelector("#lblCkbDebugMode").innerHTML = chrome.i18n.getMessage("optionsCkbDevMode");
 
     document.querySelector(".inputHdTitle").innerHTML = chrome.i18n.getMessage("optionsPanelTitle");
     document.querySelector("#btnInputCancel").innerHTML = chrome.i18n.getMessage("optionsBtnCancel");
